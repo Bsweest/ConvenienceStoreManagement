@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1536" d:DesignHeight="864"
+        WindowState="Maximized"
+        x:Class="GroceryStoreManagement.Main.MainWindow"
+        Title="MainWindow">
+	<DockPanel Background="#21202E">
+		<StackPanel Height="30" Background="#121016" DockPanel.Dock="Top" Orientation="Horizontal">
+			<TextBlock Margin="20 0" Foreground="Gainsboro" VerticalAlignment="Center" FontSize="16" Text="Grocery Store Management"/>
+		</StackPanel>
+		<Border BorderThickness="0 0 1 0" BorderBrush="Black">
+			<StackPanel Background="#21202E" Width="60" DockPanel.Dock="Left">
+			<StackPanel.Styles>
+				<Style Selector="Button.MenuIcon">
+					<Setter Property="Background" Value="#21202E" />
+					<Setter Property="FontSize" Value="33" />
+					<Setter Property="Height" Value="60" />
+					<Setter Property="Width" Value="60" />
+					<Setter Property="Foreground" Value="Gray" />
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="CornerRadius" Value="0" />
+				</Style>
+				<Style Selector="Button.Choosed">
+					<Setter Property="Foreground" Value="#49C59F" />
+					<Setter Property="BorderThickness" Value="2 0 0 0" />
+					<Setter Property="BorderBrush" Value="#8464C6" />
+				</Style>
+			</StackPanel.Styles>
+			<Button Classes="MenuIcon" Command="{Binding ChangeToShop}" 
+					Classes.Choosed="{Binding ShopPanel}" 
+					i:Attached.Icon="fa-solid fa-shop"/>
+			<Button Classes="MenuIcon" Command="{Binding ChangeToSearch}" 
+					Classes.Choosed="{Binding SearchPanel}" 
+					i:Attached.Icon="fa-solid fa-search"/>
+		</StackPanel>
+		</Border>
+		<Panel>
+			<TransitioningContentControl Content="{Binding CurrentPage}" />
+		</Panel>
+	</DockPanel>
+</Window>

@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:comp="clr-namespace:GroceryStoreManagement.Components;assembly=GroceryStoreManagement"
+             mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="700"
+             x:Class="GroceryStoreManagement.Main.Page.ShopPage" Background="#21202E">
+	
+	
+	<StackPanel HorizontalAlignment="Left">
+		<StackPanel Height="70" Orientation="Horizontal">
+			<Label Margin="20 0 10 0" VerticalContentAlignment="Center" Content="Find Item: "/>
+			<TextBox VerticalContentAlignment="Center" Height="30" Width="610"/>
+			<Label Margin="110 0 0 0" FontSize="20" FontWeight="Bold"
+				   VerticalContentAlignment="Center" Content="Shopping Cart"/>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+			<Border Background="#121016" Margin="80 0 0 0" CornerRadius="20">
+				<StackPanel>
+					<Border Background="Gray" CornerRadius="20 20 0 0">
+						<StackPanel  Orientation="Horizontal">
+							<TextBlock Margin="22 0 0 0" Text="Image"/>
+							<TextBlock Margin="75 0 0 0" Text="Item Name"/>
+							<TextBlock Margin="200 0 0 0" Text="Remaining"/>
+							<TextBlock Margin="52 0 0 0" Text="Price"/>
+						</StackPanel>
+					</Border>
+					<ListBox Items="{Binding ListItem}"
+						 Width="650" Height="605"
+						 Background="Transparent"
+						 SelectionMode="Toggle">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<comp:ShopItem />
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</StackPanel>
+			</Border>
+			<Border Background="#121016" Margin="80 0 0 0" CornerRadius="20">
+				<StackPanel>
+					<Border Background="Gray" CornerRadius="20 20 0 0">
+						<StackPanel  Orientation="Horizontal">
+							<TextBlock Margin="22 0 0 0" Text="Image"/>
+							<TextBlock Margin="75 0 0 0" Text="Item Name"/>
+							<TextBlock Margin="200 0 0 0" Text="Quantity"/>
+							<TextBlock Margin="52 0 0 0" Text="Price"/>
+						</StackPanel>
+					</Border>	
+					<ListBox Items="{Binding ListItem}"
+						 Width="650" Height="605"
+						 Background="Transparent"
+						 SelectionMode="Toggle">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<comp:ShopItem />
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</StackPanel>
+			</Border>
+		</StackPanel>
+		
+	</StackPanel>
+</UserControl>

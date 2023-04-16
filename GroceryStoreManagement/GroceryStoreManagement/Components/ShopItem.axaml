@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Background="Transparent"
+             x:Class="GroceryStoreManagement.Components.ShopItem" Cursor="Hand">
+	<Border Background="Black" Width="630" Height="100" CornerRadius="20">
+		<StackPanel Orientation="Horizontal">
+			<StackPanel.Styles>
+				<Style Selector="TextBlock.GridItem">
+					<Setter Property="Margin" Value="10 0"/>
+					<Setter Property="FontSize" Value="14"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+				</Style>
+			</StackPanel.Styles>
+			
+			<Image Margin="15 0 10 0" Source="/Assets/placeholder.jpg" Width="100"/>
+			<Rectangle VerticalAlignment="Stretch" Width="2" Margin="0 6" Fill="#2E2B38" />
+			<TextBlock Classes="GridItem" Width="250" VerticalAlignment="Center" Text="Item Name"/>
+			<Rectangle VerticalAlignment="Stretch" Width="2" Margin="0 6" Fill="#2E2B38" />
+			<TextBlock Classes="GridItem" Width="100" Text="Remaining"/>
+			<Rectangle VerticalAlignment="Stretch" Width="2" Margin="0 6" Fill="#2E2B38" />
+			<TextBlock Classes="GridItem" Text="Price"/>
+		</StackPanel>
+	</Border>
+</UserControl>
