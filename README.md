@@ -1,2 +1,2 @@
-# GroceryStoreManagement
+# ConvenienceStoreManagement
  
