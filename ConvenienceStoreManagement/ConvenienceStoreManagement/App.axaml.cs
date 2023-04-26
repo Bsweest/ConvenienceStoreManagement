@@ -1,10 +1,12 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ConvenienceStoreManagement.Auth;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Main;
 using ConvenienceStoreManagement.Main.ViewModel;
+using System;
 
 namespace ConvenienceStoreManagement
 {
@@ -12,8 +14,8 @@ namespace ConvenienceStoreManagement
     {
         private readonly DbManager dbManager = new();
 
-        private AuthenticationHandler? authWindow;
-        private MainWindow? mainWindow;
+        private AuthenticationHandler authWindow;
+        private MainWindow mainWindow;
         public override void Initialize()
         {
             InitWindow();
@@ -23,9 +25,11 @@ namespace ConvenienceStoreManagement
 
         public void InitWindow()
         {
+            Action<int> action = index => ChangeWindow(index);
+
             authWindow = new AuthenticationHandler
             {
-                DataContext = new AuthViewModel(dbManager),
+                DataContext = new AuthViewModel(dbManager, action),
             };
             mainWindow = new MainWindow
             {
@@ -33,13 +37,32 @@ namespace ConvenienceStoreManagement
             };
         }
 
-        public override void OnFrameworkInitializationCompleted()
+        public void ChangeWindow(int index)
         {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            Window nextWindow = authWindow;
+            Window? preWindow;
+            switch (index)
             {
-                desktop.MainWindow = mainWindow;
+                case 0:
+                    nextWindow = authWindow;
+                    break;
+                case 1:
+                    nextWindow = mainWindow;
+                    break;
             }
 
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                preWindow = desktop.MainWindow;
+                desktop.MainWindow = nextWindow;
+                nextWindow.Show();
+                preWindow?.Close();
+            }
+        }
+
+        public override void OnFrameworkInitializationCompleted()
+        {
+            ChangeWindow(0);
             base.OnFrameworkInitializationCompleted();
         }
     }
