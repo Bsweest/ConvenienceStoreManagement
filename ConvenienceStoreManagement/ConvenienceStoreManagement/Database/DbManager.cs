@@ -9,10 +9,10 @@ namespace ConvenienceStoreManagement.Database
 
         public async void OpenConnection()
         {
-            if (Db != null) return;
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
-            var dataSource = dataSourceBuilder.Build();
-            Db = await dataSource.OpenConnectionAsync();
+            //if (Db != null) return;
+            //var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
+            //var dataSource = dataSourceBuilder.Build();
+            //Db = await dataSource.OpenConnectionAsync();
         }
     }
 }
