@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace GroceryStoreManagement.Auth;
+namespace ConvenienceStoreManagement.Auth;
 
 public partial class AuthenticationHandler : Window
 {

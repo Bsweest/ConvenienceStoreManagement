@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ConvenienceStoreManagement.Components.DrawerUser">
+	<DockPanel LastChildFill="False">
+		<DockPanel.Styles>
+			<Style Selector="Border.Closed">
+				<Setter Property="RenderTransform" Value="translateX(420px)"/>
+			</Style>
+		</DockPanel.Styles>
+
+		<DockPanel.Transitions>
+			<Transitions>
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.5" />
+			</Transitions>
+		</DockPanel.Transitions>
+		
+		<Border Width="420" DockPanel.Dock="Right" Classes.Closed="{Binding IsClosed}"
+				Background="#21202E" Padding="35 0 35 0" BorderThickness="1 0 0 0" BorderBrush="Violet">
+			<StackPanel>
+				<Label Content="Choose Customer" Foreground="Violet" FontSize="16" Margin="0 20 20 20" />
+				<StackPanel Orientation="Horizontal">
+					<Label Content="Find Customer: "/>
+					<CheckBox IsChecked="{Binding IsGuestCheck}" Margin="0 -5 0 0"/>
+					<Label Content="Is Guest"/>
+				</StackPanel>
+				<TextBox Watermark="Phone Num." IsEnabled="{Binding !IsGuestCheck}"/>
+				<Border Padding="20 0" Height="60" Margin="0 20" Background="#0D0D12" CornerRadius="8">
+					<Panel>
+						<Button Background="Transparent" IsVisible="{Binding ShowNotFound}"
+								Command="{Binding ShowCreateCustomer}">
+							<TextBlock Cursor="Hand"
+									   VerticalAlignment="Center" Foreground="Red">
+								Can't Find Phone Number, Create New?
+							</TextBlock>
+						</Button>
+						<StackPanel IsVisible="{Binding	FindCustomer, Converter={x:Static ObjectConverters.IsNotNull}}"
+									Height="40" Orientation="Horizontal">
+							<TextBlock VerticalAlignment="Center" Text="Customer Name" Width="200" />
+							<Rectangle Margin="10 0" Width="2" Fill="#2E2B38" />
+							<TextBlock VerticalAlignment="Center" Text="Membership" />
+						</StackPanel>
+					</Panel>
+				</Border>
+
+				<DockPanel LastChildFill="False">
+					<Button Content="OK" Command="{Binding ToggleChooseDrawer}"
+							Padding="20 10" DockPanel.Dock="Right" Background="Green"/>
+					<Button Content="Find" IsEnabled="{Binding !IsGuestCheck}"
+							Margin="30 0" Command="{Binding QueryCustomerPhoneNum}"
+							Padding="20 10" DockPanel.Dock="Right" Background="Orchid"/>
+				</DockPanel>
+			</StackPanel>
+		</Border>
+	</DockPanel>
+</UserControl>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QnOKJvlR+2kzWQ8z7Rl9wt3/BJFXiF8Zzp27L/fFvsqi3WOWB4GuWg6/RrSd5vpac9xO851j64kiFJrcoNAMhA==",
+  "dgSpecHash": "nFPE7QNKCdmePKMyP4QkIPX8BZgVI9B39amgDO5xNOEYtezp4RJChNVOwLcgnVUnDm7YjYPIwXINFzc3+VUTqA==",
   "success": true,
-  "projectFilePath": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement.csproj",
+  "projectFilePath": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\ConvenienceStoreManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Manh\\.nuget\\packages\\avalonia\\0.10.18\\avalonia.0.10.18.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2020091801\\avalonia.angle.windows.natives.2.1.0.2020091801.nupkg.sha512",
@@ -36,6 +36,9 @@
     "C:\\Users\\Manh\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\opencvsharp4\\4.7.0.20230115\\opencvsharp4.4.7.0.20230115.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\opencvsharp4.runtime.win\\4.7.0.20230115\\opencvsharp4.runtime.win.4.7.0.20230115.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\opencvsharp4.wpfextensions\\4.7.0.20230115\\opencvsharp4.wpfextensions.4.7.0.20230115.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\projektanker.icons.avalonia\\5.12.0\\projektanker.icons.avalonia.5.12.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\projektanker.icons.avalonia.fontawesome\\5.12.0\\projektanker.icons.avalonia.fontawesome.5.12.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\shimskiasharp\\0.5.18\\shimskiasharp.0.5.18.nupkg.sha512",
@@ -86,7 +89,9 @@
     "C:\\Users\\Manh\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.3\\system.threading.tasks.extensions.4.5.3.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\tmds.dbus\\0.9.0\\tmds.dbus.0.9.0.nupkg.sha512",
-    "C:\\Users\\Manh\\.nuget\\packages\\xamlnamereferencegenerator\\1.6.1\\xamlnamereferencegenerator.1.6.1.nupkg.sha512"
+    "C:\\Users\\Manh\\.nuget\\packages\\xamlnamereferencegenerator\\1.6.1\\xamlnamereferencegenerator.1.6.1.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\zxing.net\\0.16.9\\zxing.net.0.16.9.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\zxing.net.bindings.opencv.v4\\0.16.9\\zxing.net.bindings.opencv.v4.0.16.9.nupkg.sha512"
   ],
   "logs": []
 }

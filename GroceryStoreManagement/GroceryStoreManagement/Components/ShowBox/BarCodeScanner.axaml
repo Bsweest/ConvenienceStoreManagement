@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="550" Height="690" 
+        x:Class="ConvenienceStoreManagement.Components.ShowBox.BarCodeScanner"
+        Title="BarCodeScanner" WindowStartupLocation="CenterScreen"
+		CanResize="False">
+	<Border Margin="12">
+		<StackPanel>
+			<Border Background="Gray">
+				<Image Source="{Binding	ScanImg}" Width="500" Height="500"/>
+			</Border>
+			<TextBox Margin="0 20 0 0" Text="{Binding ChoosedNumber}"/>
+
+			<StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+				<StackPanel.Styles>
+					<Style Selector="ToggleButton.ScanMode:checked">
+						<Setter Property="Content" Value="Scan Mode: Add"/>
+					</Style>
+					<Style Selector="ToggleButton.ScanMode:unchecked">
+						<Setter Property="Content" Value="Scan Mode: Remove"/>
+						<Setter Property="Background" Value="Crimson" />
+					</Style>
+					<!--2 Toggle button-->
+					<Style Selector="ToggleButton.Running:checked">
+						<Setter Property="Content" Value="Scanning"/>
+					</Style>
+					<Style Selector="ToggleButton.Running:unchecked">
+						<Setter Property="Content" Value="Scan Stopped"/>
+					</Style>
+				</StackPanel.Styles>
+				<ToggleButton Cursor="Hand" Margin="10 0" IsChecked="{Binding ScanModeAdd}"
+							  Width="170" HorizontalContentAlignment="Center" 
+							  Classes="ScanMode"/>
+				<ToggleButton Command="{Binding	ToggleScanning}" Classes="Running" 
+							  Width="120" IsChecked="{Binding ScannerVM.IsScanning}" HorizontalContentAlignment="Center"/>
+
+			</StackPanel>
+			<DockPanel Margin="0 20 0 0" LastChildFill="False">
+				<Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right"
+						Background="Red" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding CloseForm}"/>
+				<Button Margin="20 0" Padding="20 10" Content="Manual Choose Good Id" DockPanel.Dock="Right"
+						Background="Green" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding BtnOK}"/>
+			</DockPanel>
+		</StackPanel>
+	</Border>
+</Window>

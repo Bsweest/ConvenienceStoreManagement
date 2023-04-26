@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="400" 
+        x:Class="ConvenienceStoreManagement.Main.InvoicePrintPreview"
+        Title="InvoicePrintPreview">
+	<StackPanel>
+		<Border x:Name="InvoicePanel" Padding="10" 
+				Background="White" Width="400">
+			<StackPanel>
+				<StackPanel.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="Foreground" Value="Black"/>
+						<Setter Property="FontSize" Value="12" />
+					</Style>
+				</StackPanel.Styles>
+				
+				<TextBlock Text="Convenience Store" FontWeight="Bold"
+						   FontSize="20" HorizontalAlignment="Center"/>
+
+				<StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+					<TextBlock Text="Invoice Number: "/>
+					<TextBlock Text="{Binding InvoiceID}"/>
+				</StackPanel>
+				<StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+					<TextBlock Text="Invoice Date: "/>
+					<TextBlock Text="{Binding InvoiceDate}"/>
+				</StackPanel>
+				
+				<TextBlock Text="Cart Detail: " Margin="0 5" FontWeight="DemiBold"/>
+				<StackPanel Orientation="Horizontal" Margin="12 0">
+					<TextBlock Width="189" Text="Name"/>
+					<TextBlock Width="80" Text="Quantity"/>
+					<TextBlock Width="100" Text="Cost"/>
+				</StackPanel>
+				
+				<Rectangle HorizontalAlignment="Stretch" Height="1" Margin="0 5 0 0" Fill="Black"/>
+
+				<ListBox Items="{Binding CartList}" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Width="200" Text="Name"/>
+								<TextBlock Margin="10 0" Width="50" Text="10"/>
+								<TextBlock Width="100" Text="Cost"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				
+				<Rectangle HorizontalAlignment="Stretch" Height="1" Margin="0 5 0 0" Fill="Black"/>
+
+				<StackPanel Orientation="Horizontal" Margin="0 5">
+					<TextBlock Text="Customer ID: "/>
+					<TextBlock Width="125" Text="{Binding Customer.Id}"/>
+					<TextBlock Text="Phone: "/>
+					<TextBlock Text="{Binding Customer.PhoneNum}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Customer Name: "/>
+					<TextBlock Text="{Binding Customer.FullName}"/>
+				</StackPanel>
+				
+				<StackPanel Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Right">
+					<TextBlock Text="Total cost: " FontWeight="Bold"/>
+					<TextBlock Text="" FontWeight="Bold"/>
+				</StackPanel>
+				
+				<TextBlock Text="Thank you for Shoppping" HorizontalAlignment="Right"/>
+			</StackPanel>
+		</Border>
+		
+		<DockPanel LastChildFill="False" Margin="10">
+			<Button Margin="20 0" Width="150" Height="30"
+					VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+					Content="Print Invoice" DockPanel.Dock="Right"
+					Background="Green" FontWeight="Bold" Cursor="Hand"
+					Command="{Binding PrintInvoice}" HotKey="Ctrl+P"/>
+		</DockPanel>
+	</StackPanel>
+</Window>

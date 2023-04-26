@@ -44,6 +44,8 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\Micros
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\mscorlib.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\netstandard.dll
 C:\Users\Manh\.nuget\packages\npgsql\7.0.2\lib\net6.0\Npgsql.dll
+C:\Users\Manh\.nuget\packages\opencvsharp4\4.7.0.20230115\lib\net6.0\OpenCvSharp.dll
+C:\Users\Manh\.nuget\packages\opencvsharp4.wpfextensions\4.7.0.20230115\lib\netcoreapp3.1\OpenCvSharp.WpfExtensions.dll
 C:\Users\Manh\.nuget\packages\projektanker.icons.avalonia\5.12.0\lib\netstandard2.0\Projektanker.Icons.Avalonia.dll
 C:\Users\Manh\.nuget\packages\projektanker.icons.avalonia.fontawesome\5.12.0\lib\netstandard2.0\Projektanker.Icons.Avalonia.FontAwesome.dll
 C:\Users\Manh\.nuget\packages\shimskiasharp\0.5.18\lib\net6.0\ShimSkiaSharp.dll
@@ -207,3 +209,5 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\System
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\System.Xml.XPath.XDocument.dll
 C:\Users\Manh\.nuget\packages\tmds.dbus\0.9.0\lib\netstandard2.0\Tmds.DBus.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.15\ref\net6.0\WindowsBase.dll
+C:\Users\Manh\.nuget\packages\zxing.net\0.16.9\lib\net6.0\zxing.dll
+C:\Users\Manh\.nuget\packages\zxing.net.bindings.opencv.v4\0.16.9\lib\net6.0\ZXing.OpenCv.dll

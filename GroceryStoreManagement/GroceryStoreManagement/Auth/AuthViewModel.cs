@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GroceryStoreManagement.Database;
+using ConvenienceStoreManagement.Database;
 using Npgsql;
 using System.Threading.Tasks;
 
-namespace GroceryStoreManagement.Auth
+namespace ConvenienceStoreManagement.Auth
 {
     public partial class AuthViewModel : ViewModelBase
     {

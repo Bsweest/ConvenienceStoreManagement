@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GroceryStoreManagement.Database;
+using ConvenienceStoreManagement.Database;
 using System.Collections.Generic;
 
-namespace GroceryStoreManagement.Main.ViewModel
+namespace ConvenienceStoreManagement.Main.ViewModel
 {
     public partial class MainViewModel : ViewModelBase
     {
@@ -12,13 +12,15 @@ namespace GroceryStoreManagement.Main.ViewModel
         enum MainPanel
         {
             Shop,
-            Search
+            ItemManage,
+            CustomerManage,
         }
 
         private readonly Dictionary<int, PageViewModelBase> Pages = new()
         {
             { (int)MainPanel.Shop, new ShopViewModel() },
-            { (int)MainPanel.Search, new SearchViewModel() },
+            { (int)MainPanel.CustomerManage, new CustomerManageViewModel() },
+            { (int)MainPanel.ItemManage, new ItemManageViewModel() },
         };
 
         [ObservableProperty]
@@ -26,11 +28,13 @@ namespace GroceryStoreManagement.Main.ViewModel
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ShopPanel))]
-        [NotifyPropertyChangedFor(nameof(SearchPanel))]
+        [NotifyPropertyChangedFor(nameof(ItemPanel))]
+        [NotifyPropertyChangedFor(nameof(CustomerManagePanel))]
         private int choosedPanel = 0;
 
         public bool ShopPanel => ChoosedPanel == (int)MainPanel.Shop;
-        public bool SearchPanel => ChoosedPanel == (int)MainPanel.Search;
+        public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
+        public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
 
         public MainViewModel(DbManager dbManager)
         {
@@ -52,9 +56,16 @@ namespace GroceryStoreManagement.Main.ViewModel
         }
 
         [RelayCommand]
-        public void ChangeToSearch()
+        public void ChangeToCustomerManage()
         {
-            ChoosedPanel = (int)MainPanel.Search;
+            ChoosedPanel = (int)MainPanel.CustomerManage;
+            NavigateNext();
+        }
+
+        [RelayCommand]
+        public void ChangeToItemManage()
+        {
+            ChoosedPanel = (int)MainPanel.ItemManage;
             NavigateNext();
         }
     }

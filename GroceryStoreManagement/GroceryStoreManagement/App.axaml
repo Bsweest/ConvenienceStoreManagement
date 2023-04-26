@@ -1,10 +1,11 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:GroceryStoreManagement"
-             x:Class="GroceryStoreManagement.App">
+             xmlns:local="using:ConvenienceStoreManagement"
+             x:Class="ConvenienceStoreManagement.App">
 
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
 
 	<Application.DataTemplates>

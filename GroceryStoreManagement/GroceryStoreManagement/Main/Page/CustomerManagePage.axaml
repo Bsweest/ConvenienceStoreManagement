@@ -2,7 +2,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GroceryStoreManagement.Main.Page.CustomerManagePage">
-  Welcome to Avalonia!
+			 xmlns:comp="clr-namespace:ConvenienceStoreManagement.Components;assembly=ConvenienceStoreManagement"
+             mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="800" Background="#21202E"
+             x:Class="ConvenienceStoreManagement.Main.Page.CustomerManagePage">
+	<Border Padding="20">
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Label VerticalContentAlignment="Center" Content="Find Customer: "/>
+				<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
+						 Watermark="Phone Num."/>
+				<Button Margin="20 0" Padding="20 10" Content="Add Customer"
+						Background="Orchid" FontWeight="Bold" Cursor="Hand"
+						/>
+				<Button Margin="20 0" Padding="20 10" Content="Update Customer"
+						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
+						/>
+				<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
+
+				<Button Margin="20 0" Padding="20 10" Content="Deposit"
+						Background="Green" FontWeight="Bold" Cursor="Hand"
+						/>
+				<Button Margin="20 0" Padding="20 10" Content="Withdraw"
+						Background="#FF2E2E" FontWeight="Bold" Cursor="Hand"
+						/>
+			</StackPanel>
+
+			<Grid Margin="0 20 0 0" Height="650" Background="#121016">
+				<DataGrid Name="Customer" SelectionMode="Single" Items="{Binding GridCus}" 
+						  AutoGenerateColumns="False" IsReadOnly="True">
+					<DataGrid.Columns>
+						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>
+						<DataGridTextColumn	Width="*" Header="Full Name" Binding="{Binding FullName}" />
+						<DataGridTextColumn	Width="*" Header="Phone Num." Binding="{Binding PhoneNumber}" />
+						<DataGridTextColumn Width="*" Header="Total Spending" Binding="{Binding TotalSpending}" />
+						<DataGridTextColumn	Width="*" Header="Balance" Binding="{Binding Balance}" />
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+		</StackPanel>
+	</Border>
 </UserControl>

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace GroceryStoreManagement
+namespace ConvenienceStoreManagement
 {
     public class ViewModelBase : ObservableObject
     {

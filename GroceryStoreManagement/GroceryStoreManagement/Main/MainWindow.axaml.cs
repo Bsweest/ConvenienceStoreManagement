@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace GroceryStoreManagement.Main;
+namespace ConvenienceStoreManagement.Main;
 
 public partial class MainWindow : Window
 {

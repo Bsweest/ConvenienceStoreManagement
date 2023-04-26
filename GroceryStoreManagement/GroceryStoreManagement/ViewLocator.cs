@@ -2,7 +2,7 @@
 using Avalonia.Controls.Templates;
 using System;
 
-namespace GroceryStoreManagement
+namespace ConvenienceStoreManagement
 {
     public class ViewLocator : IDataTemplate
     {

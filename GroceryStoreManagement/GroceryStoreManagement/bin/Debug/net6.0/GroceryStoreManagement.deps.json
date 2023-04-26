@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "GroceryStoreManagement/1.0.0": {
+      "ConvenienceStoreManagement/1.0.0": {
         "dependencies": {
           "Avalonia": "0.10.18",
           "Avalonia.Desktop": "0.10.18",
@@ -14,12 +14,17 @@
           "Avalonia.Svg.Skia": "0.10.18",
           "CommunityToolkit.Mvvm": "8.1.0",
           "Npgsql": "7.0.2",
+          "OpenCvSharp4": "4.7.0.20230115",
+          "OpenCvSharp4.WpfExtensions": "4.7.0.20230115",
+          "OpenCvSharp4.runtime.win": "4.7.0.20230115",
           "Projektanker.Icons.Avalonia": "5.12.0",
           "Projektanker.Icons.Avalonia.FontAwesome": "5.12.0",
-          "XamlNameReferenceGenerator": "1.6.1"
+          "XamlNameReferenceGenerator": "1.6.1",
+          "ZXing.Net": "0.16.9",
+          "ZXing.Net.Bindings.OpenCV.V4": "0.16.9"
         },
         "runtime": {
-          "GroceryStoreManagement.dll": {}
+          "ConvenienceStoreManagement.dll": {}
         }
       },
       "Avalonia/0.10.18": {
@@ -647,6 +652,53 @@
           }
         }
       },
+      "OpenCvSharp4/4.7.0.20230115": {
+        "dependencies": {
+          "System.Memory": "4.5.4",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OpenCvSharp4.runtime.win/4.7.0.20230115": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg470_64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "2022.12.0.0"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg470.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "2022.12.0.0"
+          }
+        }
+      },
+      "OpenCvSharp4.WpfExtensions/4.7.0.20230115": {
+        "dependencies": {
+          "OpenCvSharp4": "4.7.0.20230115"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Projektanker.Icons.Avalonia/5.12.0": {
         "dependencies": {
           "Avalonia": "0.10.18"
@@ -1083,11 +1135,31 @@
           }
         }
       },
-      "XamlNameReferenceGenerator/1.6.1": {}
+      "XamlNameReferenceGenerator/1.6.1": {},
+      "ZXing.Net/0.16.9": {
+        "runtime": {
+          "lib/net6.0/zxing.dll": {
+            "assemblyVersion": "0.16.9.0",
+            "fileVersion": "0.16.9.0"
+          }
+        }
+      },
+      "ZXing.Net.Bindings.OpenCV.V4/0.16.9": {
+        "dependencies": {
+          "OpenCvSharp4": "4.7.0.20230115",
+          "ZXing.Net": "0.16.9"
+        },
+        "runtime": {
+          "lib/net6.0/ZXing.OpenCv.dll": {
+            "assemblyVersion": "0.16.9.0",
+            "fileVersion": "0.16.9.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
-    "GroceryStoreManagement/1.0.0": {
+    "ConvenienceStoreManagement/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1315,6 +1387,27 @@
       "sha512": "sha512-/k12hfmg4PI0IU2UTLN6n0s/FKUfox8+RdWtzgADYZoyks7GH82WLyXm27eeqatsi/nmiK9lO3HyULlTD87szg==",
       "path": "npgsql/7.0.2",
       "hashPath": "npgsql.7.0.2.nupkg.sha512"
+    },
+    "OpenCvSharp4/4.7.0.20230115": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-t6iHTxHQf56krbSzQhewSSGBYsoxhD1dP9eqZqWTztYOQ4WmrVi5HDjcGA4aaiSs5VIWfgykS6ddCZvIdhYMAg==",
+      "path": "opencvsharp4/4.7.0.20230115",
+      "hashPath": "opencvsharp4.4.7.0.20230115.nupkg.sha512"
+    },
+    "OpenCvSharp4.runtime.win/4.7.0.20230115": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T5vVLA9rTIQ5HUQszG1RoACKjvkoiHugzQOWjFq3Eng447CWdBuxUepusUzMucl/K2O2ArRwwc999J2JymmjTA==",
+      "path": "opencvsharp4.runtime.win/4.7.0.20230115",
+      "hashPath": "opencvsharp4.runtime.win.4.7.0.20230115.nupkg.sha512"
+    },
+    "OpenCvSharp4.WpfExtensions/4.7.0.20230115": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gvY9f+5VVhBccOcJPoZuibywfgUPEVGDE9lH57IRD8YteL1G5QZD1JU0QiD1adI6kqisYXkLZ0oMNOO2zS7XBw==",
+      "path": "opencvsharp4.wpfextensions/4.7.0.20230115",
+      "hashPath": "opencvsharp4.wpfextensions.4.7.0.20230115.nupkg.sha512"
     },
     "Projektanker.Icons.Avalonia/5.12.0": {
       "type": "package",
@@ -1672,6 +1765,20 @@
       "sha512": "sha512-0LIETu9UzdHK8K/PmPn69dKtrjoPD1xz9eUPFjpRxn+O/YKY4UwjOILtthWh0HfM/Jcz+qTgoAMwde7SdFEHUg==",
       "path": "xamlnamereferencegenerator/1.6.1",
       "hashPath": "xamlnamereferencegenerator.1.6.1.nupkg.sha512"
+    },
+    "ZXing.Net/0.16.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7WaVMHklpT3Ye2ragqRIwlFRsb6kOk63BOGADV0fan3ulVfGLUYkDi5yNUsZS/7FVNkWbtHAlDLmu4WnHGfqvQ==",
+      "path": "zxing.net/0.16.9",
+      "hashPath": "zxing.net.0.16.9.nupkg.sha512"
+    },
+    "ZXing.Net.Bindings.OpenCV.V4/0.16.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3KsAgQyOUVlfpTqhV092UEZdDTBs89M1yC5v+DJXpfEPgdwl4w+tEzFjamH+xkhgMu6S4oO+fjoeaQRk7EF8kg==",
+      "path": "zxing.net.bindings.opencv.v4/0.16.9",
+      "hashPath": "zxing.net.bindings.opencv.v4.0.16.9.nupkg.sha512"
     }
   }
 }

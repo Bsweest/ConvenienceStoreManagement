@@ -4,7 +4,7 @@ using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.FontAwesome;
 using System;
 
-namespace GroceryStoreManagement
+namespace ConvenienceStoreManagement
 {
     internal class Program
     {

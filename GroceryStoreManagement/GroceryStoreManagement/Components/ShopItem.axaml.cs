@@ -1,8 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace GroceryStoreManagement.Components;
+namespace ConvenienceStoreManagement.Components;
 
 public partial class ShopItem : UserControl
 {

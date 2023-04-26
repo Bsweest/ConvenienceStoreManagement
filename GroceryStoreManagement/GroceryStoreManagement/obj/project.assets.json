@@ -824,6 +824,63 @@
           }
         }
       },
+      "OpenCvSharp4/4.7.0.20230115": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.4",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "OpenCvSharp4.runtime.win/4.7.0.20230115": {
+        "type": "package",
+        "build": {
+          "build/net5.0/OpenCvSharp4.runtime.win.props": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg470_64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg470.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "OpenCvSharp4.WpfExtensions/4.7.0.20230115": {
+        "type": "package",
+        "dependencies": {
+          "OpenCvSharp4": "4.7.0.20230115"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Projektanker.Icons.Avalonia/5.12.0": {
         "type": "package",
         "dependencies": {
@@ -1605,6 +1662,36 @@
         "type": "package",
         "build": {
           "buildTransitive/XamlNameReferenceGenerator.props": {}
+        }
+      },
+      "ZXing.Net/0.16.9": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/zxing.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/zxing.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "ZXing.Net.Bindings.OpenCV.V4/0.16.9": {
+        "type": "package",
+        "dependencies": {
+          "OpenCvSharp4": "4.7.0.20230115",
+          "ZXing.Net": "0.16.9"
+        },
+        "compile": {
+          "lib/net6.0/ZXing.OpenCv.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/ZXing.OpenCv.dll": {
+            "related": ".pdb;.xml"
+          }
         }
       }
     }
@@ -2539,6 +2626,61 @@
         "npgsql.7.0.2.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
+      ]
+    },
+    "OpenCvSharp4/4.7.0.20230115": {
+      "sha512": "t6iHTxHQf56krbSzQhewSSGBYsoxhD1dP9eqZqWTztYOQ4WmrVi5HDjcGA4aaiSs5VIWfgykS6ddCZvIdhYMAg==",
+      "type": "package",
+      "path": "opencvsharp4/4.7.0.20230115",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net48/OpenCvSharp.dll",
+        "lib/net48/OpenCvSharp.xml",
+        "lib/net6.0/OpenCvSharp.dll",
+        "lib/net6.0/OpenCvSharp.xml",
+        "lib/netcoreapp3.1/OpenCvSharp.dll",
+        "lib/netcoreapp3.1/OpenCvSharp.xml",
+        "lib/netstandard2.0/OpenCvSharp.dll",
+        "lib/netstandard2.0/OpenCvSharp.xml",
+        "lib/netstandard2.1/OpenCvSharp.dll",
+        "lib/netstandard2.1/OpenCvSharp.xml",
+        "opencvsharp4.4.7.0.20230115.nupkg.sha512",
+        "opencvsharp4.nuspec"
+      ]
+    },
+    "OpenCvSharp4.runtime.win/4.7.0.20230115": {
+      "sha512": "T5vVLA9rTIQ5HUQszG1RoACKjvkoiHugzQOWjFq3Eng447CWdBuxUepusUzMucl/K2O2ArRwwc999J2JymmjTA==",
+      "type": "package",
+      "path": "opencvsharp4.runtime.win/4.7.0.20230115",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net48/OpenCvSharp4.runtime.win.props",
+        "build/net5.0/OpenCvSharp4.runtime.win.props",
+        "build/netcoreapp/OpenCvSharp4.runtime.win.props",
+        "build/netstandard/OpenCvSharp4.runtime.win.props",
+        "opencvsharp4.runtime.win.4.7.0.20230115.nupkg.sha512",
+        "opencvsharp4.runtime.win.nuspec",
+        "runtimes/win-x64/native/OpenCvSharpExtern.dll",
+        "runtimes/win-x64/native/opencv_videoio_ffmpeg470_64.dll",
+        "runtimes/win-x86/native/OpenCvSharpExtern.dll",
+        "runtimes/win-x86/native/opencv_videoio_ffmpeg470.dll"
+      ]
+    },
+    "OpenCvSharp4.WpfExtensions/4.7.0.20230115": {
+      "sha512": "gvY9f+5VVhBccOcJPoZuibywfgUPEVGDE9lH57IRD8YteL1G5QZD1JU0QiD1adI6kqisYXkLZ0oMNOO2zS7XBw==",
+      "type": "package",
+      "path": "opencvsharp4.wpfextensions/4.7.0.20230115",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/OpenCvSharp.WpfExtensions.xml",
+        "lib/net48/OpenCvSharp.WpfExtensions.dll",
+        "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.dll",
+        "lib/netcoreapp3.1/OpenCvSharp.WpfExtensions.xml",
+        "opencvsharp4.wpfextensions.4.7.0.20230115.nupkg.sha512",
+        "opencvsharp4.wpfextensions.nuspec"
       ]
     },
     "Projektanker.Icons.Avalonia/5.12.0": {
@@ -4954,6 +5096,116 @@
         "xamlnamereferencegenerator.1.6.1.nupkg.sha512",
         "xamlnamereferencegenerator.nuspec"
       ]
+    },
+    "ZXing.Net/0.16.9": {
+      "sha512": "7WaVMHklpT3Ye2ragqRIwlFRsb6kOk63BOGADV0fan3ulVfGLUYkDi5yNUsZS/7FVNkWbtHAlDLmu4WnHGfqvQ==",
+      "type": "package",
+      "path": "zxing.net/0.16.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/native/zxing.XML",
+        "lib/native/zxing.pri",
+        "lib/native/zxing.winmd",
+        "lib/net20-cf/zxing.ce2.0.dll",
+        "lib/net20-cf/zxing.ce2.0.xml",
+        "lib/net20/zxing.XML",
+        "lib/net20/zxing.dll",
+        "lib/net35-cf/zxing.ce3.5.dll",
+        "lib/net35-cf/zxing.ce3.5.xml",
+        "lib/net35/zxing.XML",
+        "lib/net35/zxing.dll",
+        "lib/net40/zxing.XML",
+        "lib/net40/zxing.dll",
+        "lib/net40/zxing.presentation.XML",
+        "lib/net40/zxing.presentation.dll",
+        "lib/net45/zxing.XML",
+        "lib/net45/zxing.dll",
+        "lib/net45/zxing.presentation.XML",
+        "lib/net45/zxing.presentation.dll",
+        "lib/net461/zxing.XML",
+        "lib/net461/zxing.dll",
+        "lib/net461/zxing.presentation.XML",
+        "lib/net461/zxing.presentation.dll",
+        "lib/net47/zxing.XML",
+        "lib/net47/zxing.dll",
+        "lib/net47/zxing.presentation.XML",
+        "lib/net47/zxing.presentation.dll",
+        "lib/net48/zxing.XML",
+        "lib/net48/zxing.dll",
+        "lib/net48/zxing.presentation.XML",
+        "lib/net48/zxing.presentation.dll",
+        "lib/net5.0/zxing.XML",
+        "lib/net5.0/zxing.dll",
+        "lib/net6.0/zxing.XML",
+        "lib/net6.0/zxing.dll",
+        "lib/net7.0/zxing.XML",
+        "lib/net7.0/zxing.dll",
+        "lib/netcoreapp3.0/zxing.dll",
+        "lib/netcoreapp3.0/zxing.xml",
+        "lib/netcoreapp3.1/zxing.dll",
+        "lib/netcoreapp3.1/zxing.xml",
+        "lib/netstandard1.0/zxing.dll",
+        "lib/netstandard1.0/zxing.xml",
+        "lib/netstandard1.1/zxing.dll",
+        "lib/netstandard1.1/zxing.xml",
+        "lib/netstandard1.3/zxing.dll",
+        "lib/netstandard1.3/zxing.xml",
+        "lib/netstandard2.0/zxing.dll",
+        "lib/netstandard2.0/zxing.xml",
+        "lib/netstandard2.1/zxing.dll",
+        "lib/netstandard2.1/zxing.xml",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.XML",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.dll",
+        "lib/sl3-wp/zxing.wp7.0.XML",
+        "lib/sl3-wp/zxing.wp7.0.dll",
+        "lib/sl4-wp71/zxing.wp7.1.XML",
+        "lib/sl4-wp71/zxing.wp7.1.dll",
+        "lib/sl4/zxing.sl4.XML",
+        "lib/sl4/zxing.sl4.dll",
+        "lib/sl5/zxing.sl5.XML",
+        "lib/sl5/zxing.sl5.dll",
+        "lib/uap10/zxing.dll",
+        "lib/uap10/zxing.pri",
+        "lib/uap10/zxing.xml",
+        "lib/windows8-managed/zxing.winrt.XML",
+        "lib/windows8-managed/zxing.winrt.dll",
+        "lib/windows8/zxing.XML",
+        "lib/windows8/zxing.pri",
+        "lib/windows8/zxing.winmd",
+        "lib/wp8/zxing.wp8.0.XML",
+        "lib/wp8/zxing.wp8.0.dll",
+        "logo.jpg",
+        "zxing.net.0.16.9.nupkg.sha512",
+        "zxing.net.nuspec"
+      ]
+    },
+    "ZXing.Net.Bindings.OpenCV.V4/0.16.9": {
+      "sha512": "3KsAgQyOUVlfpTqhV092UEZdDTBs89M1yC5v+DJXpfEPgdwl4w+tEzFjamH+xkhgMu6S4oO+fjoeaQRk7EF8kg==",
+      "type": "package",
+      "path": "zxing.net.bindings.opencv.v4/0.16.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net48/ZXing.OpenCv.dll",
+        "lib/net48/ZXing.OpenCv.pdb",
+        "lib/net48/ZXing.OpenCv.xml",
+        "lib/net6.0/ZXing.OpenCv.dll",
+        "lib/net6.0/ZXing.OpenCv.pdb",
+        "lib/net6.0/ZXing.OpenCv.xml",
+        "lib/netcoreapp3.1/ZXing.OpenCv.dll",
+        "lib/netcoreapp3.1/ZXing.OpenCv.pdb",
+        "lib/netcoreapp3.1/ZXing.OpenCv.xml",
+        "lib/netstandard2.0/ZXing.OpenCv.dll",
+        "lib/netstandard2.0/ZXing.OpenCv.pdb",
+        "lib/netstandard2.0/ZXing.OpenCv.xml",
+        "lib/netstandard2.1/ZXing.OpenCv.dll",
+        "lib/netstandard2.1/ZXing.OpenCv.pdb",
+        "lib/netstandard2.1/ZXing.OpenCv.xml",
+        "logo.jpg",
+        "zxing.net.bindings.opencv.v4.0.16.9.nupkg.sha512",
+        "zxing.net.bindings.opencv.v4.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -4964,9 +5216,14 @@
       "Avalonia.Svg.Skia >= 0.10.18",
       "CommunityToolkit.Mvvm >= 8.1.0",
       "Npgsql >= 7.0.2",
+      "OpenCvSharp4 >= 4.7.0.20230115",
+      "OpenCvSharp4.WpfExtensions >= 4.7.0.20230115",
+      "OpenCvSharp4.runtime.win >= 4.7.0.20230115",
       "Projektanker.Icons.Avalonia >= 5.12.0",
       "Projektanker.Icons.Avalonia.FontAwesome >= 5.12.0",
-      "XamlNameReferenceGenerator >= 1.6.1"
+      "XamlNameReferenceGenerator >= 1.6.1",
+      "ZXing.Net >= 0.16.9",
+      "ZXing.Net.Bindings.OpenCV.V4 >= 0.16.9"
     ]
   },
   "packageFolders": {
@@ -4976,9 +5233,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement.csproj",
-      "projectName": "GroceryStoreManagement",
-      "projectPath": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement.csproj",
+      "projectUniqueName": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\ConvenienceStoreManagement.csproj",
+      "projectName": "ConvenienceStoreManagement",
+      "projectPath": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\ConvenienceStoreManagement.csproj",
       "packagesPath": "C:\\Users\\Manh\\.nuget\\packages\\",
       "outputPath": "E:\\CSharp\\GroceryStoreManagement\\GroceryStoreManagement\\GroceryStoreManagement\\obj\\",
       "projectStyle": "PackageReference",
@@ -5037,6 +5294,18 @@
             "target": "Package",
             "version": "[7.0.2, )"
           },
+          "OpenCvSharp4": {
+            "target": "Package",
+            "version": "[4.7.0.20230115, )"
+          },
+          "OpenCvSharp4.WpfExtensions": {
+            "target": "Package",
+            "version": "[4.7.0.20230115, )"
+          },
+          "OpenCvSharp4.runtime.win": {
+            "target": "Package",
+            "version": "[4.7.0.20230115, )"
+          },
           "Projektanker.Icons.Avalonia": {
             "target": "Package",
             "version": "[5.12.0, )"
@@ -5048,6 +5317,14 @@
           "XamlNameReferenceGenerator": {
             "target": "Package",
             "version": "[1.6.1, )"
+          },
+          "ZXing.Net": {
+            "target": "Package",
+            "version": "[0.16.9, )"
+          },
+          "ZXing.Net.Bindings.OpenCV.V4": {
+            "target": "Package",
+            "version": "[0.16.9, )"
           }
         },
         "imports": [

@@ -1,4 +1,4 @@
-﻿namespace GroceryStoreManagement.Main.ViewModel
+﻿namespace ConvenienceStoreManagement.Main.ViewModel
 {
     public abstract class PageViewModelBase : ViewModelBase
     {

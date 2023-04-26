@@ -1,12 +1,12 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using GroceryStoreManagement.Auth;
-using GroceryStoreManagement.Database;
-using GroceryStoreManagement.Main;
-using GroceryStoreManagement.Main.ViewModel;
+using ConvenienceStoreManagement.Auth;
+using ConvenienceStoreManagement.Database;
+using ConvenienceStoreManagement.Main;
+using ConvenienceStoreManagement.Main.ViewModel;
 
-namespace GroceryStoreManagement
+namespace ConvenienceStoreManagement
 {
     public partial class App : Application
     {
@@ -30,7 +30,7 @@ namespace GroceryStoreManagement
             mainWindow = new MainWindow
             {
                 DataContext = new MainViewModel(dbManager),
-            }; ;
+            };
         }
 
         public override void OnFrameworkInitializationCompleted()

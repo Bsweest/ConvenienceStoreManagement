@@ -5,7 +5,7 @@
         xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="1536" d:DesignHeight="864"
         WindowState="Maximized"
-        x:Class="GroceryStoreManagement.Main.MainWindow"
+        x:Class="ConvenienceStoreManagement.Main.MainWindow"
         Title="MainWindow">
 	<DockPanel Background="#21202E">
 		<StackPanel Height="30" Background="#121016" DockPanel.Dock="Top" Orientation="Horizontal">
@@ -32,9 +32,12 @@
 			<Button Classes="MenuIcon" Command="{Binding ChangeToShop}" 
 					Classes.Choosed="{Binding ShopPanel}" 
 					i:Attached.Icon="fa-solid fa-shop"/>
-			<Button Classes="MenuIcon" Command="{Binding ChangeToSearch}" 
-					Classes.Choosed="{Binding SearchPanel}" 
-					i:Attached.Icon="fa-solid fa-search"/>
+			<Button Classes="MenuIcon" Command="{Binding ChangeToItemManage}"
+					Classes.Choosed="{Binding ItemPanel}"
+					i:Attached.Icon="fa-solid fa-cubes"/>
+			<Button Classes="MenuIcon" Command="{Binding ChangeToCustomerManage}"
+					Classes.Choosed="{Binding CustomerManagePanel}"
+					i:Attached.Icon="fa-solid fa-person-circle-question"/>
 		</StackPanel>
 		</Border>
 		<Panel>

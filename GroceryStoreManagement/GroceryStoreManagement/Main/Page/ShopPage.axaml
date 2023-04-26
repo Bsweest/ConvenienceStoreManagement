@@ -2,65 +2,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:comp="clr-namespace:GroceryStoreManagement.Components;assembly=GroceryStoreManagement"
+			 xmlns:comp="clr-namespace:ConvenienceStoreManagement.Components;assembly=ConvenienceStoreManagement"
              mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="700"
-             x:Class="GroceryStoreManagement.Main.Page.ShopPage" Background="#21202E">
-	
-	
-	<StackPanel HorizontalAlignment="Left">
-		<StackPanel Height="70" Orientation="Horizontal">
-			<Label Margin="20 0 10 0" VerticalContentAlignment="Center" Content="Find Item: "/>
-			<TextBox VerticalContentAlignment="Center" Height="30" Width="610"/>
-			<Label Margin="110 0 0 0" FontSize="20" FontWeight="Bold"
-				   VerticalContentAlignment="Center" Content="Shopping Cart"/>
+             x:Class="ConvenienceStoreManagement.Main.Page.ShopPage" Background="#21202E">
+
+	<Grid>	
+		<StackPanel HorizontalAlignment="Left" Opacity="1">
+			<DockPanel HorizontalAlignment="Left" Width="860" LastChildFill="False">
+				<StackPanel Height="70" Orientation="Horizontal" DockPanel.Dock="Left">
+					<Label Margin="50 0 20 0" FontSize="20" FontWeight="Bold" DockPanel.Dock="Left"
+						   VerticalContentAlignment="Center" Content="Shopping Cart"/>
+					<Label Content="{Binding Test}" />
+					<Panel>
+						<Panel.Styles>
+							<Style Selector="ToggleButton.Running:checked">
+								<Setter Property="Content" Value="Scanning"/>
+							</Style>
+							<Style Selector="ToggleButton.Running:unchecked">
+								<Setter Property="Content" Value="Scan Stoped"/>
+							</Style>
+						</Panel.Styles>
+						<ToggleButton Command="{Binding	ToggleScanning}" Classes="Running" 
+									  Width="120" IsChecked="{Binding ScannerVM.IsScanning}" HorizontalContentAlignment="Center"/>
+					</Panel>
+					<Rectangle VerticalAlignment="Stretch" Width="2" Margin="10 20 20 20" Fill="#2E2B38" />
+
+					<Panel DockPanel.Dock="Right">
+						<Panel.Styles>
+							<Style Selector="Button.None">
+								<Setter Property="Background" Value="#FF2E2E"/>
+							</Style>
+							<Style Selector="Button.Choosed">
+								<Setter Property="Background" Value="Gray"/>
+							</Style>
+						</Panel.Styles>
+						<Button Classes="None" Command="{Binding DrawerUserVM.ToggleChooseDrawer}" 
+								Classes.Choosed="{Binding HasCustomer}"
+								Content="{Binding ButtonContent}"/>
+					</Panel>
+				</StackPanel>
+				
+				<Button Content="Clear Cart" Background="White" Foreground="Red"
+						Command="{Binding ClearCart}"
+						Margin="20 0 0 0" Padding="20 5" DockPanel.Dock="Right"/>
+			</DockPanel>
+
+			<StackPanel Orientation="Horizontal">
+				<Border Background="#121016" Margin="50 0 0 0" CornerRadius="20">
+					<StackPanel>
+						<Border Background="Gray" CornerRadius="20 20 0 0">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Margin="25 0 0 0" Text="Image"/>
+								<TextBlock Margin="125 0 0 0" Text="Item Name"/>
+								<TextBlock Margin="200 0 0 0" Text="Quantity"/>
+								<TextBlock Margin="65 0 0 0" Text="Price"/>
+								<TextBlock Margin="90 0 0 0" Text="Discount"/>
+							</StackPanel>
+						</Border>	
+						<ListBox Items="{Binding CartList}"
+								 Width="820" Height="610"
+								 Background="Transparent"
+								 SelectionMode="Toggle">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<comp:ShopItem />
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</StackPanel>
+				</Border>
+
+				<StackPanel Margin="20 0">
+					<StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
+						<Label Margin="0 0 10 0">Total Cost: </Label>
+						<TextBox Width="150" Margin="0 -3 0 0" IsReadOnly="True"
+								 FontWeight="Bold"
+								 Text=".VND"/>
+					</StackPanel>
+					<Button Content="Create Invoice" Command="{Binding PrintInvoice}"/>
+				</StackPanel>
+			</StackPanel>
 		</StackPanel>
 
-		<StackPanel Orientation="Horizontal">
-			<Border Background="#121016" Margin="80 0 0 0" CornerRadius="20">
-				<StackPanel>
-					<Border Background="Gray" CornerRadius="20 20 0 0">
-						<StackPanel  Orientation="Horizontal">
-							<TextBlock Margin="22 0 0 0" Text="Image"/>
-							<TextBlock Margin="75 0 0 0" Text="Item Name"/>
-							<TextBlock Margin="200 0 0 0" Text="Remaining"/>
-							<TextBlock Margin="52 0 0 0" Text="Price"/>
-						</StackPanel>
-					</Border>
-					<ListBox Items="{Binding ListItem}"
-						 Width="650" Height="605"
-						 Background="Transparent"
-						 SelectionMode="Toggle">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<comp:ShopItem />
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</StackPanel>
-			</Border>
-			<Border Background="#121016" Margin="80 0 0 0" CornerRadius="20">
-				<StackPanel>
-					<Border Background="Gray" CornerRadius="20 20 0 0">
-						<StackPanel  Orientation="Horizontal">
-							<TextBlock Margin="22 0 0 0" Text="Image"/>
-							<TextBlock Margin="75 0 0 0" Text="Item Name"/>
-							<TextBlock Margin="200 0 0 0" Text="Quantity"/>
-							<TextBlock Margin="52 0 0 0" Text="Price"/>
-						</StackPanel>
-					</Border>	
-					<ListBox Items="{Binding ListItem}"
-						 Width="650" Height="605"
-						 Background="Transparent"
-						 SelectionMode="Toggle">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<comp:ShopItem />
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</StackPanel>
-			</Border>
-		</StackPanel>
-		
-	</StackPanel>
+		<comp:DrawerUser DataContext="{Binding DrawerUserVM}" />
+	</Grid>
 </UserControl>

@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace GroceryStoreManagement.Main.Page;
+namespace ConvenienceStoreManagement.Main.Page;
 
 public partial class CustomerManagePage : UserControl
 {

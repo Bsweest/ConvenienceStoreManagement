@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="400" Height="400"
+        x:Class="ConvenienceStoreManagement.Components.ShowBox.AddCustomerBox"
+		WindowStartupLocation="CenterScreen"
+        Title="Add Customer Message Box">
+	<Border Margin="12">
+		<StackPanel>
+			<Label FontSize="20" Margin="0 0 0 10" Foreground="Orchid" FontWeight="Bold">Add Customer</Label>
+			<Label>Customer Name</Label>
+			<TextBox Margin="0 0 0 20" Text="{Binding CusName}"/>
+			<Label>Phone Num.</Label>
+			<TextBox Margin="0 0 0 20" Text="{Binding CusPhoneNum}"/>
+			<DockPanel LastChildFill="False">
+				<Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right" 
+						Background="Red" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding CloseForm}"/>
+				<Button Margin="20 0" Padding="20 10" Content="OK" DockPanel.Dock="Right" 
+						Background="Green" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding AddCustomer}"/>
+			</DockPanel>
+		</StackPanel>
+	</Border>
+</Window>
