@@ -147,6 +147,18 @@
           }
         }
       },
+      "Avalonia.AvaloniaEdit/0.10.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.0-preview1"
+        },
+        "compile": {
+          "lib/netstandard2.0/AvaloniaEdit.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AvaloniaEdit.dll": {}
+        }
+      },
       "Avalonia.Controls.DataGrid/0.10.18": {
         "type": "package",
         "dependencies": {
@@ -347,6 +359,19 @@
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
         }
       },
+      "ExcelDataReader/3.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "ExCSS/4.1.4": {
         "type": "package",
         "compile": {
@@ -481,6 +506,54 @@
           "lib/netstandard1.0/JetBrains.Annotations.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "Markdown.Avalonia/0.10.11": {
+        "type": "package",
+        "dependencies": {
+          "Markdown.Avalonia.SyntaxHigh": "0.10.11",
+          "Markdown.Avalonia.Tight": "0.10.11"
+        }
+      },
+      "Markdown.Avalonia.SyntaxHigh/0.10.11": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.0",
+          "Avalonia.AvaloniaEdit": "0.10.0",
+          "System.Collections.Immutable": "1.6.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/Markdown.Avalonia.SyntaxHigh.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Markdown.Avalonia.SyntaxHigh.dll": {}
+        }
+      },
+      "Markdown.Avalonia.Tight/0.10.11": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/ColorTextBlock.Avalonia.dll": {},
+          "lib/netcoreapp2.0/Markdown.Avalonia.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/ColorTextBlock.Avalonia.dll": {},
+          "lib/netcoreapp2.0/Markdown.Avalonia.dll": {}
+        }
+      },
+      "MessageBox.Avalonia/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.15",
+          "Markdown.Avalonia": "0.10.11"
+        },
+        "compile": {
+          "lib/netstandard2.0/MessageBox.Avalonia.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MessageBox.Avalonia.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
@@ -1087,7 +1160,7 @@
           }
         }
       },
-      "System.Collections.Immutable/1.5.0": {
+      "System.Collections.Immutable/1.6.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/System.Collections.Immutable.dll": {
@@ -1843,6 +1916,18 @@
         "runtimes/win7-x86/native/av_libglesv2.dll"
       ]
     },
+    "Avalonia.AvaloniaEdit/0.10.0": {
+      "sha512": "ugsyCTgf+3kgKXPwnc61xy8xzTlX8zW0nTU0qXdBd5oTBJAy+QATwzcJmpLI4MROwxojWTBeBTDd78rUl6M6Hw==",
+      "type": "package",
+      "path": "avalonia.avaloniaedit/0.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "avalonia.avaloniaedit.0.10.0.nupkg.sha512",
+        "avalonia.avaloniaedit.nuspec",
+        "lib/netstandard2.0/AvaloniaEdit.dll"
+      ]
+    },
     "Avalonia.Controls.DataGrid/0.10.18": {
       "sha512": "LDNZxnzk++GgBeUKsqmeWJDQgF83C4Quk4Wn0z5P6vIm1f5YSSFJL6JbibbIAvjqlGjqWWFTBZpHMUNjdyw4Aw==",
       "type": "package",
@@ -2010,6 +2095,29 @@
         "lib/netstandard2.1/CommunityToolkit.Mvvm.dll",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.pdb",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.xml"
+      ]
+    },
+    "ExcelDataReader/3.6.0": {
+      "sha512": "eXyxTwG7EEWpgQX3juZ2KcndqTqm/ydx9GXS2lUiMJU54U4h5eXdygRtVgINv0t60ezPWEb+lL7uM7Q+wm5BBA==",
+      "type": "package",
+      "path": "exceldatareader/3.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "exceldatareader.3.6.0.nupkg.sha512",
+        "exceldatareader.nuspec",
+        "lib/net20/ExcelDataReader.dll",
+        "lib/net20/ExcelDataReader.pdb",
+        "lib/net20/ExcelDataReader.xml",
+        "lib/net45/ExcelDataReader.dll",
+        "lib/net45/ExcelDataReader.pdb",
+        "lib/net45/ExcelDataReader.xml",
+        "lib/netstandard1.3/ExcelDataReader.dll",
+        "lib/netstandard1.3/ExcelDataReader.pdb",
+        "lib/netstandard1.3/ExcelDataReader.xml",
+        "lib/netstandard2.0/ExcelDataReader.dll",
+        "lib/netstandard2.0/ExcelDataReader.pdb",
+        "lib/netstandard2.0/ExcelDataReader.xml"
       ]
     },
     "ExCSS/4.1.4": {
@@ -2230,6 +2338,60 @@
         "lib/portable-net4+sl4+wp7+netcore45/JetBrains.Annotations.xml",
         "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.dll",
         "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.xml"
+      ]
+    },
+    "Markdown.Avalonia/0.10.11": {
+      "sha512": "pUrE1Wx8pjPQK/P/MeAM2GmkLS0oMKtzn3aOu8fAbb2UNHn42vvB9d0kiTPqmt6E95ECPCK9OexIqrIWrwUfvw==",
+      "type": "package",
+      "path": "markdown.avalonia/0.10.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "markdown.avalonia.0.10.11.nupkg.sha512",
+        "markdown.avalonia.nuspec"
+      ]
+    },
+    "Markdown.Avalonia.SyntaxHigh/0.10.11": {
+      "sha512": "zGlA0p8P3S44aiCXwrxn8ukaU3oya90fwM6FaR6knrofMfzZlBKlGCck3oyqE1hh2iguUmjxTvrxM/fpvyeuvA==",
+      "type": "package",
+      "path": "markdown.avalonia.syntaxhigh/0.10.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/Markdown.Avalonia.SyntaxHigh.dll",
+        "lib/netcoreapp2.0/Markdown.Avalonia.SyntaxHigh.dll",
+        "lib/netstandard2.0/Markdown.Avalonia.SyntaxHigh.dll",
+        "markdown.avalonia.syntaxhigh.0.10.11.nupkg.sha512",
+        "markdown.avalonia.syntaxhigh.nuspec"
+      ]
+    },
+    "Markdown.Avalonia.Tight/0.10.11": {
+      "sha512": "avN6z0wB8yr+y/019DL8dOJFi3h06j7KDlwXvdeQiWzNAZEdttYkMuCh2zl+jOsvCdVBjmbgPzgzj4XTg2tVRg==",
+      "type": "package",
+      "path": "markdown.avalonia.tight/0.10.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/ColorTextBlock.Avalonia.dll",
+        "lib/net461/Markdown.Avalonia.dll",
+        "lib/netcoreapp2.0/ColorTextBlock.Avalonia.dll",
+        "lib/netcoreapp2.0/Markdown.Avalonia.dll",
+        "lib/netstandard2.0/ColorTextBlock.Avalonia.dll",
+        "lib/netstandard2.0/Markdown.Avalonia.dll",
+        "markdown.avalonia.tight.0.10.11.nupkg.sha512",
+        "markdown.avalonia.tight.nuspec"
+      ]
+    },
+    "MessageBox.Avalonia/2.1.0": {
+      "sha512": "mZ6WEq5PmPyfXD0HADMs3WKbEXGeRNzaQ343RZm2M9sz9Wu0/uoIAePPhulYoofPkb3h11FzZ7dfc0HKTWi3og==",
+      "type": "package",
+      "path": "messagebox.avalonia/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/MessageBox.Avalonia.dll",
+        "messagebox.avalonia.2.1.0.nupkg.sha512",
+        "messagebox.avalonia.nuspec"
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
@@ -3035,10 +3197,10 @@
         "system.collections.nuspec"
       ]
     },
-    "System.Collections.Immutable/1.5.0": {
-      "sha512": "EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ==",
+    "System.Collections.Immutable/1.6.0": {
+      "sha512": "+aL946rTSJyo4PqstwsVZ5RBfaxfkIx+nTMfpmaxzorqgifRJwndBZhXPWNWGJpys7cQ1/vCvilYN9ugM05JFA==",
       "type": "package",
-      "path": "system.collections.immutable/1.5.0",
+      "path": "system.collections.immutable/1.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3052,7 +3214,7 @@
         "lib/netstandard2.0/System.Collections.Immutable.xml",
         "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
         "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
-        "system.collections.immutable.1.5.0.nupkg.sha512",
+        "system.collections.immutable.1.6.0.nupkg.sha512",
         "system.collections.immutable.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -5215,6 +5377,8 @@
       "Avalonia.Diagnostics >= 0.10.18",
       "Avalonia.Svg.Skia >= 0.10.18",
       "CommunityToolkit.Mvvm >= 8.1.0",
+      "ExcelDataReader >= 3.6.0",
+      "MessageBox.Avalonia >= 2.1.0",
       "Npgsql >= 7.0.2",
       "OpenCvSharp4 >= 4.7.0.20230115",
       "OpenCvSharp4.WpfExtensions >= 4.7.0.20230115",
@@ -5290,6 +5454,14 @@
             "target": "Package",
             "version": "[8.1.0, )"
           },
+          "ExcelDataReader": {
+            "target": "Package",
+            "version": "[3.6.0, )"
+          },
+          "MessageBox.Avalonia": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "Npgsql": {
             "target": "Package",
             "version": "[7.0.2, )"
@@ -5343,7 +5515,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

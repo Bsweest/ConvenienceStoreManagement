@@ -13,6 +13,8 @@
           "Avalonia.Diagnostics": "0.10.18",
           "Avalonia.Svg.Skia": "0.10.18",
           "CommunityToolkit.Mvvm": "8.1.0",
+          "ExcelDataReader": "3.6.0",
+          "MessageBox.Avalonia": "2.1.0",
           "Npgsql": "7.0.2",
           "OpenCvSharp4": "4.7.0.20230115",
           "OpenCvSharp4.WpfExtensions": "4.7.0.20230115",
@@ -128,6 +130,17 @@
             "rid": "win7-x86",
             "assetType": "native",
             "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "Avalonia.AvaloniaEdit/0.10.0": {
+        "dependencies": {
+          "Avalonia": "0.10.18"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AvaloniaEdit.dll": {
+            "assemblyVersion": "0.10.0.0",
+            "fileVersion": "0.10.0.0"
           }
         }
       },
@@ -278,6 +291,14 @@
           }
         }
       },
+      "ExcelDataReader/3.6.0": {
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {
+            "assemblyVersion": "3.6.0.0",
+            "fileVersion": "3.6.0.0"
+          }
+        }
+      },
       "ExCSS/4.1.4": {
         "runtime": {
           "lib/net6.0/ExCSS.dll": {
@@ -373,11 +394,57 @@
           }
         }
       },
+      "Markdown.Avalonia/0.10.11": {
+        "dependencies": {
+          "Markdown.Avalonia.SyntaxHigh": "0.10.11",
+          "Markdown.Avalonia.Tight": "0.10.11"
+        }
+      },
+      "Markdown.Avalonia.SyntaxHigh/0.10.11": {
+        "dependencies": {
+          "Avalonia": "0.10.18",
+          "Avalonia.AvaloniaEdit": "0.10.0",
+          "System.Collections.Immutable": "1.6.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Markdown.Avalonia.SyntaxHigh.dll": {
+            "assemblyVersion": "0.10.11.0",
+            "fileVersion": "0.10.11.0"
+          }
+        }
+      },
+      "Markdown.Avalonia.Tight/0.10.11": {
+        "dependencies": {
+          "Avalonia": "0.10.18"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/ColorTextBlock.Avalonia.dll": {
+            "assemblyVersion": "0.10.11.0",
+            "fileVersion": "0.10.11.0"
+          },
+          "lib/netcoreapp2.0/Markdown.Avalonia.dll": {
+            "assemblyVersion": "0.10.11.0",
+            "fileVersion": "0.10.11.0"
+          }
+        }
+      },
+      "MessageBox.Avalonia/2.1.0": {
+        "dependencies": {
+          "Avalonia": "0.10.18",
+          "Markdown.Avalonia": "0.10.11"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MessageBox.Avalonia.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Microsoft.CodeAnalysis.Analyzers/2.9.6": {},
       "Microsoft.CodeAnalysis.Common/3.4.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "2.9.6",
-          "System.Collections.Immutable": "1.5.0",
+          "System.Collections.Immutable": "1.6.0",
           "System.Memory": "4.5.4",
           "System.Reflection.Metadata": "1.6.0",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
@@ -858,7 +925,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Collections.Immutable/1.5.0": {},
+      "System.Collections.Immutable/1.6.0": {},
       "System.ComponentModel.Annotations/4.5.0": {},
       "System.Diagnostics.Debug/4.3.0": {
         "dependencies": {
@@ -1178,6 +1245,13 @@
       "path": "avalonia.angle.windows.natives/2.1.0.2020091801",
       "hashPath": "avalonia.angle.windows.natives.2.1.0.2020091801.nupkg.sha512"
     },
+    "Avalonia.AvaloniaEdit/0.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ugsyCTgf+3kgKXPwnc61xy8xzTlX8zW0nTU0qXdBd5oTBJAy+QATwzcJmpLI4MROwxojWTBeBTDd78rUl6M6Hw==",
+      "path": "avalonia.avaloniaedit/0.10.0",
+      "hashPath": "avalonia.avaloniaedit.0.10.0.nupkg.sha512"
+    },
     "Avalonia.Controls.DataGrid/0.10.18": {
       "type": "package",
       "serviceable": true,
@@ -1255,6 +1329,13 @@
       "path": "communitytoolkit.mvvm/8.1.0",
       "hashPath": "communitytoolkit.mvvm.8.1.0.nupkg.sha512"
     },
+    "ExcelDataReader/3.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eXyxTwG7EEWpgQX3juZ2KcndqTqm/ydx9GXS2lUiMJU54U4h5eXdygRtVgINv0t60ezPWEb+lL7uM7Q+wm5BBA==",
+      "path": "exceldatareader/3.6.0",
+      "hashPath": "exceldatareader.3.6.0.nupkg.sha512"
+    },
     "ExCSS/4.1.4": {
       "type": "package",
       "serviceable": true,
@@ -1310,6 +1391,34 @@
       "sha512": "sha512-0GLU9lwGVXjUNlr9ZIdAgjqLI2Zm/XFGJFaqJ1T1sU+kwfeMLhm68+rblUrNUP9psRl4i8yM7Ghb4ia4oI2E5g==",
       "path": "jetbrains.annotations/10.3.0",
       "hashPath": "jetbrains.annotations.10.3.0.nupkg.sha512"
+    },
+    "Markdown.Avalonia/0.10.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pUrE1Wx8pjPQK/P/MeAM2GmkLS0oMKtzn3aOu8fAbb2UNHn42vvB9d0kiTPqmt6E95ECPCK9OexIqrIWrwUfvw==",
+      "path": "markdown.avalonia/0.10.11",
+      "hashPath": "markdown.avalonia.0.10.11.nupkg.sha512"
+    },
+    "Markdown.Avalonia.SyntaxHigh/0.10.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zGlA0p8P3S44aiCXwrxn8ukaU3oya90fwM6FaR6knrofMfzZlBKlGCck3oyqE1hh2iguUmjxTvrxM/fpvyeuvA==",
+      "path": "markdown.avalonia.syntaxhigh/0.10.11",
+      "hashPath": "markdown.avalonia.syntaxhigh.0.10.11.nupkg.sha512"
+    },
+    "Markdown.Avalonia.Tight/0.10.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-avN6z0wB8yr+y/019DL8dOJFi3h06j7KDlwXvdeQiWzNAZEdttYkMuCh2zl+jOsvCdVBjmbgPzgzj4XTg2tVRg==",
+      "path": "markdown.avalonia.tight/0.10.11",
+      "hashPath": "markdown.avalonia.tight.0.10.11.nupkg.sha512"
+    },
+    "MessageBox.Avalonia/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mZ6WEq5PmPyfXD0HADMs3WKbEXGeRNzaQ343RZm2M9sz9Wu0/uoIAePPhulYoofPkb3h11FzZ7dfc0HKTWi3og==",
+      "path": "messagebox.avalonia/2.1.0",
+      "hashPath": "messagebox.avalonia.2.1.0.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
       "type": "package",
@@ -1500,12 +1609,12 @@
       "path": "system.collections/4.3.0",
       "hashPath": "system.collections.4.3.0.nupkg.sha512"
     },
-    "System.Collections.Immutable/1.5.0": {
+    "System.Collections.Immutable/1.6.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ==",
-      "path": "system.collections.immutable/1.5.0",
-      "hashPath": "system.collections.immutable.1.5.0.nupkg.sha512"
+      "sha512": "sha512-+aL946rTSJyo4PqstwsVZ5RBfaxfkIx+nTMfpmaxzorqgifRJwndBZhXPWNWGJpys7cQ1/vCvilYN9ugM05JFA==",
+      "path": "system.collections.immutable/1.6.0",
+      "hashPath": "system.collections.immutable.1.6.0.nupkg.sha512"
     },
     "System.ComponentModel.Annotations/4.5.0": {
       "type": "package",

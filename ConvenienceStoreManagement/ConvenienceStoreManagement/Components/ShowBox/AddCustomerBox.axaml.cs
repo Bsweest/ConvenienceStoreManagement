@@ -24,11 +24,11 @@ public partial class AddCustomerBox : Window
     public static Task<AddCustomerResult> ShowBox()
     {
         AddCustomerBoxViewModel viewModel = new();
-        var addBox = new AddCustomerBox
+        AddCustomerBox addBox = new AddCustomerBox
         {
             DataContext = viewModel
         };
-        viewModel.SetParentWindow(addBox);
+        viewModel.SetViewWindow(addBox);
 
         var taskCompletion = new TaskCompletionSource<AddCustomerResult>();
         addBox.Closed += delegate { taskCompletion.TrySetResult(viewModel.Result); };

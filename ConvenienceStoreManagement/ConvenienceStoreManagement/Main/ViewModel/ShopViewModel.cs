@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Components.ViewModel;
+using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Model;
 using System.Collections.Generic;
 
@@ -9,12 +10,12 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 {
     public partial class ShopViewModel : PageViewModelBase
     {
-        [ObservableProperty]
-        private string test;
         // Current Customer
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasCustomer))]
         private CustomerModel? customer;
+
+        private readonly MainWindow MainWindow;
 
         public bool HasCustomer => Customer != null;
         public string ButtonContent => HasCustomer ? "Customer: " + Customer.FullName : "Guest Customer";
@@ -28,14 +29,17 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         private BarCodeScannerViewModel scannerVM = new();
 
         [ObservableProperty]
-        private List<ShopItemViewModel> cartList = new()
-        {
-            new ShopItemViewModel(new ShopItemModel("uuid", "name", 20, null, 20))
-        };
+        private List<ShopItemViewModel> cartList = new() { };
 
-        public ShopViewModel()
+        public ShopViewModel(MainWindow mainWindow)
         {
-            BarCodeScanner.CreateBox(scannerVM);
+            MainWindow = mainWindow;
+            BarCodeScanner.CreateBox(scannerVM, mainWindow);
+        }
+
+        public override ShopViewModel SetDatabaseConnection(DbManager dbManager)
+        {
+            return base.SetDatabaseConnection(dbManager) as ShopViewModel;
         }
 
         [RelayCommand]

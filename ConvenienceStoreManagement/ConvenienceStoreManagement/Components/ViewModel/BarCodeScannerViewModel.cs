@@ -44,9 +44,9 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 
         public void StartScanning()
         {
-            if (!Parent.IsActive)
+            if (!ViewWindow.IsActive)
             {
-                Parent.Show();
+                ViewWindow.Show();
             }
             Capturer.Open(0, VideoCaptureAPIs.ANY);
             if (!Capturer.IsOpened())
@@ -65,21 +65,20 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         public override void CloseBehaviour()
         {
             StopScanning();
-            Parent.Hide();
+            ViewWindow.Hide();
             IsScanning = false;
         }
 
         public void FindScanValue(Mat frameMat)
         {
+            if (frameMat == null) return;
             var result = reader.Decode(frameMat);
             if (result != null)
             {
                 int parsed;
                 bool success = int.TryParse(result.Text, out parsed);
-                if (success)
-                {
-                    ChoosedNumber = parsed;
-                }
+                if (success) ChoosedNumber = parsed;
+
             }
         }
 

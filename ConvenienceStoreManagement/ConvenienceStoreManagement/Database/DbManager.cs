@@ -5,14 +5,21 @@ namespace ConvenienceStoreManagement.Database
     public class DbManager
     {
         private readonly string connString = "Host=localhost;Username=postgres;Password=Phanhuymanh123;Database=ConvenienceStoreManagement";
-        public NpgsqlConnection? Db { get; private set; }
 
-        public async void OpenConnection()
+        public NpgsqlDataSource DataSource { get; private set; }
+        public DbQueryItem? QueryItems { get; private set; }
+
+        public DbManager()
         {
-            //if (Db != null) return;
-            //var dataSourceBuilder = new NpgsqlDataSourceBuilder(connString);
-            //var dataSource = dataSourceBuilder.Build();
-            //Db = await dataSource.OpenConnectionAsync();
+            SetupDatabase();
+        }
+
+        public void SetupDatabase()
+        {
+            if (DataSource != null) return;
+            var datasourcebuilder = new NpgsqlDataSourceBuilder(connString);
+            DataSource = datasourcebuilder.Build();
+            QueryItems = new(DataSource);
         }
     }
 }

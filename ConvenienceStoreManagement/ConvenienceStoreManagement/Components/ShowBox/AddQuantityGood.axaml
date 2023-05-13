@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="450" Height="450"
+        x:Class="ConvenienceStoreManagement.Components.ShowBox.AddQuantityGood"
+        Title="Add Quantity Good">
+	<Border Padding="10">
+		<StackPanel>
+			<StackPanel.Styles>
+				<Style Selector="Label.Menu">
+					<Setter Property="FontSize" Value="15"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+					<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="0 5"/>
+				</Style>
+			</StackPanel.Styles>
+			<Label Content="Manual Add" Classes="Menu" Foreground="DeepPink"/>
+			<Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto">
+				<Grid.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="Margin" Value="0 5"/>
+					</Style>
+					<Style Selector="ComboBox">
+						<Setter Property="Margin" Value="0 5"/>
+					</Style>
+				</Grid.Styles>
+			
+				<Label Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center"
+					   Content="Barcode ID: "/>
+				<Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center"
+					   Content="Item ID: "/>
+				<Label Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center"
+					   Content="MFG Date: "/>
+				<Label Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center"
+					   Content="Expired Date: "/>
+
+				<TextBox Grid.Column="1" Grid.Row="0" Margin="0 5" Text="{Binding GoodID}"/>
+				<ComboBox Grid.Column="1" Grid.Row="1" Items="{Binding ArrItemName}"/>
+				<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MFG_Date}"/>
+				<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Expired_Date}"/>
+			</Grid>
+			
+			<Label Classes="Menu" Content="Using File" Foreground="CadetBlue"/>
+			<StackPanel Orientation="Horizontal">
+				<TextBox Width="340" Margin="0 0 20 0" IsReadOnly="True" Text="{Binding	FilePath}"/>
+				<Button Content="Choose" Command="{Binding ChooseFileToProcess}"/>
+			</StackPanel>
+			
+			<TextBlock Text="{Binding ResultMessage}" Margin="0 10 0 0" Foreground="Bisque"/>
+
+			<DockPanel Margin="0 30" LastChildFill="False">
+				<Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right"
+						Background="Red" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding CloseForm}"/>
+				<Button Margin="20 0" Padding="20 10" Content="OK" DockPanel.Dock="Right"
+						Background="Green" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding ClickOK}"/>
+			</DockPanel>
+		</StackPanel>
+	</Border>
+</Window>

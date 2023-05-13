@@ -34,7 +34,7 @@
 							  Width="170" HorizontalContentAlignment="Center" 
 							  Classes="ScanMode"/>
 				<ToggleButton Command="{Binding	ToggleScanning}" Classes="Running" 
-							  Width="120" IsChecked="{Binding ScannerVM.IsScanning}" HorizontalContentAlignment="Center"/>
+							  Width="120" IsChecked="{Binding IsScanning}" HorizontalContentAlignment="Center"/>
 
 			</StackPanel>
 			<DockPanel Margin="0 20 0 0" LastChildFill="False">

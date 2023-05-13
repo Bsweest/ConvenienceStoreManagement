@@ -16,25 +16,27 @@ namespace ConvenienceStoreManagement
 
         private AuthenticationHandler authWindow;
         private MainWindow mainWindow;
+
         public override void Initialize()
         {
             InitWindow();
             AvaloniaXamlLoader.Load(this);
-            dbManager.OpenConnection();
         }
 
         public void InitWindow()
         {
-            Action<int> action = index => ChangeWindow(index);
+            Action<int> changeWindow = index => ChangeWindow(index);
 
             authWindow = new AuthenticationHandler
             {
-                DataContext = new AuthViewModel(dbManager, action),
+                DataContext = new AuthViewModel(changeWindow)
+                                    .SetDatabaseConnection(dbManager),
             };
-            mainWindow = new MainWindow
-            {
-                DataContext = new MainViewModel(dbManager),
-            };
+            mainWindow = new MainWindow();
+            mainWindow.DataContext = new MainViewModel(changeWindow)
+                                            .SetViewWindow(mainWindow)
+                                            .SetDatabaseConnection(dbManager)
+                                            .FinishBuild();
         }
 
         public void ChangeWindow(int index)
@@ -62,7 +64,7 @@ namespace ConvenienceStoreManagement
 
         public override void OnFrameworkInitializationCompleted()
         {
-            ChangeWindow(0);
+            ChangeWindow(1);
             base.OnFrameworkInitializationCompleted();
         }
     }

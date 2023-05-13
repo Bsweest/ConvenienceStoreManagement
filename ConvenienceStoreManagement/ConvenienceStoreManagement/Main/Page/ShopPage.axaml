@@ -6,13 +6,12 @@
              mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="700"
              x:Class="ConvenienceStoreManagement.Main.Page.ShopPage" Background="#21202E">
 
-	<Grid>	
+	<Grid>
 		<StackPanel HorizontalAlignment="Left" Opacity="1">
 			<DockPanel HorizontalAlignment="Left" Width="860" LastChildFill="False">
 				<StackPanel Height="70" Orientation="Horizontal" DockPanel.Dock="Left">
 					<Label Margin="50 0 20 0" FontSize="20" FontWeight="Bold" DockPanel.Dock="Left"
 						   VerticalContentAlignment="Center" Content="Shopping Cart"/>
-					<Label Content="{Binding Test}" />
 					<Panel>
 						<Panel.Styles>
 							<Style Selector="ToggleButton.Running:checked">

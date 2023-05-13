@@ -20,7 +20,7 @@ public partial class NumberBox : Window
         {
             DataContext = viewModel
         };
-        viewModel.SetParentWindow(numBox);
+        viewModel.SetViewWindow(numBox);
 
         var taskCompletion = new TaskCompletionSource<int>();
         numBox.Closed += delegate

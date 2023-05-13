@@ -1,17 +1,20 @@
-﻿using Avalonia.Controls;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace ConvenienceStoreManagement.Components.ViewModel.Base
 {
     public partial class BaseBoxViewModel : ViewModelBase
     {
-        protected Window? Parent;
+        public virtual void OKBehaviour() { }
 
-        public void SetParentWindow(Window parent)
+        public virtual void CloseBehaviour()
         {
-            Parent = parent;
+            if (ViewWindow != null)
+            {
+                ViewWindow.Close();
+            }
         }
 
+        // Business Logic
         [RelayCommand]
         public void CloseForm()
         {
@@ -22,19 +25,6 @@ namespace ConvenienceStoreManagement.Components.ViewModel.Base
         public void ClickOK()
         {
             OKBehaviour();
-        }
-
-        public virtual void OKBehaviour()
-        {
-
-        }
-
-        public virtual void CloseBehaviour()
-        {
-            if (Parent != null)
-            {
-                Parent.Close();
-            }
         }
     }
 }

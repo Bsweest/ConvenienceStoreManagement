@@ -64,6 +64,14 @@
               "target": "Package",
               "version": "[8.1.0, )"
             },
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
+            "MessageBox.Avalonia": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[7.0.2, )"
@@ -117,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

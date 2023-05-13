@@ -23,20 +23,38 @@ namespace ConvenienceStoreManagement.Tools
             {
                 Uri uri;
 
-                // Allow for assembly overrides
-                if (rawUri.StartsWith("avares://"))
+                try
                 {
-                    uri = new Uri($"avares://{assemblyName}/{rawUri[9..]}");
+                    if (rawUri == "")
+                    {
+                        return null;
+                    }
+                    else if (rawUri.StartsWith("avares://"))
+                    {
+                        uri = new Uri($"avares://{assemblyName}/{rawUri[9..]}");
+                    }
+                    else if (rawUri.StartsWith("storage://"))
+                    {
+                        return new Bitmap(ItemManageViewModel.ImageFolder + rawUri[10..]);
+                    }
+                    else
+                    {
+                        return new Bitmap(rawUri);
+                    }
+
+                    var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+                    var asset = assets.Open(uri);
+
+                    return new Bitmap(asset);
                 }
-                else
+                catch
                 {
-                    uri = new Uri(ItemManageViewModel.ImageFolder + rawUri);
+                    uri = new Uri($"avares://{assemblyName}/Assets/NotFound.png");
+                    var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+                    var asset = assets.Open(uri);
+                    return new Bitmap(asset);
                 }
 
-                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-                var asset = assets.Open(uri);
-
-                return new Bitmap(asset);
             }
 
             throw new NotSupportedException();

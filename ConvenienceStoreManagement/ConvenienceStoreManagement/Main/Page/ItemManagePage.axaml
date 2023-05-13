@@ -3,76 +3,81 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	         xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
 			 xmlns:tools="clr-namespace:ConvenienceStoreManagement.Tools;assembly=ConvenienceStoreManagement"
+			 xmlns:comp="clr-namespace:ConvenienceStoreManagement.Components;assembly=ConvenienceStoreManagement"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="800" Background="#21202E"
              x:Class="ConvenienceStoreManagement.Main.Page.ItemManagePage">
 	<UserControl.Resources>
 		<tools:BitmapAssetValueConverter x:Key="variableImage"/>
 	</UserControl.Resources>
-	
-	<Border Padding="20">
-		<StackPanel>
-			<StackPanel Orientation="Horizontal">
-				<StackPanel.Styles>
-					<Style Selector="Button.NotExpired">
-						<Setter Property="Background" Value="Gray"/>
-					</Style>
-					<Style Selector="Button.HaveExpired">
-						<Setter Property="Background" Value="Crimson"/>
-						<Setter Property="Foreground" Value="SeaShell"/>
-					</Style>
-				</StackPanel.Styles>
+
+	<Grid>
+		<Border Padding="20">
+			<StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<StackPanel.Styles>
+						<Style Selector="Button.NotExpired">
+							<Setter Property="Background" Value="Gray"/>
+						</Style>
+						<Style Selector="Button.HaveExpired">
+							<Setter Property="Background" Value="Crimson"/>
+							<Setter Property="Foreground" Value="SeaShell"/>
+						</Style>
+					</StackPanel.Styles>
 				
-				<Label VerticalContentAlignment="Center" Content="Find Item: "/>
-				<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
-						 Watermark="Item Name"/>
-				<Button Margin="20 0" Padding="20 10" Content="Add Item"
-						Background="Gray" FontWeight="Bold" Cursor="Hand"
-						i:Attached.Icon="fa-solid fa-image"
-						/>
-				<Button Margin="20 0" Padding="20 10" Content="Add Item"
-						Background="Orchid" FontWeight="Bold" Cursor="Hand"
-						/>
-				<Button Margin="20 0" Padding="20 10" Content="Update Item"
-						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
-						/>
-				<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
+					<Label VerticalContentAlignment="Center" Content="Find Item: "/>
+					<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
+							 Watermark="Item Name"/>
+					<Button Margin="20 0" Padding="20 10" Content="Refresh"
+							Background="Gray" FontWeight="Bold" Cursor="Hand"
+							i:Attached.Icon="fa-solid fa-arrows-rotate"
+							Command="{Binding GetAllShopItem}"/>
+					<Button Margin="20 0 0 0" Padding="20 10" Content="Add Item"
+							Background="Orchid" FontWeight="Bold" Cursor="Hand"
+							Command="{Binding OpenDrawerAddItem}"/>
+					<Button Margin="20 0" Padding="20 10" Content="Update Item"
+							Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
+							/>
+					<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 
-				<Button Margin="20 0" Padding="20 10" Content="Add Quantity"
-						Background="Green" FontWeight="Bold" Cursor="Hand"
-						/>
-				<Button Margin="20 0" Padding="20 10" Content="Remove Quantity"
-						Background="#FF2E2E" FontWeight="Bold" Cursor="Hand"
-						/>
-				<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
+					<Button Margin="20 0 0 0" Padding="20 10" Content="Add Quantity"
+							Background="Green" FontWeight="Bold" Cursor="Hand"
+							Command="{Binding AddQuantity}"/>
+					<Button Margin="20 0" Padding="20 10" Content="Remove Quantity"
+							Background="#FF2E2E" FontWeight="Bold" Cursor="Hand"
+							/>
+					<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 
-				<Button Margin="20 0" FontSize="30" Padding="20 3"
-						FontWeight="Bold" Cursor="Hand"
-						i:Attached.Icon="fa-solid fa-dumpster-fire"
-						Classes="NotExpired"
-						Classes.HaveExpired="True"
-						/>
+					<Button Margin="20 0" FontSize="30" Padding="20 3"
+							FontWeight="Bold" Cursor="Hand"
+							i:Attached.Icon="fa-solid fa-dumpster-fire"
+							Classes="NotExpired"
+							Classes.HaveExpired="True"
+							/>
+				</StackPanel>
+
+				<Grid Margin="0 20 0 0" Height="650" Background="#121016">
+					<DataGrid Name="Items" SelectionMode="Single" Items="{Binding GridItems}"
+							  AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedItem}">
+						<DataGrid.Columns>
+							<DataGridTextColumn	Width="*" Header="ID" Binding="{Binding Item.UUID}"/>
+							<DataGridTemplateColumn Width="250" Header="Image">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<Image Width="200" Height="100" Source="{Binding Item.ImagePath, Converter={StaticResource variableImage}}"/>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTextColumn	Width="*" Header="Item Name" Binding="{Binding Item.Name}" />
+							<DataGridTextColumn	Width="*" Header="Price" Binding="{Binding Item.Price}" />
+							<DataGridTextColumn	Width="150" Header="Remaining" Binding="{Binding Count}" />
+							<DataGridTextColumn Width="*" Header="Nearest Expired Date Batch" Binding="{Binding NearestExpiredDate}" />
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</StackPanel>
-
-			<Grid Margin="0 20 0 0" Height="650" Background="#121016">
-				<DataGrid Name="Items" SelectionMode="Single" Items="{Binding GridItems}"
-						  AutoGenerateColumns="False" IsReadOnly="True">
-					<DataGrid.Columns>
-						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>
-						<DataGridTemplateColumn Width="*" Header="Image">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<Image Width="200" Height="100" Source="{Binding ImagePath, Converter={StaticResource variableImage}}"/>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTextColumn	Width="*" Header="Item Name" Binding="{Binding Name}" />
-						<DataGridTextColumn	Width="*" Header="Price" Binding="{Binding Price}" />
-						<DataGridTextColumn	Width="*" Header="Remaining" Binding="{Binding Remaining}" />
-						<DataGridTextColumn Width="*" Header="Nearest Expired Date Batch" Binding="{Binding ExpiredDate}" />
-					</DataGrid.Columns>
-				</DataGrid>
-			</Grid>
-		</StackPanel>
-	</Border>
+		</Border>
+		
+		<comp:DrawerShopItem DataContext="{Binding DrawerItemVM}"/>
+	</Grid>
 </UserControl>

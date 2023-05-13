@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ConvenienceStoreManagement.Database;
+using System;
 using System.Collections.Generic;
 
 namespace ConvenienceStoreManagement.Main.ViewModel
 {
     public partial class MainViewModel : ViewModelBase
     {
-        private readonly DbManager dbManager;
+        private readonly Action<int> ChangeWindow;
 
         enum MainPanel
         {
@@ -16,12 +16,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             CustomerManage,
         }
 
-        private readonly Dictionary<int, PageViewModelBase> Pages = new()
-        {
-            { (int)MainPanel.Shop, new ShopViewModel() },
-            { (int)MainPanel.CustomerManage, new CustomerManageViewModel() },
-            { (int)MainPanel.ItemManage, new ItemManageViewModel() },
-        };
+        private Dictionary<int, PageViewModelBase> Pages;
 
         [ObservableProperty]
         private PageViewModelBase currentPage;
@@ -36,10 +31,36 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
         public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
 
-        public MainViewModel(DbManager dbManager)
+        public MainViewModel(Action<int> changeWindow)
         {
-            this.dbManager = dbManager;
+            this.ChangeWindow = changeWindow;
+        }
+
+        public override ViewModelBase FinishBuild()
+        {
+            if (ViewWindow == null || dbManager == null) return this;
+            Pages = new()
+            {
+                {
+                    (int)MainPanel.Shop,
+                    new ShopViewModel(ViewWindow as MainWindow)
+                        .SetDatabaseConnection(dbManager)
+                },
+                {
+                    (int)MainPanel.CustomerManage,
+                    new CustomerManageViewModel()
+                },
+                {
+                    (int)MainPanel.ItemManage,
+                    new ItemManageViewModel()
+                        .SetViewWindow(ViewWindow)
+                        .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
+                },
+            };
+
             NavigateNext();
+            return this;
         }
 
         private void NavigateNext()

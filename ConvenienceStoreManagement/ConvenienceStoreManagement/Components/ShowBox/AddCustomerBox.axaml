@@ -19,7 +19,7 @@
 						Command="{Binding CloseForm}"/>
 				<Button Margin="20 0" Padding="20 10" Content="OK" DockPanel.Dock="Right" 
 						Background="Green" FontWeight="Bold" Cursor="Hand"
-						Command="{Binding AddCustomer}"/>
+						Command="{Binding ClickOK}"/>
 			</DockPanel>
 		</StackPanel>
 	</Border>

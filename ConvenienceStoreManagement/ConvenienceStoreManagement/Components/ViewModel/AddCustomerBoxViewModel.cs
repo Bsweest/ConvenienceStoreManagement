@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using ConvenienceStoreManagement.Components.ViewModel.Base;
 using static ConvenienceStoreManagement.Components.ShowBox.AddCustomerBox;
 
@@ -14,8 +13,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [ObservableProperty]
         private string cusPhoneNum = "";
 
-        [RelayCommand]
-        public void AddCustomer()
+        public override void OKBehaviour()
         {
 
         }

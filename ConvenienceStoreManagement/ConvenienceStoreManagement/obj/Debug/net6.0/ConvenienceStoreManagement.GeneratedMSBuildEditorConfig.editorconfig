@@ -20,6 +20,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Auth/AuthenticationHandler.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Components/DrawerShopItem.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Components/DrawerUser.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
@@ -27,6 +30,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Components/ShowBox/AddCustomerBox.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Components/ShowBox/AddQuantityGood.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [E:/CSharp/ConvenienceStoreManagement/ConvenienceStoreManagement/ConvenienceStoreManagement/Components/ShowBox/BarCodeScanner.axaml]

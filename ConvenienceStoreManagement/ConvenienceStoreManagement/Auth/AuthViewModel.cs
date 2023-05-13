@@ -1,59 +1,59 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ConvenienceStoreManagement.Database;
+using Npgsql;
 using System;
 
 namespace ConvenienceStoreManagement.Auth
 {
     public partial class AuthViewModel : ViewModelBase
     {
-        private DbManager dbManager;
+        [ObservableProperty]
+        private string username = "";
 
         [ObservableProperty]
-        private string _username = "";
+        private string password = "";
 
         [ObservableProperty]
-        private string _password = "";
+        private string errorMessage = "";
 
-        [ObservableProperty]
-        private string _errorMessage = "";
+        private readonly Action<int> ChangeWindow;
 
-        private Action<int> changeWindow;
-
-        public AuthViewModel(DbManager dbManager, Action<int> changeWindow)
+        public AuthViewModel(Action<int> changeWindow)
         {
-            this.dbManager = dbManager;
-            this.changeWindow = changeWindow;
+            this.ChangeWindow = changeWindow;
         }
 
         [RelayCommand]
-        public void Login()
+        public async void Login()
         {
-            //await using var cmd = new NpgsqlCommand(
-            //    "SELECT * FROM app_auth WHERE username = $1",
-            //    dbManager.Db)
-            //{
-            //    Parameters = { new() { Value = Username } }
-            //};
-            //await using var reader = await cmd.ExecuteReaderAsync();
-            //if (!reader.HasRows)
-            //{
-            //    ErrorMessage = "No account found";
-            //    return;
-            //}
-            //while (await reader.ReadAsync())
-            //{
-            //    string auth_pass = reader.GetString(1);
-            //    if (auth_pass == Password)
-            //    {
+            if (dbManager == null) return;
+            await using var connection = await dbManager.DataSource.OpenConnectionAsync();
 
-            //    }
-            //    else
-            //    {
-            //        ErrorMessage = "Password is not correct";
-            //    }
-            //}
-            changeWindow(1);
+            await using var cmd = new NpgsqlCommand(
+                "SELECT * FROM employee WHERE username = $1",
+                connection)
+            {
+                Parameters = { new() { Value = Username } }
+            };
+
+            await using var reader = await cmd.ExecuteReaderAsync();
+            if (!reader.HasRows)
+            {
+                ErrorMessage = "No account found";
+                return;
+            }
+            while (await reader.ReadAsync())
+            {
+                string auth_pass = reader["password"].ToString();
+                if (auth_pass == Password)
+                {
+                    ChangeWindow(1);
+                }
+                else
+                {
+                    ErrorMessage = "Password is not correct";
+                }
+            }
         }
     }
 }

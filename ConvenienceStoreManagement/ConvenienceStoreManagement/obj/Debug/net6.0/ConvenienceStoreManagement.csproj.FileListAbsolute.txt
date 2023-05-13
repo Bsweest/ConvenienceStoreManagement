@@ -304,3 +304,9 @@ E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStore
 E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\obj\Debug\net6.0\ConvenienceStoreManagement.pdb
 E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\obj\Debug\net6.0\ConvenienceStoreManagement.genruntimeconfig.cache
 E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\obj\Debug\net6.0\ref\ConvenienceStoreManagement.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\AvaloniaEdit.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\Markdown.Avalonia.SyntaxHigh.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\ColorTextBlock.Avalonia.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\Markdown.Avalonia.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\MessageBox.Avalonia.dll
+E:\CSharp\ConvenienceStoreManagement\ConvenienceStoreManagement\ConvenienceStoreManagement\bin\Debug\net6.0\ExcelDataReader.dll
