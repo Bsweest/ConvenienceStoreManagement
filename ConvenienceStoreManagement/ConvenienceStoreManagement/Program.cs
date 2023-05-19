@@ -3,6 +3,7 @@ using Avalonia.Svg.Skia;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.FontAwesome;
 using System;
+using System.Text;
 
 namespace ConvenienceStoreManagement
 {
@@ -18,6 +19,8 @@ namespace ConvenienceStoreManagement
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             GC.KeepAlive(typeof(SvgImageExtension).Assembly);
             GC.KeepAlive(typeof(Avalonia.Svg.Skia.Svg).Assembly);
 

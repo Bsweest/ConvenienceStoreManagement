@@ -1,7 +1,10 @@
-﻿using ExcelDataReader;
+﻿using ConvenienceStoreManagement.Components.ViewModel;
+using ExcelDataReader;
 using System;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace ConvenienceStoreManagement.Tools
 {
@@ -12,24 +15,35 @@ namespace ConvenienceStoreManagement.Tools
             return DateTime.Now.ToString("yyyymmdd");
         }
 
-        public static DataTable ReadDataFile(string filePath, bool isExcel = true)
+        public static void ReadAndAddDataFile(DataTable result, string filePath, bool isExcel = true)
         {
-            DataTable result = new();
             using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
-            using var reader = isExcel
+            using IExcelDataReader reader = isExcel
                 ? ExcelReaderFactory.CreateReader(stream)
                 : ExcelReaderFactory.CreateCsvReader(stream);
-            do
+            DataSet dataSet = reader.AsDataSet(new ExcelDataSetConfiguration()
             {
-                while (reader.Read())
+                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
                 {
-                    // Read Only 1 Sheet
-                    result.Load(reader);
-                    return result;
+                    UseHeaderRow = true
                 }
-            } while (reader.NextResult());
+            });
+            foreach (DataTable dt in dataSet.Tables)
+            {
 
-            return result;
+                result.Merge(dt, true, MissingSchemaAction.Ignore);
+            }
+        }
+
+        public static int[] GetArrayIdFromListCart(ObservableCollection<CartItemViewModel> listCart)
+        {
+            int[] returnArray = Array.Empty<int>();
+            foreach (var cart in listCart)
+            {
+                returnArray = returnArray.Concat(cart.GetAllGoodID()).ToArray();
+            }
+
+            return returnArray;
         }
     }
 }

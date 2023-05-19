@@ -10,48 +10,49 @@
 	</UserControl.Resources>
 
 	<DockPanel LastChildFill="False">
-	  <DockPanel.Styles>
-		  <Style Selector="Border.Closed">
-			  <Setter Property="RenderTransform" Value="translateY(310px)"/>
-		  </Style>
-	  </DockPanel.Styles>
+		<DockPanel.Styles>
+			<Style Selector="Border.Closed">
+				<Setter Property="RenderTransform" Value="translateY(310px)"/>
+			</Style>
+		</DockPanel.Styles>
 
-	  <DockPanel.Transitions>
-		  <Transitions>
-			  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.5" />
-		  </Transitions>
-	  </DockPanel.Transitions>
+		<DockPanel.Transitions>
+			  <Transitions>
+				  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.5" />
+			  </Transitions>
+		</DockPanel.Transitions>
 
-	  <Border Classes.Closed="{Binding IsClosed}" DockPanel.Dock="Bottom" Height="310"
-			  Background="#21202E" Padding="20" BorderBrush="Violet" BorderThickness="0 1 0 0">
-		  <StackPanel>
-			  <Label Content="{Binding UsageText}" FontWeight="Bold" FontSize="20" Foreground="Orchid"/>
+		<Border Classes.Closed="{Binding IsClosed}" DockPanel.Dock="Bottom" Height="310"
+				Background="#21202E" Padding="20" BorderBrush="Violet" BorderThickness="0 1 0 0">
+			<StackPanel>
+				<Label Content="{Binding UsageText}" FontWeight="Bold" FontSize="20" Foreground="Orchid"/>
 
-			  <Border BorderBrush="AliceBlue" BorderThickness="0.5" Padding="5 5 5 20"
-					  CornerRadius="12" Margin="0 10">
-				<Grid ColumnDefinitions="250,200,400,150,150" RowDefinitions="35,Auto">
-					<Grid.Styles>
-						<Style Selector="TextBox">
-							<Setter Property="Margin" Value="5 0"/>
-							<Setter Property="Height" Value="35"/>
-						</Style>
-					</Grid.Styles>
+				<Border BorderBrush="AliceBlue" BorderThickness="0.5" Padding="5 5 5 20"
+						CornerRadius="12" Margin="0 10">
+					<Grid ColumnDefinitions="250,200,400,150,150" RowDefinitions="35,Auto">
+						<Grid.Styles>
+							<Style Selector="TextBox">
+								<Setter Property="Margin" Value="5 0"/>
+								<Setter Property="Height" Value="35"/>
+							</Style>
+						</Grid.Styles>
 				  
-					<Label Grid.Column="0" Grid.Row="0" Content="ID" HorizontalContentAlignment="Center"/>
-					<Label Grid.Column="1" Grid.Row="0" Content="Image" HorizontalContentAlignment="Center"/>
-					<Label Grid.Column="2" Grid.Row="0" Content="Name" HorizontalContentAlignment="Center"/>
-					<Label Grid.Column="3" Grid.Row="0" Content="Price" HorizontalContentAlignment="Center"/>
+						<Label Grid.Column="0" Grid.Row="0" Content="ID" HorizontalContentAlignment="Center"/>
+						<Label Grid.Column="1" Grid.Row="0" Content="Image" HorizontalContentAlignment="Center"/>
+						<Label Grid.Column="2" Grid.Row="0" Content="Name" HorizontalContentAlignment="Center"/>
+						<Label Grid.Column="3" Grid.Row="0" Content="Price" HorizontalContentAlignment="Center"/>
 
-					<TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ItemID}"
-							   Background="Gray" Foreground="Black" VerticalAlignment="Center"
-							   Width="230" Height="35" Padding="10"/>
-					<Button Grid.Column="1" Grid.Row="1" Cursor="Hand" Command="{Binding SetAbsoluteImagePath}">
-						<Image Source="{Binding ImagePath, Converter={StaticResource variableImage}}" Width="180" Height="120"/>
-					</Button>
-					<TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Name}"/>
-					<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Price}" />
-				</Grid>
-			</Border>
+						<TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ItemID}"
+								   Background="Gray" Foreground="Black" VerticalAlignment="Center"
+								   Width="230" Height="35" Padding="10"/>
+						<Button Grid.Column="1" Grid.Row="1" Cursor="Hand" Command="{Binding SetAbsoluteImagePath}">
+							<Image Source="{Binding ImagePath, Converter={StaticResource variableImage}}" Width="180" Height="120"/>
+						</Button>
+						<TextBox Grid.Column="2" Grid.Row="1" Text="{Binding Name}"/>
+						<TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Price}" />
+					</Grid>
+				</Border>
+				
 				<DockPanel LastChildFill="False">
 					<TextBlock Text="{Binding ProcessResult}" FontSize="24" Foreground="CadetBlue" FontWeight="Bold" />
 					

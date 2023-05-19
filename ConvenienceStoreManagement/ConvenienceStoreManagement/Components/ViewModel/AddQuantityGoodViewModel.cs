@@ -7,30 +7,41 @@ using ConvenienceStoreManagement.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using System.IO;
 
 namespace ConvenienceStoreManagement.Components.ViewModel
 {
     public partial class AddQuantityGoodViewModel : BaseBoxViewModel
     {
+        // Dt contains Goods To Add
+        private DataTable dt = new();
+
         [ObservableProperty]
         private string filePath = "";
+
+        private bool IsExcel = true;
         [ObservableProperty]
         private string resultMessage = "";
 
         [ObservableProperty]
         private int goodID;
         [ObservableProperty]
-        private int mFG_Date;
+        private DateTimeOffset? mFG_Date;
         [ObservableProperty]
-        private int expired_Date;
+        private DateTimeOffset? expired_Date;
 
         [ObservableProperty]
-        private string[] arrItemName;
+        private List<ShopItemModel> allItem;
+        [ObservableProperty]
+        private ShopItemModel? selectedItem;
 
         public AddQuantityGoodViewModel(List<ShopItemModel> allItem)
         {
-            arrItemName = allItem.Select(item => item.Name).ToArray();
+            AllItem = allItem;
+            dt.Columns.Add("id", typeof(int));
+            dt.Columns.Add("itemid", typeof(string));
+            dt.Columns.Add("mfg_date", typeof(DateTime));
+            dt.Columns.Add("expired_date", typeof(DateTime));
         }
 
         [RelayCommand]
@@ -51,29 +62,39 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             if (result != null)
             {
                 FilePath = result[0];
+                IsExcel = Path.GetExtension(FilePath) != ".csv";
             }
         }
 
         public override async void OKBehaviour()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            List<string> errorList = new List<string>();
+            dt.Rows.Clear();
+            List<string> errorList = new();
             int numSuccess = 0;
 
-            if (string.IsNullOrEmpty(FilePath))
+            if (GoodID != 0 && SelectedItem != null && MFG_Date != null && Expired_Date != null)
             {
-                DataTable dtfile = Utils.ReadDataFile(FilePath);
-
+                dt.Rows.Add(
+                    GoodID, SelectedItem.UUID,
+                    ((DateTimeOffset)MFG_Date).Date,
+                    ((DateTimeOffset)Expired_Date).Date
+                );
             }
+
+            if (!string.IsNullOrEmpty(FilePath))
+            {
+                Utils.ReadAndAddDataFile(dt, FilePath, IsExcel);
+            }
+
             foreach (var dataRow in dt.Select())
             {
                 var result = await dbManager.QueryItems.AddGood(
-                    dataRow["id"].ToString(),
-                    dataRow["itemid"].ToString(),
-                    (DateOnly)dataRow["mfg_date"],
-                    (DateOnly)dataRow["expired_date"]
+                    (int)dataRow["id"],
+                    new Guid(dataRow["itemid"].ToString()),
+                    DateOnly.FromDateTime((DateTime)dataRow["mfg_date"]),
+                    DateOnly.FromDateTime((DateTime)dataRow["expired_date"])
                 );
+                result.ToSingle();
 
                 if (result["error"] is object error)
                 {
@@ -85,7 +106,6 @@ namespace ConvenienceStoreManagement.Components.ViewModel
                     numSuccess++;
                 }
             }
-
             ResultMessage = $"Success Add {numSuccess} good and Fail {errorList.Count} times";
         }
     }

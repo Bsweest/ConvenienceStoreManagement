@@ -10,7 +10,12 @@
 			<StackPanel Orientation="Horizontal">
 				<Label VerticalContentAlignment="Center" Content="Find Customer: "/>
 				<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
-						 Watermark="Phone Num."/>
+						 Watermark="Enter Search Key..."
+						 Text="{Binding DebounceSearchCustomer.QueryParam}"/>
+				<ComboBox Items="{Binding DebounceSearchCustomer.FilterSearchKeys}" 
+						  Width="150" Margin="0 3 0 0"
+						  SelectedItem="{Binding DebounceSearchCustomer.SelectedFilter}"/>
+				
 				<Button Margin="20 0" Padding="20 10" Content="Add Customer"
 						Background="Orchid" FontWeight="Bold" Cursor="Hand"
 						/>

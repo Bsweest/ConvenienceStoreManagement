@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FJNmooEvwBWOhN3AE0xpQ7mm7rFi8wPwr0srqnZZ69BVUK0j244hbpu8EBk7OcBJZgYhPLasJmH8l7+0RHpgVg==",
+  "dgSpecHash": "Oa4DyjFpjnwahienJ/l2yC+rSs0OHLr1tvBUoX6VL3oEey8qdtHUGyXEThDLaeYwS8xcRt9sZ0xRxYxHw3PdHw==",
   "success": true,
   "projectFilePath": "E:\\CSharp\\ConvenienceStoreManagement\\ConvenienceStoreManagement\\ConvenienceStoreManagement\\ConvenienceStoreManagement.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\Manh\\.nuget\\packages\\avalonia.x11\\0.10.18\\avalonia.x11.0.10.18.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\communitytoolkit.mvvm\\8.1.0\\communitytoolkit.mvvm.8.1.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
+    "C:\\Users\\Manh\\.nuget\\packages\\exceldatareader.dataset\\3.6.0\\exceldatareader.dataset.3.6.0.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\excss\\4.1.4\\excss.4.1.4.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\fizzler\\1.2.1\\fizzler.1.2.1.nupkg.sha512",
     "C:\\Users\\Manh\\.nuget\\packages\\harfbuzzsharp\\2.8.2.1-preview.108\\harfbuzzsharp.2.8.2.1-preview.108.nupkg.sha512",

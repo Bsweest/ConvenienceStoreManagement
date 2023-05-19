@@ -2,12 +2,18 @@
 using CommunityToolkit.Mvvm.Input;
 using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Model;
+using System;
+using System.Collections.Generic;
 
 namespace ConvenienceStoreManagement.Components.ViewModel
 {
     public partial class DrawerUserViewModel : ViewModelBase
     {
-        public DrawerUserViewModel() { }
+        Action<CustomerModel?> ChoosePayingCustomer;
+        public DrawerUserViewModel(Action<CustomerModel?> action)
+        {
+            ChoosePayingCustomer = action;
+        }
 
         // Choose Customer Drawer
         [ObservableProperty]
@@ -18,10 +24,25 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 
         // Query Customer
         [ObservableProperty]
-        private CustomerModel findCustomer;
+        private CustomerModel? findCustomer;
 
         [ObservableProperty]
         private bool showNotFound = false;
+        [ObservableProperty]
+        private string searchPhoneNum = "";
+
+        partial void OnFindCustomerChanged(CustomerModel? value)
+        {
+            if (value != null)
+            {
+                ShowNotFound = false;
+                IsGuestCheck = false;
+            }
+            else
+            {
+
+            }
+        }
 
         [RelayCommand]
         public void ToggleChooseDrawer()
@@ -31,26 +52,40 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             {
                 IsGuestCheck = true;
                 ShowNotFound = false;
+                ChoosePayingCustomer(FindCustomer);
+                FindCustomer = null;
             }
         }
 
         [RelayCommand]
-        public void QueryCustomerPhoneNum()
+        public async void QueryCustomerPhoneNum()
         {
-            if (FindCustomer != null)
-            {
+            ShowNotFound = false;
+            var result = await dbManager.QueryCustomer.SearchOneCustomer(SearchPhoneNum);
 
-            }
-            else
+            if (result["data"] is List<Dictionary<string, object>> listData)
             {
-                ShowNotFound = true;
+                if (listData.Count == 1)
+                    FindCustomer = new(listData[0]);
+                else ShowNotFound = true;
             }
+        }
+
+        [RelayCommand]
+        public void ClearCustomer()
+        {
+            FindCustomer = null;
         }
 
         [RelayCommand]
         public async void ShowCreateCustomer()
         {
-            _ = await AddCustomerBox.ShowBox();
+            var insertResult = await AddCustomerBox.ShowBox(dbManager);
+            if (insertResult != null)
+            {
+                IsGuestCheck = false;
+                FindCustomer = insertResult;
+            }
         }
     }
 }

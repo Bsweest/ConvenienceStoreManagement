@@ -26,8 +26,13 @@
 					</StackPanel.Styles>
 				
 					<Label VerticalContentAlignment="Center" Content="Find Item: "/>
-					<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
-							 Watermark="Item Name"/>
+					<TextBox Margin="20 0" VerticalContentAlignment="Center" 
+							 Height="30" Width="300" Watermark="Enter Search Keys" 
+							 Text="{Binding DebounceSearchItem.QueryParam}"/>
+					<ComboBox Items="{Binding DebounceSearchItem.FilterSearchKeys}" 
+							  Width="100" Margin="0 3 0 0"
+							  SelectedItem="{Binding DebounceSearchItem.SelectedFilter}"/>
+					
 					<Button Margin="20 0" Padding="20 10" Content="Refresh"
 							Background="Gray" FontWeight="Bold" Cursor="Hand"
 							i:Attached.Icon="fa-solid fa-arrows-rotate"
@@ -37,7 +42,8 @@
 							Command="{Binding OpenDrawerAddItem}"/>
 					<Button Margin="20 0" Padding="20 10" Content="Update Item"
 							Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
-							/>
+							Command="{Binding OpenDrawerUpdateItem}"
+							IsEnabled="{Binding SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}"/>
 					<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 
 					<Button Margin="20 0 0 0" Padding="20 10" Content="Add Quantity"
@@ -45,7 +51,7 @@
 							Command="{Binding AddQuantity}"/>
 					<Button Margin="20 0" Padding="20 10" Content="Remove Quantity"
 							Background="#FF2E2E" FontWeight="Bold" Cursor="Hand"
-							/>
+							Command="{Binding NotAvailable}"/>
 					<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 
 					<Button Margin="20 0" FontSize="30" Padding="20 3"

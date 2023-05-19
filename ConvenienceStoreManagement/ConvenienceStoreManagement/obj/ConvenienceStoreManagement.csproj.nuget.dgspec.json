@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[3.6.0, )"
             },
+            "ExcelDataReader.DataSet": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
             "MessageBox.Avalonia": {
               "target": "Package",
               "version": "[2.1.0, )"

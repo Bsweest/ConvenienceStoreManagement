@@ -47,6 +47,7 @@ namespace ConvenienceStoreManagement.Auth
                 string auth_pass = reader["password"].ToString();
                 if (auth_pass == Password)
                 {
+                    dbManager.SetWorkingEmployee(1);
                     ChangeWindow(1);
                 }
                 else

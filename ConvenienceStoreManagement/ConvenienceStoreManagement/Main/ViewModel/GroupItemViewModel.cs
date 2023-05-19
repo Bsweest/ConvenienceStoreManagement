@@ -1,7 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AvaloniaEdit.Utils;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ConvenienceStoreManagement.Model;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ConvenienceStoreManagement.Main.ViewModel
 {
@@ -12,27 +13,53 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Count))]
-        [NotifyPropertyChangedFor(nameof(NearestExpiredDate))]
-        private List<GoodModel> goods = new();
+        private ObservableCollection<GoodModel> goods = new();
 
         public GroupItemViewModel(ShopItemModel item)
         {
             Item = item;
         }
 
-        public int Count => Goods.Count;
+        [ObservableProperty]
+        private int count;
 
-        public DateOnly? NearestExpiredDate =>
-            Goods.Count > 0 ? Goods[0].ExpiredDate : null;
+        [ObservableProperty]
+        private int totalCost;
+
+        public string? NearestExpiredDate =>
+            Goods.Count > 0 ? Goods[0].ExpiredDate.ToString() : null;
         public bool CompareId(string id) => id == Item.UUID;
 
         public void AddGood(GoodModel goods)
         {
             Goods.Add(goods);
+            Count = Goods.Count;
+            TotalCost = Goods.Count * Item.GetCost();
         }
         public void AddGood(GoodModel[] goods)
         {
             Goods.AddRange(goods);
+            Count = Goods.Count;
+            TotalCost = Goods.Count * Item.GetCost();
+        }
+
+        public bool RemoveGoodById(int id)
+        {
+            try
+            {
+                var toRemove = Goods.Single(good => good.Id == id);
+                Goods.Remove(toRemove);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public int[] GetAllGoodID()
+        {
+            return Goods.Select(e => e.Id).ToArray();
         }
     }
 }

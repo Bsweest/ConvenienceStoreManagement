@@ -19,8 +19,8 @@ create table customer (
 	fullname text not null,
 	phonenum text not null unique,
 	person_id text unique,
-	total_spending integer,
-	balance integer
+	total_spending integer DEFAULT 0,
+	balance integer DEFAULT 0
 );
 
 create table shopitem (
@@ -45,7 +45,7 @@ create table invoice (
 	cus_id integer references customer,
 	staff_id integer references employee,
 	total_cost int,
-	purchase_time timestamptz
+	purchase_time timestamptz DEFAULT now()
 );
 
 create table good (
@@ -57,3 +57,6 @@ create table good (
 	cost integer,
 	invoice_id integer references invoice
 );
+
+insert into customer (id, fullname, phonenum) values (0, 'GUEST', '000000000');
+insert into employee (name) values ('ADMIN');

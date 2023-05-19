@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:tools="clr-namespace:ConvenienceStoreManagement.Tools;assembly=ConvenienceStoreManagement"
              mc:Ignorable="d" Background="Transparent"
-             x:Class="ConvenienceStoreManagement.Components.ShopItem" Cursor="Hand">
+             x:Class="ConvenienceStoreManagement.Components.CartItem" Cursor="Hand">
 	<UserControl.Resources>
 		<tools:BitmapAssetValueConverter x:Key="variableImage"/>
 	</UserControl.Resources>
 	
-	<Button Command="{Binding ShowNumberBox}" Background="Black" Padding="0"
-			Width="800" Height="100"
+	<Button Background="Black" Padding="0" Width="800" Height="100"
 			CornerRadius="20">
 		<StackPanel Orientation="Horizontal">
 			<StackPanel.Styles>
@@ -21,7 +20,7 @@
 				</Style>
 			</StackPanel.Styles>
 
-			<Image Margin="15 0 10 0" Width="150" Source="{Binding ImagePath, Converter={StaticResource variableImage}}"/>
+			<Image Margin="15 0 10 0" Width="150" Source="{Binding Item.ImagePath, Converter={StaticResource variableImage}}"/>
 			<Rectangle VerticalAlignment="Stretch" Width="2" Margin="0 6" Fill="#2E2B38" />
 			<TextBlock Classes="GridItem" Width="250" VerticalAlignment="Center" 
 					   Text="{Binding Item.Name}"/>
@@ -32,7 +31,7 @@
 			<TextBlock Classes="GridItem" Width="100" Text="{Binding TotalCost}"/>
 			
 			<Rectangle VerticalAlignment="Stretch" Width="2" Margin="0 6" Fill="#2E2B38" />
-			<TextBlock Classes="GridItem" Text="{Binding Item.Discount, StringFormat='{}{0}%'}"/>
+			<TextBlock Classes="GridItem" Text="0"/>
 		</StackPanel>
 	</Button>
 </UserControl>

@@ -29,16 +29,23 @@
 				<Label Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center"
 					   Content="Barcode ID: "/>
 				<Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center"
-					   Content="Item ID: "/>
+					   Content="Item Name: "/>
 				<Label Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center"
 					   Content="MFG Date: "/>
 				<Label Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center"
 					   Content="Expired Date: "/>
 
 				<TextBox Grid.Column="1" Grid.Row="0" Margin="0 5" Text="{Binding GoodID}"/>
-				<ComboBox Grid.Column="1" Grid.Row="1" Items="{Binding ArrItemName}"/>
-				<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MFG_Date}"/>
-				<TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Expired_Date}"/>
+				<ComboBox Grid.Column="1" Grid.Row="1" Items="{Binding AllItem}"
+						  SelectedItem="{Binding SelectedItem}">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Name}"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+				<DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding MFG_Date}" />
+				<DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Expired_Date}" />
 			</Grid>
 			
 			<Label Classes="Menu" Content="Using File" Foreground="CadetBlue"/>

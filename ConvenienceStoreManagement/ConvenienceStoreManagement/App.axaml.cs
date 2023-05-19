@@ -6,7 +6,6 @@ using ConvenienceStoreManagement.Auth;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Main;
 using ConvenienceStoreManagement.Main.ViewModel;
-using System;
 
 namespace ConvenienceStoreManagement
 {
@@ -25,15 +24,15 @@ namespace ConvenienceStoreManagement
 
         public void InitWindow()
         {
-            Action<int> changeWindow = index => ChangeWindow(index);
+            //Action<int> changeWindow = index => ChangeWindow(index);
 
             authWindow = new AuthenticationHandler
             {
-                DataContext = new AuthViewModel(changeWindow)
+                DataContext = new AuthViewModel(ChangeWindow)
                                     .SetDatabaseConnection(dbManager),
             };
             mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainViewModel(changeWindow)
+            mainWindow.DataContext = new MainViewModel(ChangeWindow)
                                             .SetViewWindow(mainWindow)
                                             .SetDatabaseConnection(dbManager)
                                             .FinishBuild();

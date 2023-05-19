@@ -5,14 +5,17 @@ using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Components.ViewModel;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Model;
+using ConvenienceStoreManagement.Tools;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
 
 namespace ConvenienceStoreManagement.Main.ViewModel
 {
     public partial class ItemManageViewModel : PageViewModelBase
     {
-        public static string ImageFolder { get; private set; } = @$"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\ConvenienceStoreManagement\";
+        public static string ImageFolder { get; private set; } = @$"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\ConvenienceStoreManagement\ItemImages\";
 
         [ObservableProperty]
         private DrawerShopItemViewModel drawerItemVM = new();
@@ -21,17 +24,21 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         private string choosedFolder = "";
 
         [ObservableProperty]
-        private List<GroupItemViewModel> gridItems = new();
-
-        private List<GroupItemViewModel> ListBaseGroupItem = new();
-        private List<ShopItemModel> AllShopItem = new();
-
+        private List<GroupItemViewModel>? gridItems = null;
         [ObservableProperty]
         private GroupItemViewModel? selectedItem;
+
+        private readonly List<ShopItemModel> AllShopItem = new();
+        private readonly List<GroupItemViewModel> ListBaseGroupItem = new();
+
+        [ObservableProperty]
+        private DebounceSearch debounceSearchItem;
 
         public ItemManageViewModel()
         {
             ChoosedFolder = ImageFolder;
+            var filterKeys = new string[] { "ID", "Name" };
+            debounceSearchItem = new(FilterShopItem, filterKeys, 1);
         }
         public override ItemManageViewModel SetViewWindow(Window viewWindow)
         {
@@ -50,6 +57,21 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             return this;
         }
 
+        private async void FilterShopItem(string queryParam, string selectedFilter)
+        {
+            if (queryParam == "")
+            {
+                GridItems = ListBaseGroupItem;
+            }
+            else
+            {
+                var filteredItem = ListBaseGroupItem
+                    .Where(x => x.Item.GetProperty(selectedFilter).ToLower().Contains(queryParam.ToLower()))
+                    .ToList();
+                GridItems = filteredItem;
+            }
+        }
+
         [RelayCommand]
         public async void GetAllShopItem()
         {
@@ -64,12 +86,13 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                     ShopItemModel shopItem = new(item);
                     GroupItemViewModel grpItem = new(shopItem);
 
-                    var taskGoods = await dbManager.QueryItems.GetRemainingGood(shopItem.UUID);
+                    var taskGoods = await dbManager.QueryItems.GetRemainingGood(new Guid(shopItem.UUID));
                     if (taskGoods["data"] is List<Dictionary<string, object>> listGood)
                     {
                         foreach (var good in listGood)
                         {
-                            grpItem.AddGood(new GoodModel(shopItem, good));
+                            var newGood = new GoodModel(shopItem, good);
+                            grpItem.AddGood(newGood);
                         }
                     }
 
@@ -77,13 +100,14 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                     ListBaseGroupItem.Add(grpItem);
                 }
             }
-
+            GridItems = null;
             GridItems = ListBaseGroupItem;
         }
 
         [RelayCommand]
         public void AddQuantity()
         {
+            if (dbManager == null) throw new Exception("Db Connection not found!");
             AddQuantityGood.ShowBox(AllShopItem, dbManager);
         }
 
@@ -97,8 +121,9 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [RelayCommand]
         public void OpenDrawerUpdateItem()
         {
+            if (SelectedItem == null) return;
             DrawerItemVM.IsAdd = false;
-            DrawerItemVM.ToggleDrawer();
+            DrawerItemVM.ToggleDrawer(SelectedItem.Item);
         }
     }
 }

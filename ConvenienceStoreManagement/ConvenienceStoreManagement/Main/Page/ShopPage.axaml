@@ -36,8 +36,8 @@
 							</Style>
 						</Panel.Styles>
 						<Button Classes="None" Command="{Binding DrawerUserVM.ToggleChooseDrawer}" 
-								Classes.Choosed="{Binding HasCustomer}"
-								Content="{Binding ButtonContent}"/>
+								Classes.Choosed="{Binding HasChoosed}"
+								Content="{Binding ButtonCusNameContent}"/>
 					</Panel>
 				</StackPanel>
 				
@@ -54,17 +54,17 @@
 								<TextBlock Margin="25 0 0 0" Text="Image"/>
 								<TextBlock Margin="125 0 0 0" Text="Item Name"/>
 								<TextBlock Margin="200 0 0 0" Text="Quantity"/>
-								<TextBlock Margin="65 0 0 0" Text="Price"/>
+								<TextBlock Margin="65 0 0 0" Text="Cost"/>
 								<TextBlock Margin="90 0 0 0" Text="Discount"/>
 							</StackPanel>
 						</Border>	
-						<ListBox Items="{Binding CartList}"
+						<ListBox Items="{Binding ListCartCtrl.ListCart}"
 								 Width="820" Height="610"
 								 Background="Transparent"
 								 SelectionMode="Toggle">
 							<ListBox.ItemTemplate>
 								<DataTemplate>
-									<comp:ShopItem />
+									<comp:CartItem DataContext="{Binding}" />
 								</DataTemplate>
 							</ListBox.ItemTemplate>
 						</ListBox>

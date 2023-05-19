@@ -26,7 +26,8 @@
 					<CheckBox IsChecked="{Binding IsGuestCheck}" Margin="0 -5 0 0"/>
 					<Label Content="Is Guest"/>
 				</StackPanel>
-				<TextBox Watermark="Phone Num." IsEnabled="{Binding !IsGuestCheck}"/>
+				<TextBox Watermark="Phone Num." Text="{Binding SearchPhoneNum}" 
+						 IsEnabled="{Binding !IsGuestCheck}"/>
 				<Border Padding="20 0" Height="60" Margin="0 20" Background="#0D0D12" CornerRadius="8">
 					<Panel>
 						<Button Background="Transparent" IsVisible="{Binding ShowNotFound}"
@@ -38,7 +39,7 @@
 						</Button>
 						<StackPanel IsVisible="{Binding	FindCustomer, Converter={x:Static ObjectConverters.IsNotNull}}"
 									Height="40" Orientation="Horizontal">
-							<TextBlock VerticalAlignment="Center" Text="Customer Name" Width="200" />
+							<TextBlock VerticalAlignment="Center" Text="{Binding FindCustomer.FullName}" Width="200" />
 							<Rectangle Margin="10 0" Width="2" Fill="#2E2B38" />
 							<TextBlock VerticalAlignment="Center" Text="Membership" />
 						</StackPanel>
@@ -51,6 +52,9 @@
 					<Button Content="Find" IsEnabled="{Binding !IsGuestCheck}"
 							Margin="30 0" Command="{Binding QueryCustomerPhoneNum}"
 							Padding="20 10" DockPanel.Dock="Right" Background="Orchid"/>
+					<Button Content="Clear" IsEnabled="{Binding !IsGuestCheck}"
+							Margin="30 0" Command="{Binding ClearCustomer}"
+							Padding="20 10" DockPanel.Dock="Right" Background="Firebrick"/>
 				</DockPanel>
 			</StackPanel>
 		</Border>

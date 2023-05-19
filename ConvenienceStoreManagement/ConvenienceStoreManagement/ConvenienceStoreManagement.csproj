@@ -21,6 +21,7 @@
     <PackageReference Include="Avalonia.Svg.Skia" Version="0.10.18" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="2.1.0" />
     <PackageReference Include="Npgsql" Version="7.0.2" />
     <PackageReference Include="OpenCvSharp4" Version="4.7.0.20230115" />
@@ -47,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Components\CartItem.axaml.cs">
+      <DependentUpon>CartItem.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Components\ShowBox\AddCustomerBox.axaml.cs">
       <DependentUpon>AddCustomerBox.axaml</DependentUpon>
     </Compile>

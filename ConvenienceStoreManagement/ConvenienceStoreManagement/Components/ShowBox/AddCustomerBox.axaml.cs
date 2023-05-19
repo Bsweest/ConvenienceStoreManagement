@@ -3,35 +3,30 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ConvenienceStoreManagement.Components.ViewModel;
+using ConvenienceStoreManagement.Database;
+using ConvenienceStoreManagement.Model;
 using System.Threading.Tasks;
 
 namespace ConvenienceStoreManagement.Components.ShowBox;
 
 public partial class AddCustomerBox : Window
 {
-    public enum AddCustomerResult
-    {
-        Success,
-        Fail,
-        Cancel,
-    }
-
     public AddCustomerBox()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
-    public static Task<AddCustomerResult> ShowBox()
+    public static Task<CustomerModel?> ShowBox(DbManager db)
     {
-        AddCustomerBoxViewModel viewModel = new();
+        AddCustomerBoxViewModel viewModel = new AddCustomerBoxViewModel();
         AddCustomerBox addBox = new AddCustomerBox
         {
             DataContext = viewModel
         };
-        viewModel.SetViewWindow(addBox);
+        viewModel.SetViewWindow(addBox).SetDatabaseConnection(db);
 
-        var taskCompletion = new TaskCompletionSource<AddCustomerResult>();
-        addBox.Closed += delegate { taskCompletion.TrySetResult(viewModel.Result); };
+        var taskCompletion = new TaskCompletionSource<CustomerModel?>();
+        addBox.Closed += delegate { taskCompletion.TrySetResult(viewModel.CustomerResult); };
 
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

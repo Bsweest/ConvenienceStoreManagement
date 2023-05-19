@@ -43,12 +43,17 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 {
                     (int)MainPanel.Shop,
-                    new ShopViewModel(ViewWindow as MainWindow)
+                    new ShopViewModel()
+                        .SetViewWindow(ViewWindow)
                         .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
                 },
                 {
                     (int)MainPanel.CustomerManage,
                     new CustomerManageViewModel()
+                        .SetViewWindow(ViewWindow)
+                        .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
                 },
                 {
                     (int)MainPanel.ItemManage,

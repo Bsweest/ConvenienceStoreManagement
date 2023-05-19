@@ -26,8 +26,17 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [ObservableProperty]
         private int choosedNumber;
 
-        public BarCodeScannerViewModel()
+        [ObservableProperty]
+        private string processResult = "";
+
+        private readonly Action<int> FuncAddCart;
+        private readonly Action<int> FuncRemoveCart;
+
+        public BarCodeScannerViewModel(Action<int> funcAddCart, Action<int> funcRemoveCart)
         {
+            FuncAddCart = funcAddCart;
+            FuncRemoveCart = funcRemoveCart;
+
             Capturer = new VideoCapture();
             Capturer.FrameWidth = 500;
             Capturer.FrameHeight = 500;
@@ -35,6 +44,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             BgWorker = new BackgroundWorker { WorkerSupportsCancellation = true };
             BgWorker.DoWork += BgWorker_Working;
         }
+
         [RelayCommand]
         public void ToggleScanning()
         {
@@ -62,11 +72,17 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             Capturer.Release();
         }
 
+        public override void OKBehaviour()
+        {
+            if (ScanModeAdd) FuncAddCart(ChoosedNumber);
+            else FuncRemoveCart(ChoosedNumber);
+        }
+
         public override void CloseBehaviour()
         {
             StopScanning();
-            ViewWindow.Hide();
             IsScanning = false;
+            ViewWindow.Hide();
         }
 
         public void FindScanValue(Mat frameMat)
@@ -77,8 +93,11 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             {
                 int parsed;
                 bool success = int.TryParse(result.Text, out parsed);
-                if (success) ChoosedNumber = parsed;
-
+                if (success)
+                {
+                    ChoosedNumber = parsed;
+                    OKBehaviour();
+                }
             }
         }
 
@@ -90,11 +109,8 @@ namespace ConvenienceStoreManagement.Components.ViewModel
                 using (var frameMat = Capturer.RetrieveMat())
                 {
                     FindScanValue(frameMat);
-
-                    using (var memory = frameMat.ToMemoryStream())
-                    {
-                        ScanImg = new Bitmap(memory);
-                    }
+                    using var memory = frameMat.ToMemoryStream();
+                    ScanImg = new Bitmap(memory);
                 }
 
                 Thread.Sleep(30);

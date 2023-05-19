@@ -13,6 +13,10 @@
 			<TextBox Margin="0 0 0 20" Text="{Binding CusName}"/>
 			<Label>Phone Num.</Label>
 			<TextBox Margin="0 0 0 20" Text="{Binding CusPhoneNum}"/>
+			<Label>Person ID</Label>
+			<TextBox Margin="0 0 0 20" Text="{Binding PersonID}"/>
+			
+			<TextBlock Text="{Binding ErrorMessage}"/>
 			<DockPanel LastChildFill="False">
 				<Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right" 
 						Background="Red" FontWeight="Bold" Cursor="Hand"

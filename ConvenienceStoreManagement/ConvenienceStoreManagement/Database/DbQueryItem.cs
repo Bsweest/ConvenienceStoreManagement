@@ -1,56 +1,13 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ConvenienceStoreManagement.Database
 {
-    public class DbQueryItem
+    public class DbQueryItem : DbQueryBase
     {
-        private readonly NpgsqlDataSource DataSource;
-        public DbQueryItem(NpgsqlDataSource dataSource)
-        {
-            this.DataSource = dataSource;
-        }
-
-        public async Task<Dictionary<string, object?>> BaseQueryCall
-            (string queryString, object[]? parameters)
-        {
-            await using var connection = await DataSource.OpenConnectionAsync();
-            Dictionary<string, object?> task = new()
-            {
-                { "data", null },
-                { "error", null },
-            };
-            List<Dictionary<string, object>> data = new();
-
-            await using var cmd = new NpgsqlCommand(queryString, connection);
-            if (parameters != null)
-            {
-                foreach (var param in parameters)
-                {
-                    cmd.Parameters.Add(new NpgsqlParameter() { Value = param });
-                }
-            }
-
-            try
-            {
-                var rsReader = await cmd.ExecuteReaderAsync();
-                while (await rsReader.ReadAsync())
-                {
-                    data.Add(Enumerable.Range(0, rsReader.FieldCount)
-                                .ToDictionary(i => rsReader.GetName(i), i => rsReader.GetValue(i)));
-                }
-                task["data"] = data;
-            }
-            catch (Exception ex)
-            {
-                task["error"] = ex.ToString();
-            }
-
-            return task;
-        }
+        public DbQueryItem(NpgsqlDataSource dataSource) : base(dataSource) { }
 
         public async Task<Dictionary<string, object?>> GetAllItem()
         {
@@ -58,13 +15,24 @@ namespace ConvenienceStoreManagement.Database
             return task;
         }
 
-        public async Task<Dictionary<string, object?>> GetRemainingGood(string itemID)
+        public async Task<Dictionary<string, object?>> SearchMatchingItem(string matchText)
+        {
+            var task = await BaseQueryCall(
+                "SELECT * FROM shopitem " +
+                "WHERE name LIKE %" + matchText + "%"
+            );
+            return task;
+        }
+
+
+        public async Task<Dictionary<string, object?>> GetRemainingGood(Guid itemID)
         {
             var task = await BaseQueryCall(
                 "SELECT * FROM good " +
                 "WHERE itemid=$1 AND expired_date > current_date " +
-                "ORDER BY expired_date ASC"
-                , new object[] { itemID });
+                "ORDER BY expired_date ASC",
+                new object[] { itemID }
+            );
             return task;
         }
 
@@ -93,12 +61,35 @@ namespace ConvenienceStoreManagement.Database
         }
 
         public async Task<Dictionary<string, object?>> AddGood
-            (string goodId, string itemID, DateOnly mfd, DateOnly expired)
+            (int goodId, Guid itemID, DateOnly mfd, DateOnly expired)
         {
             var task = await BaseQueryCall(
                 "INSERT INTO good (id, itemid, mfg_date, expired_date) " +
                 "VALUES ($1, $2, $3, $4) RETURNING *",
                 new object[] { goodId, itemID, mfd, expired }
+                );
+
+            return task;
+        }
+
+        public async Task<Dictionary<string, object?>> GetGoodWithItem(int goodId)
+        {
+            var task = await BaseQueryCall(
+                "select G.*, S.name, S.price, S.image_path from good G " +
+                "JOIN shopitem S on G.itemid = S.id " +
+                "where G.id = $1",
+                new object[] { goodId }
+            );
+
+            return task;
+        }
+
+        public async Task<Dictionary<string, object?>> GetShopItem(int itemId)
+        {
+            var task = await BaseQueryCall(
+                "SELECT * FROM shopitem " +
+                "WHERE id=$1",
+                new object[] { itemId }
                 );
 
             return task;

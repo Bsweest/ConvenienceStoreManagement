@@ -42,13 +42,13 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 
         public DrawerShopItemViewModel() { }
 
-        partial void OnItemModelChanged(ShopItemModel? model)
+        partial void OnItemModelChanged(ShopItemModel? value)
         {
-            if (model != null)
+            if (value != null)
             {
-                Name = model.Name;
-                ImagePath = model.ImagePath;
-                Price = model.Price;
+                Name = value.Name;
+                ImagePath = value.ImagePath;
+                Price = value.Price;
             }
             else
             {
@@ -59,10 +59,11 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         }
 
         [RelayCommand]
-        public void ToggleDrawer()
+        public void ToggleDrawer(ShopItemModel? model = null)
         {
             IsClosed = !IsClosed;
             if (IsAdd) ClearItem();
+            ItemModel = model;
         }
 
         [RelayCommand]
@@ -84,14 +85,14 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         public async void InsertNewItem()
         {
             string pushImage = string.IsNullOrEmpty(imageAbsPath) ? "" : "storage://" + Name + ".png";
-            var task = await dbManager.QueryItems.AddItem(Name, pushImage, Price);
-            var result = task.ToSingle();
+            var result = await dbManager.QueryItems.AddItem(Name, pushImage, Price);
+            result.ToSingle();
 
-            if (result["error"] != null)
+            if (result["error"] is object error)
             {
                 ProcessResult = "Error Happened When Inserted";
                 var errorBox = MessageBoxManager
-                    .GetMessageBoxStandardWindow("Error While Adding Item", result["error"].ToString());
+                    .GetMessageBoxStandardWindow("Error While Adding Item", error.ToString());
                 _ = errorBox.Show();
                 return;
             };
@@ -107,14 +108,14 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         public async void UpdateChoosedItem()
         {
             string pushImage = string.IsNullOrEmpty(imageAbsPath) ? "" : "storage://" + Name + ".png";
-            var task = await dbManager.QueryItems.UpdateItem(ItemID, Name, pushImage, Price);
-            var result = task.ToSingle();
+            var result = await dbManager.QueryItems.UpdateItem(ItemID, Name, pushImage, Price);
+            result.ToSingle();
 
-            if (result["error"] != null)
+            if (result["error"] is object error)
             {
                 ProcessResult = "Error Happened When Updated";
                 var errorBox = MessageBoxManager
-                    .GetMessageBoxStandardWindow("Error While Update Item", result["error"].ToString());
+                    .GetMessageBoxStandardWindow("Error While Update Item", error.ToString());
                 _ = errorBox.Show();
                 return;
             };
