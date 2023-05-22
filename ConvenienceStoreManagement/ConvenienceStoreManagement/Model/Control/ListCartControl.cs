@@ -10,6 +10,12 @@ namespace ConvenienceStoreManagement.Model.Control
         [ObservableProperty]
         private ObservableCollection<CartItemViewModel> listCart = new();
 
+        [ObservableProperty]
+        public int totalCost;
+
+        public void CalculateTotal()
+            => TotalCost = ListCart.Sum(e => e.TotalCost);
+
         public void AddGood(GoodModel goodModel)
         {
             int index = ListCart.IndexOf(ListCart.Where(i => i.CompareId(goodModel)).FirstOrDefault());
@@ -23,6 +29,7 @@ namespace ConvenienceStoreManagement.Model.Control
                 cartItem.AddGood(goodModel);
                 ListCart.Add(cartItem);
             }
+            CalculateTotal();
         }
 
         public bool RemoveGoodById(int id)
@@ -30,7 +37,11 @@ namespace ConvenienceStoreManagement.Model.Control
             foreach (var element in ListCart)
             {
                 if (element.RemoveGoodById(id))
+                {
+                    if (element.Goods.Count == 0) ListCart.Remove(element);
+                    CalculateTotal();
                     return true;
+                }
             }
 
             return false;
@@ -39,6 +50,7 @@ namespace ConvenienceStoreManagement.Model.Control
         public void ClearCart()
         {
             ListCart.Clear();
+            CalculateTotal();
         }
     }
 }

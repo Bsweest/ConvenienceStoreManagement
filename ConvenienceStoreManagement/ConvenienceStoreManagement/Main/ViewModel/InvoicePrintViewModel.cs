@@ -64,7 +64,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
             var result = await dbManager.QueryInvoice.CreateNewInvoice(
                 Customer != null ? Customer.Id : 0,
-                dbManager.WorkingEmployee,
+                dbManager.WorkingEmployee.Id,
                 TotalCost,
                 cartList
             );

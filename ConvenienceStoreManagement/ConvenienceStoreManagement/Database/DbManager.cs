@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using ConvenienceStoreManagement.Model;
+using Npgsql;
 
 namespace ConvenienceStoreManagement.Database
 {
@@ -6,12 +7,13 @@ namespace ConvenienceStoreManagement.Database
     {
         private readonly string connString = "Host=localhost;Username=postgres;Password=Phanhuymanh123;Database=ConvenienceStoreManagement";
 
-        public int WorkingEmployee { get; private set; } = 1;
+        public EmployeeModel WorkingEmployee { get; private set; } = new();
 
         public NpgsqlDataSource DataSource { get; private set; }
         public DbQueryItem? QueryItems { get; private set; }
         public DbQueryCustomer? QueryCustomer { get; private set; }
         public DbQueryInvoice? QueryInvoice { get; private set; }
+        public DbQueryEmployee? QueryEmployee { get; private set; }
 
         public DbManager()
         {
@@ -26,8 +28,9 @@ namespace ConvenienceStoreManagement.Database
             QueryItems = new(DataSource);
             QueryCustomer = new(DataSource);
             QueryInvoice = new(DataSource);
+            QueryEmployee = new(DataSource);
         }
 
-        public void SetWorkingEmployee(int id) { WorkingEmployee = id; }
+        public void SetWorkingEmployee(EmployeeModel model) => WorkingEmployee = model;
     }
 }

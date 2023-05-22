@@ -76,7 +76,7 @@
 						<Label Margin="0 0 10 0">Total Cost: </Label>
 						<TextBox Width="150" Margin="0 -3 0 0" IsReadOnly="True"
 								 FontWeight="Bold"
-								 Text=".VND"/>
+								 Text="{Binding	ListCartCtrl.TotalCost, StringFormat='{}{0} .VND'}"/>
 					</StackPanel>
 					<Button Content="Create Invoice" Command="{Binding PrintInvoice}"/>
 				</StackPanel>

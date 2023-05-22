@@ -14,6 +14,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             Shop,
             ItemManage,
             CustomerManage,
+            EmployeeManage,
         }
 
         private Dictionary<int, PageViewModelBase> Pages;
@@ -30,6 +31,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         public bool ShopPanel => ChoosedPanel == (int)MainPanel.Shop;
         public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
         public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
+        public bool EmployeeManagePanel => ChoosedPanel == (int)MainPanel.EmployeeManage;
 
         public MainViewModel(Action<int> changeWindow)
         {
@@ -62,37 +64,37 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                         .SetDatabaseConnection(dbManager)
                         .FinishBuild()
                 },
+                {
+                    (int)MainPanel.EmployeeManage,
+                    new EmployeeManageViewModel()
+                        .SetViewWindow(ViewWindow)
+                        .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
+                }
             };
-
-            NavigateNext();
+            CurrentPage = Pages[0];
             return this;
         }
 
-        private void NavigateNext()
+        partial void OnChoosedPanelChanged(int value)
         {
-            CurrentPage = Pages[ChoosedPanel];
+            CurrentPage = Pages[value];
         }
 
 
         [RelayCommand]
         public void ChangeToShop()
-        {
-            ChoosedPanel = (int)MainPanel.Shop;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.Shop;
 
         [RelayCommand]
         public void ChangeToCustomerManage()
-        {
-            ChoosedPanel = (int)MainPanel.CustomerManage;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.CustomerManage;
 
         [RelayCommand]
         public void ChangeToItemManage()
-        {
-            ChoosedPanel = (int)MainPanel.ItemManage;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.ItemManage;
+        [RelayCommand]
+        public void ChangeToEmployeeManage()
+            => ChoosedPanel = (int)MainPanel.EmployeeManage;
     }
 }

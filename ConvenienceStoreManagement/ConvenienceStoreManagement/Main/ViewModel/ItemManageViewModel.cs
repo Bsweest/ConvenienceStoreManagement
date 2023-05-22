@@ -59,6 +59,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         private async void FilterShopItem(string queryParam, string selectedFilter)
         {
+            selectedItem = null;
             if (queryParam == "")
             {
                 GridItems = ListBaseGroupItem;

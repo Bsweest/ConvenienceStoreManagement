@@ -38,6 +38,9 @@
 			<Button Classes="MenuIcon" Command="{Binding ChangeToCustomerManage}"
 					Classes.Choosed="{Binding CustomerManagePanel}"
 					i:Attached.Icon="fa-solid fa-person-circle-question"/>
+			<Button Classes="MenuIcon" Command="{Binding ChangeToEmployeeManage}"
+					Classes.Choosed="{Binding EmployeeManagePanel}"
+					i:Attached.Icon="fa-solid fa-clipboard-user"/>
 		</StackPanel>
 		</Border>
 		<Panel>

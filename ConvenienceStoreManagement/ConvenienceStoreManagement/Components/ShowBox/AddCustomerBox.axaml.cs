@@ -16,7 +16,7 @@ public partial class AddCustomerBox : Window
         AvaloniaXamlLoader.Load(this);
     }
 
-    public static Task<CustomerModel?> ShowBox(DbManager db)
+    public static Task<CustomerModel?> ShowBox(DbManager db, CustomerModel? model = null)
     {
         AddCustomerBoxViewModel viewModel = new AddCustomerBoxViewModel();
         AddCustomerBox addBox = new AddCustomerBox
@@ -24,6 +24,7 @@ public partial class AddCustomerBox : Window
             DataContext = viewModel
         };
         viewModel.SetViewWindow(addBox).SetDatabaseConnection(db);
+        viewModel.SetUpdateCustomer(model);
 
         var taskCompletion = new TaskCompletionSource<CustomerModel?>();
         addBox.Closed += delegate { taskCompletion.TrySetResult(viewModel.CustomerResult); };

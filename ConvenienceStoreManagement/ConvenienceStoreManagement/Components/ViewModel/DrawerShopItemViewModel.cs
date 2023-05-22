@@ -64,6 +64,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
             IsClosed = !IsClosed;
             if (IsAdd) ClearItem();
             ItemModel = model;
+            ProcessResult = "";
         }
 
         [RelayCommand]

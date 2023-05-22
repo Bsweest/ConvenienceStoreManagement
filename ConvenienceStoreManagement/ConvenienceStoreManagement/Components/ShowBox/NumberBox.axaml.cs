@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using ConvenienceStoreManagement.Components.ViewModel;
+using ConvenienceStoreManagement.Database;
+using ConvenienceStoreManagement.Model;
 using System.Threading.Tasks;
 
 namespace ConvenienceStoreManagement.Components.ShowBox;
@@ -13,14 +15,19 @@ public partial class NumberBox : Window
         InitializeComponent();
     }
 
-    public static Task<int> ShowBox(string title)
+    public static Task<int> ShowBox(string title, CustomerModel model, DbManager dbManager)
     {
-        NumberBoxViewModel viewModel = new(title);
+        var viewModel = new NumberBoxViewModel()
+        {
+            Title = title,
+            Customer = model,
+            Purpose = "Deposit/Withdraw Customer: " + model.FullName,
+        };
         var numBox = new NumberBox
         {
             DataContext = viewModel
         };
-        viewModel.SetViewWindow(numBox);
+        viewModel.SetViewWindow(numBox).SetDatabaseConnection(dbManager);
 
         var taskCompletion = new TaskCompletionSource<int>();
         numBox.Closed += delegate

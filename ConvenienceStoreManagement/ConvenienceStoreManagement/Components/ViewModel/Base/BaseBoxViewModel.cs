@@ -16,15 +16,10 @@ namespace ConvenienceStoreManagement.Components.ViewModel.Base
 
         // Business Logic
         [RelayCommand]
-        public void CloseForm()
-        {
-            CloseBehaviour();
-        }
+        public void CloseForm() => CloseBehaviour();
 
         [RelayCommand]
-        public void ClickOK()
-        {
-            OKBehaviour();
-        }
+        public void ClickOK() => OKBehaviour();
+
     }
 }
