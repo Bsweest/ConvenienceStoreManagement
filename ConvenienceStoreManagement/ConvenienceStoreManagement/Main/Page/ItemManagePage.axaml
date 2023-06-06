@@ -59,7 +59,7 @@
 							i:Attached.Icon="fa-solid fa-dumpster-fire"
 							Classes="NotExpired"
 							Classes.HaveExpired="True"
-							/>
+							Command="{Binding CheckExpiry}" />
 				</StackPanel>
 
 				<Grid Margin="0 20 0 0" Height="650" Background="#121016">
@@ -77,7 +77,7 @@
 							<DataGridTextColumn	Width="*" Header="Item Name" Binding="{Binding Item.Name}" />
 							<DataGridTextColumn	Width="*" Header="Price" Binding="{Binding Item.Price}" />
 							<DataGridTextColumn	Width="150" Header="Remaining" Binding="{Binding Count}" />
-							<DataGridTextColumn Width="*" Header="Nearest Expired Date Batch" Binding="{Binding NearestExpiredDate}" />
+							<DataGridTextColumn Width="*" Header="Nearest Expiry Date Batch" Binding="{Binding NearestExpiredDate}" />
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>

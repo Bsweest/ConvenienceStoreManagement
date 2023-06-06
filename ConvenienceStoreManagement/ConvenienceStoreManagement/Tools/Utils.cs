@@ -45,5 +45,16 @@ namespace ConvenienceStoreManagement.Tools
 
             return returnArray;
         }
+
+        public static DateOnly GetDateOnlyFromDb(object d)
+        {
+            return DateOnly.FromDateTime(DateTime.Parse(d.ToString()));
+        }
+
+        public static DateTimeOffset DateOnlyToDTOS(DateOnly d)
+        {
+            var datetime = d.ToDateTime(new TimeOnly(0));
+            return new DateTimeOffset(datetime);
+        }
     }
 }

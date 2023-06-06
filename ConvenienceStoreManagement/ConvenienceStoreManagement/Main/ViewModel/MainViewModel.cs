@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ConvenienceStoreManagement.Components.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -14,6 +15,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             Shop,
             ItemManage,
             CustomerManage,
+            EmployeeManage,
         }
 
         private Dictionary<int, PageViewModelBase> Pages;
@@ -25,11 +27,16 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [NotifyPropertyChangedFor(nameof(ShopPanel))]
         [NotifyPropertyChangedFor(nameof(ItemPanel))]
         [NotifyPropertyChangedFor(nameof(CustomerManagePanel))]
+        [NotifyPropertyChangedFor(nameof(EmployeeManagePanel))]
         private int choosedPanel = 0;
 
         public bool ShopPanel => ChoosedPanel == (int)MainPanel.Shop;
         public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
         public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
+        public bool EmployeeManagePanel => ChoosedPanel == (int)MainPanel.EmployeeManage;
+
+        [ObservableProperty]
+        NotificationViewModel notify = new();
 
         public MainViewModel(Action<int> changeWindow)
         {
@@ -39,6 +46,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         public override ViewModelBase FinishBuild()
         {
             if (ViewWindow == null || dbManager == null) return this;
+            dbManager.SetupNofifycation(Notify);
             Pages = new()
             {
                 {
@@ -62,37 +70,38 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                         .SetDatabaseConnection(dbManager)
                         .FinishBuild()
                 },
+                {
+                    (int)MainPanel.EmployeeManage,
+                    new EmployeeManageViewModel()
+                        .SetViewWindow(ViewWindow)
+                        .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
+                }
             };
-
-            NavigateNext();
+            CurrentPage = Pages[0];
             return this;
         }
 
-        private void NavigateNext()
+        partial void OnChoosedPanelChanged(int value)
         {
-            CurrentPage = Pages[ChoosedPanel];
+            CurrentPage = Pages[value];
         }
 
 
         [RelayCommand]
         public void ChangeToShop()
-        {
-            ChoosedPanel = (int)MainPanel.Shop;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.Shop;
 
         [RelayCommand]
         public void ChangeToCustomerManage()
-        {
-            ChoosedPanel = (int)MainPanel.CustomerManage;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.CustomerManage;
 
         [RelayCommand]
         public void ChangeToItemManage()
-        {
-            ChoosedPanel = (int)MainPanel.ItemManage;
-            NavigateNext();
-        }
+            => ChoosedPanel = (int)MainPanel.ItemManage;
+
+        [RelayCommand]
+        public void ChangeToEmployeeManage()
+            => ChoosedPanel = (int)MainPanel.EmployeeManage;
     }
 }

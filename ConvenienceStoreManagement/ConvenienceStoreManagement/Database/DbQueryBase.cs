@@ -51,5 +51,38 @@ namespace ConvenienceStoreManagement.Database
 
             return task;
         }
+
+        public async Task<bool> PgFunctionBoolean(string functionString, object[]? parameters = null)
+        {
+            await using var connection = await DataSource.OpenConnectionAsync();
+
+            await using var cmd = new NpgsqlCommand(
+                "select from " + functionString,
+                connection
+            );
+
+            if (parameters != null)
+            {
+                foreach (var param in parameters)
+                {
+                    cmd.Parameters.Add(new NpgsqlParameter() { Value = param });
+                }
+            }
+
+            try
+            {
+                var rsReader = await cmd.ExecuteReaderAsync();
+                while (await rsReader.ReadAsync())
+                {
+                    return rsReader.GetBoolean(0);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return false;
+        }
     }
 }

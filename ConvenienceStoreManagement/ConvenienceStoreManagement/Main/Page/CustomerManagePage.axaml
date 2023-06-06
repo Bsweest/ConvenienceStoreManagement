@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:comp="clr-namespace:ConvenienceStoreManagement.Components;assembly=ConvenienceStoreManagement"
+	         xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="800" Background="#21202E"
              x:Class="ConvenienceStoreManagement.Main.Page.CustomerManagePage">
 	<Border Padding="20">
@@ -15,25 +15,28 @@
 				<ComboBox Items="{Binding DebounceSearchCustomer.FilterSearchKeys}" 
 						  Width="150" Margin="0 3 0 0"
 						  SelectedItem="{Binding DebounceSearchCustomer.SelectedFilter}"/>
+				<Button Margin="20 0" Padding="20 10" Content="Refresh"
+						Background="Gray" FontWeight="Bold" Cursor="Hand"
+						i:Attached.Icon="fa-solid fa-arrows-rotate"
+						Command="{Binding RetrieveAllCustomer}"/>
 				
 				<Button Margin="20 0" Padding="20 10" Content="Add Customer"
 						Background="Orchid" FontWeight="Bold" Cursor="Hand"
-						/>
+						Command="{Binding ShowCreateCustomer}"/>
 				<Button Margin="20 0" Padding="20 10" Content="Update Customer"
 						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
-						/>
+						IsEnabled="{Binding SelectedCustomer, Converter={x:Static ObjectConverters.IsNotNull}}"
+						Command="{Binding ShowUpdateCustomer}"/>
 				<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 
-				<Button Margin="20 0" Padding="20 10" Content="Deposit"
-						Background="Green" FontWeight="Bold" Cursor="Hand"
-						/>
-				<Button Margin="20 0" Padding="20 10" Content="Withdraw"
-						Background="#FF2E2E" FontWeight="Bold" Cursor="Hand"
-						/>
+				<Button Margin="20 0" Padding="20 10" Content="Deposit/Withdraw"
+						Background="MediumOrchid" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding TransactionBalance}"/>
 			</StackPanel>
 
 			<Grid Margin="0 20 0 0" Height="650" Background="#121016">
-				<DataGrid Name="Customer" SelectionMode="Single" Items="{Binding GridCus}" 
+				<DataGrid Name="Customer" SelectionMode="Single" 
+						  Items="{Binding GridCus}" SelectedItem="{Binding SelectedCustomer}"
 						  AutoGenerateColumns="False" IsReadOnly="True">
 					<DataGrid.Columns>
 						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>

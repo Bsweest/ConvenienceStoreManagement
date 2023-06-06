@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Model;
 using ConvenienceStoreManagement.Tools;
@@ -14,6 +16,8 @@ namespace ConvenienceStoreManagement.Main.ViewModel
     {
         [ObservableProperty]
         private ObservableCollection<CustomerModel>? gridCus = null;
+        [ObservableProperty]
+        private CustomerModel? selectedCustomer;
 
         private readonly ObservableCollection<CustomerModel> AllCustomer = new();
 
@@ -43,6 +47,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         public void FilterCustomer(string queryParam, string filter)
         {
+            SelectedCustomer = null;
             if (queryParam == "")
             {
                 GridCus = AllCustomer;
@@ -57,6 +62,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             }
         }
 
+        [RelayCommand]
         public async void RetrieveAllCustomer()
         {
             AllCustomer.Clear();
@@ -72,6 +78,38 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             }
             GridCus = null;
             GridCus = AllCustomer;
+        }
+
+        [RelayCommand]
+        public async void ShowCreateCustomer()
+        {
+            var insertResult = await AddCustomerBox.ShowBox(dbManager);
+            if (insertResult != null)
+            {
+                AllCustomer.Insert(0, insertResult);
+            }
+        }
+        [RelayCommand]
+        public async void ShowUpdateCustomer()
+        {
+            if (SelectedCustomer == null) return;
+            var insertResult = await AddCustomerBox.ShowBox(dbManager, SelectedCustomer);
+            if (insertResult != null)
+            {
+                RetrieveAllCustomer();
+            }
+        }
+        [RelayCommand]
+        public async void TransactionBalance()
+        {
+            if (SelectedCustomer == null || dbManager == null) return;
+            var result = await NumberBox.ShowBox("Change Customer Balance", SelectedCustomer, dbManager);
+            if (result != 0)
+            {
+                SelectedCustomer.SetNewBalance(result);
+                GridCus = null;
+                GridCus = AllCustomer;
+            }
         }
     }
 }

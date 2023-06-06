@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	         xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 mc:Ignorable="d" Width="1400" Height="800" Background="#21202E"
+             x:Class="ConvenienceStoreManagement.Main.Page.EmployeeManagePage">
+	<Border Padding="20">
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Label VerticalContentAlignment="Center" Content="Find Employee: "/>
+				<TextBox Margin="20 0" VerticalContentAlignment="Center" Height="30" Width="300"
+						 Watermark="Enter Search Key..."
+						 Text="{Binding DebounceSearchEmployee.QueryParam}"/>
+				<ComboBox Items="{Binding DebounceSearchEmployee.FilterSearchKeys}"
+						  Width="150" Margin="0 3 0 0"
+						  SelectedItem="{Binding DebounceSearchEmployee.SelectedFilter}"/>
+				<Button Margin="20 0" Padding="20 10" Content="Refresh"
+						Background="Gray" FontWeight="Bold" Cursor="Hand"
+						i:Attached.Icon="fa-solid fa-arrows-rotate"
+						Command="{Binding RetrieveAllEmployee}"/>
+
+				<Button Margin="20 0" Padding="20 10" Content="Add Employee"
+						Background="Orchid" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding InsertEmployee}"/>
+				<Button Margin="20 0" Padding="20 10" Content="Update Employee"
+						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
+						IsEnabled="{Binding SelectedEmployee, Converter={x:Static ObjectConverters.IsNotNull}}"
+						Command="{Binding UpdateEmployee}"/>
+			</StackPanel>
+
+			<Grid Margin="0 20 0 0" Height="650" Background="#121016">
+				<DataGrid Name="Customer" SelectionMode="Single" Items="{Binding GridItems}"
+						  AutoGenerateColumns="False" IsReadOnly="True" 
+						  SelectedItem="{Binding SelectedEmployee}">
+					<DataGrid.Columns>
+						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>
+						<DataGridTextColumn	Width="*" Header="Full Name" Binding="{Binding Name}" />
+						<DataGridTextColumn	Width="*" Header="Phone Num." Binding="{Binding PhoneNumber}" />
+						<DataGridTextColumn	Width="*" Header="Personal ID" Binding="{Binding PersonId}" />
+						<DataGridTextColumn	Width="*" Header="Salary" Binding="{Binding Salary}" />
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+		</StackPanel>
+	</Border>
+</UserControl>

@@ -8,6 +8,8 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 {
     public partial class AddCustomerBoxViewModel : BaseBoxViewModel
     {
+        private bool IsAdd = true;
+        private CustomerModel UpdateModel;
         public CustomerModel? CustomerResult { get; private set; }
 
         [ObservableProperty]
@@ -19,9 +21,47 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [ObservableProperty]
         private string? errorMessage = null;
 
-        public override async void OKBehaviour()
+        [ObservableProperty]
+        private string title = "Add Customer Message Box";
+
+        public override void OKBehaviour()
         {
-            var result = await dbManager.QueryCustomer.InsertCustomer(cusName, cusPhoneNum, personID);
+            if (IsAdd) Insert();
+            else Update();
+        }
+        public void SetUpdateCustomer(CustomerModel? model)
+        {
+            if (model == null) return;
+            IsAdd = false;
+            Title = "Update Customer Id - " + UpdateModel.Id;
+            UpdateModel = model;
+            CusName = model.FullName;
+            CusPhoneNum = model.PhoneNumber;
+            PersonID = model.PersonId;
+        }
+
+        public async void Insert()
+        {
+            var result = await dbManager.QueryCustomer
+                .InsertCustomer(cusName, cusPhoneNum, personID);
+            result.ToSingle();
+
+            if (result["error"] is object error)
+            {
+                ErrorMessage = error.ToString();
+            }
+
+            if (result["data"] is Dictionary<string, object> data)
+            {
+                CustomerResult = new(data);
+                ViewWindow.Close();
+            }
+        }
+
+        public async void Update()
+        {
+            var result = await dbManager.QueryCustomer
+                .UpdateCustomer(UpdateModel.Id, cusName, cusPhoneNum, personID);
             result.ToSingle();
 
             if (result["error"] is object error)

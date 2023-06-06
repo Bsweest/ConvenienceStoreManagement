@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Height="360" Width="500"
+        x:Class="ConvenienceStoreManagement.Components.ShowBox.MakeContractBox"
+        Title="MakeContractBox">
+  <StackPanel HorizontalAlignment="Center">
+	  <Label Margin="0 10 0 20" Foreground="Goldenrod" FontWeight="Black" FontSize="20"
+			 HorizontalAlignment="Center">Make New Contract</Label>
+	  <Grid RowDefinitions="auto,auto,auto,auto"
+			ColumnDefinitions="150,*" Margin="0 0 0 25">
+		  <Grid.Styles>
+			  <Style Selector="TextBox">
+				  <Setter Property="Margin" Value="0 5"/>
+			  </Style>
+			  <Style Selector="Label">
+				  <Setter Property="VerticalAlignment" Value="Center"/>
+			  </Style>
+		  </Grid.Styles>
+		  
+		  <Label Content="EMPLOYEE" Grid.Row="0" Grid.Column="0"/>
+		  <Label Content="Salary:" Grid.Row="1" Grid.Column="0"/>
+		  <Label Content="Contract Start:" Grid.Row="2" Grid.Column="0"/>
+		  <Label Content="Contract End:" Grid.Row="3" Grid.Column="0"/>
+
+		  <TextBox Grid.Row="0" Foreground="BlanchedAlmond" 
+				   IsReadOnly="True" Background="Gray"
+				   Text="{Binding Employee.Id}"
+				   Grid.Column="1" Width="200" HorizontalAlignment="Left" />
+		  <TextBox Grid.Row="1" Foreground="BlanchedAlmond"
+				   Text="{Binding Salary}"
+				   Grid.Column="1" Width="200" HorizontalAlignment="Left" />
+		  <DatePicker Grid.Row="2" Grid.Column="2" Margin="0 5"
+					  SelectedDate="{Binding StartDate}" />
+		  <DatePicker Grid.Row="3" Grid.Column="2" Margin="0 5"
+					  SelectedDate="{Binding EndDate}" />
+	  </Grid>
+	  <DockPanel LastChildFill="False">
+		  <Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right"
+				  Background="Red" FontWeight="Bold" Cursor="Hand"
+				  Command="{Binding CloseForm}"/>
+		  <Button Margin="20 0" Padding="20 10" Content="OK" DockPanel.Dock="Right"
+				  Background="Green" FontWeight="Bold" Cursor="Hand"
+				  Command="{Binding ClickOK}"/>
+	  </DockPanel>
+
+	  <Border Margin="0 20 0 0" >
+		  <Button Command="{Binding RemoveContract}"
+				  IsEnabled="{Binding Employee.Contract, Converter={x:Static ObjectConverters.IsNotNull}}">
+			  <Label Content="Remove Contract" Foreground="Red" FontSize="16" FontWeight="Black" />
+		  </Button>
+	  </Border>
+  </StackPanel>
+</Window>

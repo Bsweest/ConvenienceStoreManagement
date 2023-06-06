@@ -3,45 +3,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+		xmlns:comp="clr-namespace:ConvenienceStoreManagement.Components;assembly=ConvenienceStoreManagement"
         mc:Ignorable="d" d:DesignWidth="1536" d:DesignHeight="864"
         WindowState="Maximized"
         x:Class="ConvenienceStoreManagement.Main.MainWindow"
         Title="MainWindow">
-	<DockPanel Background="#21202E">
-		<StackPanel Height="30" Background="#121016" DockPanel.Dock="Top" Orientation="Horizontal">
-			<TextBlock Margin="20 0" Foreground="Gainsboro" VerticalAlignment="Center" FontSize="16" Text="Grocery Store Management"/>
-		</StackPanel>
-		<Border BorderThickness="0 0 1 0" BorderBrush="Black">
-			<StackPanel Background="#21202E" Width="60" DockPanel.Dock="Left">
-			<StackPanel.Styles>
-				<Style Selector="Button.MenuIcon">
-					<Setter Property="Background" Value="#21202E" />
-					<Setter Property="FontSize" Value="33" />
-					<Setter Property="Height" Value="60" />
-					<Setter Property="Width" Value="60" />
-					<Setter Property="Foreground" Value="Gray" />
-					<Setter Property="Cursor" Value="Hand" />
-					<Setter Property="CornerRadius" Value="0" />
-				</Style>
-				<Style Selector="Button.Choosed">
-					<Setter Property="Foreground" Value="#49C59F" />
-					<Setter Property="BorderThickness" Value="2 0 0 0" />
-					<Setter Property="BorderBrush" Value="#8464C6" />
-				</Style>
-			</StackPanel.Styles>
-			<Button Classes="MenuIcon" Command="{Binding ChangeToShop}" 
-					Classes.Choosed="{Binding ShopPanel}" 
-					i:Attached.Icon="fa-solid fa-shop"/>
-			<Button Classes="MenuIcon" Command="{Binding ChangeToItemManage}"
-					Classes.Choosed="{Binding ItemPanel}"
-					i:Attached.Icon="fa-solid fa-cubes"/>
-			<Button Classes="MenuIcon" Command="{Binding ChangeToCustomerManage}"
-					Classes.Choosed="{Binding CustomerManagePanel}"
-					i:Attached.Icon="fa-solid fa-person-circle-question"/>
-		</StackPanel>
-		</Border>
-		<Panel>
-			<TransitioningContentControl Content="{Binding CurrentPage}" />
-		</Panel>
-	</DockPanel>
+	<Grid>
+		
+		<DockPanel Background="#21202E">
+			<StackPanel Height="30" Background="#121016" DockPanel.Dock="Top" Orientation="Horizontal">
+				<TextBlock Margin="20 0" Foreground="Gainsboro" VerticalAlignment="Center" FontSize="16" Text="Convenience Store Management"/>
+			</StackPanel>
+			<Border BorderThickness="0 0 1 0" BorderBrush="Black">
+				<Grid Background="#21202E" RowDefinitions="*,60">
+					<StackPanel Width="60" DockPanel.Dock="Left" Grid.Row="0 ">
+						<StackPanel.Styles>
+							<Style Selector="Button.MenuIcon">
+								<Setter Property="Background" Value="#21202E" />
+								<Setter Property="FontSize" Value="33" />
+								<Setter Property="Height" Value="60" />
+								<Setter Property="Width" Value="60" />
+								<Setter Property="Foreground" Value="Gray" />
+								<Setter Property="Cursor" Value="Hand" />
+								<Setter Property="CornerRadius" Value="0" />
+							</Style>
+							<Style Selector="Button.Choosed">
+								<Setter Property="Foreground" Value="#49C59F" />
+								<Setter Property="BorderThickness" Value="2 0 0 0" />
+								<Setter Property="BorderBrush" Value="#8464C6" />
+							</Style>
+						</StackPanel.Styles>
+						<Button Classes="MenuIcon" Command="{Binding ChangeToShop}" 
+								Classes.Choosed="{Binding ShopPanel}" 
+								i:Attached.Icon="fa-solid fa-shop"/>
+						<Button Classes="MenuIcon" Command="{Binding ChangeToItemManage}"
+								Classes.Choosed="{Binding ItemPanel}"
+								i:Attached.Icon="fa-solid fa-cubes"/>
+						<Button Classes="MenuIcon" Command="{Binding ChangeToCustomerManage}"
+								Classes.Choosed="{Binding CustomerManagePanel}"
+								i:Attached.Icon="fa-solid fa-person-circle-question"/>
+						<Button Classes="MenuIcon" Command="{Binding ChangeToEmployeeManage}"
+								Classes.Choosed="{Binding EmployeeManagePanel}"
+								i:Attached.Icon="fa-solid fa-clipboard-user"/>
+					</StackPanel>
+
+					<Button Command="{Binding }"
+							Grid.Row="1" Width="60" Height="60" FontSize="33"
+							i:Attached.Icon="fa-solid fa-right-from-bracket"/>
+				</Grid>
+			</Border>
+		
+			<Panel>
+				<TransitioningContentControl Content="{Binding CurrentPage}" />
+			</Panel>
+		</DockPanel>
+
+		<comp:NotificationBubble DataContext="{Binding Notify}"/>
+	</Grid>
 </Window>

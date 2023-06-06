@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConvenienceStoreManagement.Tools;
+using System;
 using System.Collections.Generic;
 
 namespace ConvenienceStoreManagement.Model
@@ -9,8 +10,8 @@ namespace ConvenienceStoreManagement.Model
         {
             Id = (int)data["id"];
             Item = item;
-            ImportDate = DateOnly.FromDateTime(DateTime.Parse(data["mfg_date"].ToString()));
-            ExpiredDate = DateOnly.FromDateTime(DateTime.Parse(data["expired_date"].ToString()));
+            ImportDate = Utils.GetDateOnlyFromDb(data["mfg_date"]);
+            ExpiredDate = Utils.GetDateOnlyFromDb(data["expired_date"]);
             Cost = data["cost"] != DBNull.Value ? (int)data["cost"] : null;
         }
 

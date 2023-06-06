@@ -5,7 +5,7 @@
         mc:Ignorable="d" Width="400" Height="400"
         x:Class="ConvenienceStoreManagement.Components.ShowBox.AddCustomerBox"
 		WindowStartupLocation="CenterScreen"
-        Title="Add Customer Message Box">
+        Title="{Binding Title}">
 	<Border Margin="12">
 		<StackPanel>
 			<Label FontSize="20" Margin="0 0 0 10" Foreground="Orchid" FontWeight="Bold">Add Customer</Label>

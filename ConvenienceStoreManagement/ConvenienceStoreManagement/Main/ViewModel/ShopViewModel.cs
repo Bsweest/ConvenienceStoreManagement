@@ -16,11 +16,12 @@ namespace ConvenienceStoreManagement.Main.ViewModel
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasChoosed))]
+        [NotifyPropertyChangedFor(nameof(ButtonCusNameContent))]
         private CustomerModel? customer;
         public bool HasChoosed => Customer != null;
 
         public string ButtonCusNameContent
-            => HasChoosed ? "Customer: " + Customer.FullName : "Guest Customer";
+            => Customer != null ? "Customer: " + Customer.FullName : "Guest Customer";
 
         // Side Drawer Content
         [ObservableProperty]
@@ -66,8 +67,12 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [RelayCommand]
         public async void PrintInvoice()
         {
-            _ = await InvoicePrintPreview.CreateInvoicePreview(ListCartCtrl.ListCart, Customer, dbManager);
-            Customer = null;
+            var result = await InvoicePrintPreview.CreateInvoicePreview(ListCartCtrl.ListCart, Customer, dbManager);
+            if (result == CreateInvoiceResult.Success)
+            {
+                Customer = null;
+                ClearCart();
+            }
         }
 
         [RelayCommand]

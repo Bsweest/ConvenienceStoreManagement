@@ -21,6 +21,11 @@ namespace ConvenienceStoreManagement.Model
             if (data["balance"] is int balance) Balance = balance;
         }
 
+        public void SetNewBalance(int value)
+        {
+            Balance += value;
+        }
+
         public string? GetProperty(string propertyName)
         {
             if (propertyName == "ID") return Id.ToString();
