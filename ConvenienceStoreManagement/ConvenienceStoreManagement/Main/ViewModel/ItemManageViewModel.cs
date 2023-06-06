@@ -57,19 +57,27 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             return this;
         }
 
-        private async void FilterShopItem(string queryParam, string selectedFilter)
+        private void FilterShopItem(string queryParam, string selectedFilter)
         {
             selectedItem = null;
             if (queryParam == "")
             {
                 GridItems = ListBaseGroupItem;
             }
+            else if (queryParam == "*:expiry")
+            {
+                var filterdItems = ListBaseGroupItem
+                    .Where(x =>
+                        x.Goods[0].ExpiredDate == DateOnly.Parse(DateTime.Now.ToString())
+                    ).ToList();
+                GridItems = filterdItems;
+            }
             else
             {
-                var filteredItem = ListBaseGroupItem
+                var filteredItems = ListBaseGroupItem
                     .Where(x => x.Item.GetProperty(selectedFilter).ToLower().Contains(queryParam.ToLower()))
                     .ToList();
-                GridItems = filteredItem;
+                GridItems = filteredItems;
             }
         }
 
@@ -125,6 +133,12 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             if (SelectedItem == null) return;
             DrawerItemVM.IsAdd = false;
             DrawerItemVM.ToggleDrawer(SelectedItem.Item);
+        }
+
+        [RelayCommand]
+        public void CheckExpiry()
+        {
+            DebounceSearchItem.QueryParam = "*:expiry";
         }
     }
 }

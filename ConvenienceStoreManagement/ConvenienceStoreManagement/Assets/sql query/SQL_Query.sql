@@ -6,12 +6,22 @@ COMMENT ON SCHEMA public IS 'standard public schema';
 
 CREATE EXTENSION if not exists "uuid-ossp";
 
+create table contract (
+	id SERIAL primary key,
+	staff_id integer,
+	salary integer,
+	start_date date,
+	end_date date,
+	
+	constraint check_dates check (start_date < end_date)
+);
+
 create table employee (
 	id SERIAL primary key,
 	name text not null,
 	phonenum text not null unique,
-	salary integer DEFAULT 0,
 	person_id text unique,
+	contract_id integer references contract,
 	username text unique,
 	password text
 );
@@ -39,7 +49,9 @@ create table discount (
 	itemid uuid references shopitem,
 	percent int,
 	start_time timestamptz,
-	end_time timestamptz
+	end_time timestamptz,
+	
+	constraint check_dates check (start_time < end_time)
 );
 
 create table invoice (
@@ -57,7 +69,9 @@ create table good (
 	mfg_date date,
 	expired_date date,
 	cost integer,
-	invoice_id integer references invoice
+	invoice_id integer references invoice,
+	
+	constraint check_dates check (mfg_date < expired_date)
 );
 
 create table transaction (
@@ -67,6 +81,11 @@ create table transaction (
 	trans_time timestamptz DEFAULT now(),
 	amount integer
 );
+
+alter table contract
+  add constraint fk_contract_employee
+      foreign key (staff_id)
+      references employee;
 
 CREATE or REPLACE FUNCTION check_auth_pass(check_string text, auth_name text)
 RETURNS BOOLEAN language plpgsql

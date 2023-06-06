@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ConvenienceStoreManagement.Components.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -26,12 +27,16 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [NotifyPropertyChangedFor(nameof(ShopPanel))]
         [NotifyPropertyChangedFor(nameof(ItemPanel))]
         [NotifyPropertyChangedFor(nameof(CustomerManagePanel))]
+        [NotifyPropertyChangedFor(nameof(EmployeeManagePanel))]
         private int choosedPanel = 0;
 
         public bool ShopPanel => ChoosedPanel == (int)MainPanel.Shop;
         public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
         public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
         public bool EmployeeManagePanel => ChoosedPanel == (int)MainPanel.EmployeeManage;
+
+        [ObservableProperty]
+        NotificationViewModel notify = new();
 
         public MainViewModel(Action<int> changeWindow)
         {
@@ -41,6 +46,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         public override ViewModelBase FinishBuild()
         {
             if (ViewWindow == null || dbManager == null) return this;
+            dbManager.SetupNofifycation(Notify);
             Pages = new()
             {
                 {
@@ -93,6 +99,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [RelayCommand]
         public void ChangeToItemManage()
             => ChoosedPanel = (int)MainPanel.ItemManage;
+
         [RelayCommand]
         public void ChangeToEmployeeManage()
             => ChoosedPanel = (int)MainPanel.EmployeeManage;

@@ -25,16 +25,19 @@
 						Command="{Binding InsertEmployee}"/>
 				<Button Margin="20 0" Padding="20 10" Content="Update Employee"
 						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
+						IsEnabled="{Binding SelectedEmployee, Converter={x:Static ObjectConverters.IsNotNull}}"
 						Command="{Binding UpdateEmployee}"/>
 			</StackPanel>
 
 			<Grid Margin="0 20 0 0" Height="650" Background="#121016">
 				<DataGrid Name="Customer" SelectionMode="Single" Items="{Binding GridItems}"
-						  AutoGenerateColumns="False" IsReadOnly="True">
+						  AutoGenerateColumns="False" IsReadOnly="True" 
+						  SelectedItem="{Binding SelectedEmployee}">
 					<DataGrid.Columns>
 						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>
 						<DataGridTextColumn	Width="*" Header="Full Name" Binding="{Binding Name}" />
 						<DataGridTextColumn	Width="*" Header="Phone Num." Binding="{Binding PhoneNumber}" />
+						<DataGridTextColumn	Width="*" Header="Personal ID" Binding="{Binding PersonId}" />
 						<DataGridTextColumn	Width="*" Header="Salary" Binding="{Binding Salary}" />
 					</DataGrid.Columns>
 				</DataGrid>

@@ -1,5 +1,6 @@
 ﻿using ConvenienceStoreManagement.Tools;
 using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace ConvenienceStoreManagement.Database
             var task = await BaseQueryCall(
                 "INSERT INTO customer (fullname, phonenum, person_id) " +
                 "VALUES ($1, $2, $3) RETURNING *",
-                new object[] { cusname, phonenum, pid }
+                new object[] { cusname, phonenum, pid == null ? DBNull.Value : pid }
             );
 
             return task;
@@ -43,7 +44,7 @@ namespace ConvenienceStoreManagement.Database
             var task = await BaseQueryCall(
                 "UPDATE customer SET cusname=$2, phonenum=$3, person_id=$4 " +
                 "WHERE id=$1 RETURNING *",
-                new object[] { id, cusname, phonenum, pid }
+                new object[] { id, cusname, phonenum, pid == null ? DBNull.Value : pid }
             );
 
             return task;

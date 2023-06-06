@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="600" Height="550"
+        x:Class="ConvenienceStoreManagement.Components.ShowBox.UpsertEmployee"
+        Title="UpsertEmployee">
+	<Border Padding="20 5">
+		<StackPanel>
+			<Label FontSize="26" Foreground="Orchid" 
+				   Content="{Binding Title}" Margin="0 0 0 10"
+				   HorizontalAlignment="Center"/>
+			<Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto"
+				  ColumnDefinitions="150,*">
+				<Grid.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="Margin" Value="0 5"/>
+					</Style>
+					<Style Selector="Label">
+						<Setter Property="VerticalAlignment" Value="Center"/>
+					</Style>
+				</Grid.Styles>
+				
+				<Label Content="ID:" Grid.Row="0" Grid.Column="0"/>
+				<Label Content="Name:" Grid.Row="1" Grid.Column="0"/>
+				<Label Content="Person ID:" Grid.Row="2" Grid.Column="0"/>
+				<Label Content="Phone Num:" Grid.Row="3" Grid.Column="0"/>
+				<Label Content="Contract ID:" Grid.Row="4" Grid.Column="0"/>
+				<Label Content="Salary:" Grid.Row="5" Grid.Column="0"/>
+				<Label Content="Contract Start:" Grid.Row="6" Grid.Column="0"/>
+				<Label Content="Contract End:" Grid.Row="7" Grid.Column="0"/>
+				
+				<TextBox Grid.Row="0" Grid.Column="1" Width="200" 
+						 HorizontalAlignment="Left" Text="{Binding Id}" />
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Pid}"/>
+				<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PhoneNum}"/>
+				<TextBox Grid.Row="4" Background="Gray" Foreground="BlanchedAlmond"
+						 Text="{Binding Employee.Contract.Id}"
+						 Grid.Column="1" Width="200" HorizontalAlignment="Left" IsReadOnly="True" />
+				<TextBox Grid.Row="5" Background="Gray" Foreground="BlanchedAlmond"
+						 Text="{Binding Salary}"
+						 Grid.Column="1" Width="200" HorizontalAlignment="Left" IsReadOnly="True" />
+				<DatePicker Grid.Row="6" Grid.Column="2" Margin="0 5"
+							SelectedDate="{Binding StartDate}" IsEnabled="False" />
+				<DatePicker Grid.Row="7" Grid.Column="2" Margin="0 5"
+							SelectedDate="{Binding EndDate}" IsEnabled="False" />
+			</Grid>
+
+			<DockPanel LastChildFill="False" Margin="0 40 0 20">
+				<Button Content="Manage Contract" Padding="20 10" DockPanel.Dock="Left"
+						Background="Goldenrod" FontWeight="Bold" Cursor="Hand"
+						IsEnabled="{Binding Employee, Converter={x:Static ObjectConverters.IsNotNull}}"
+						Command="{Binding MakeContract}" />
+				<Button Content="Cancel" Padding="20 10" DockPanel.Dock="Right"
+						Background="Red" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding CloseForm}"/>
+				<Button Margin="20 0" Padding="20 10" Content="OK" DockPanel.Dock="Right"
+						Background="Green" FontWeight="Bold" Cursor="Hand"
+						Command="{Binding ClickOK}"/>
+			</DockPanel>
+			
+			<Button Content="Change Authentication Info" Padding="20 5" 
+					Command="{Binding ShowChangeAuth}"/>
+		</StackPanel>
+	</Border>
+</Window>

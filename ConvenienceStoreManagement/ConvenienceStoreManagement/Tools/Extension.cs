@@ -8,8 +8,12 @@ namespace ConvenienceStoreManagement.Tools
         {
             if (inDict["data"] != null)
             {
-                List<Dictionary<string, object>> data = (List<Dictionary<string, object>>)inDict["data"];
-                inDict["data"] = data[0];
+                if (inDict["data"] is Dictionary<string, object>) return inDict;
+                if (inDict["data"] is List<Dictionary<string, object>> listData)
+                {
+
+                    inDict["data"] = listData[0];
+                }
             }
             return inDict;
         }

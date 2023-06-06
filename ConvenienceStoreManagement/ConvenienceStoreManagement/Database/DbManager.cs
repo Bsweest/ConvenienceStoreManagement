@@ -1,4 +1,5 @@
-﻿using ConvenienceStoreManagement.Model;
+﻿using ConvenienceStoreManagement.Components.ViewModel;
+using ConvenienceStoreManagement.Model;
 using Npgsql;
 
 namespace ConvenienceStoreManagement.Database
@@ -14,13 +15,11 @@ namespace ConvenienceStoreManagement.Database
         public DbQueryCustomer? QueryCustomer { get; private set; }
         public DbQueryInvoice? QueryInvoice { get; private set; }
         public DbQueryEmployee? QueryEmployee { get; private set; }
+        public DbQueryContract? QueryContract { get; private set; }
+
+        private NotificationViewModel Notification;
 
         public DbManager()
-        {
-            SetupDatabase();
-        }
-
-        public void SetupDatabase()
         {
             if (DataSource != null) return;
             var datasourcebuilder = new NpgsqlDataSourceBuilder(connString);
@@ -29,8 +28,18 @@ namespace ConvenienceStoreManagement.Database
             QueryCustomer = new(DataSource);
             QueryInvoice = new(DataSource);
             QueryEmployee = new(DataSource);
+            QueryContract = new(DataSource);
         }
 
         public void SetWorkingEmployee(EmployeeModel model) => WorkingEmployee = model;
+
+        public void SetupNofifycation(NotificationViewModel vm)
+        {
+            Notification = vm;
+        }
+
+        public void Notify(string msg, bool isError = false)
+            => Notification.NotifyMessage(msg, isError);
+
     }
 }

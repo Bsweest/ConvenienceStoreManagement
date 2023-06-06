@@ -25,6 +25,7 @@
 						Command="{Binding ShowCreateCustomer}"/>
 				<Button Margin="20 0" Padding="20 10" Content="Update Customer"
 						Background="DarkGreen" FontWeight="Bold" Cursor="Hand"
+						IsEnabled="{Binding SelectedCustomer, Converter={x:Static ObjectConverters.IsNotNull}}"
 						Command="{Binding ShowUpdateCustomer}"/>
 				<Rectangle VerticalAlignment="Stretch" Width="3" Margin="0 6" Fill="#2E2B38" />
 

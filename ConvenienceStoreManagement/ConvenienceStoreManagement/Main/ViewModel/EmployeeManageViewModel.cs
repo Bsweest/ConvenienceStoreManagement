@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Model;
 using ConvenienceStoreManagement.Tools;
@@ -13,8 +15,9 @@ namespace ConvenienceStoreManagement.Main.ViewModel
     {
         [ObservableProperty]
         private ObservableCollection<EmployeeModel>? gridItems = null;
+
         [ObservableProperty]
-        private CustomerModel? selectedEmployee;
+        private EmployeeModel? selectedEmployee;
 
         private readonly ObservableCollection<EmployeeModel> AllEmployee = new();
         [ObservableProperty]
@@ -57,6 +60,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             }
         }
 
+        [RelayCommand]
         public async void RetrieveAllEmployee()
         {
             AllEmployee.Clear();
@@ -66,12 +70,37 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 foreach (var each in data)
                 {
-                    EmployeeModel model = new(each);
+                    ContractModel? contract = null;
+                    if (each["contract_id"] is int contID)
+                    {
+                        var contractTask = await dbManager.QueryContract.GetContractInfo(contID);
+                        contractTask.ToSingle();
+                        if (contractTask["data"] is Dictionary<string, object> contData)
+                        {
+                            contract = new(contData);
+                        }
+
+                    }
+                    EmployeeModel model = new(each, contract);
+
                     AllEmployee.Add(model);
                 }
             }
             GridItems = null;
             GridItems = AllEmployee;
+        }
+
+        [RelayCommand]
+        public void InsertEmployee()
+        {
+            UpsertEmployee.ShowBox(null, dbManager);
+        }
+
+        [RelayCommand]
+        public void UpdateEmployee()
+        {
+            if (SelectedEmployee == null) return;
+            UpsertEmployee.ShowBox(SelectedEmployee, dbManager);
         }
     }
 }
