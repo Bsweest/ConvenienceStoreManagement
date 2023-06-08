@@ -57,5 +57,14 @@ namespace ConvenienceStoreManagement.Database
                 new object[] { username, password, id }
             );
         }
+
+        public async Task<Dictionary<string, object?>> Login(string username)
+        {
+            return await BaseQueryCall(
+                "SELECT * FROM employee WHERE username = $1",
+                new object[] { username }
+            );
+        }
+
     }
 }
