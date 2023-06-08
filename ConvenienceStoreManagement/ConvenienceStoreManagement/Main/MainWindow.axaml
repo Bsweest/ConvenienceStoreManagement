@@ -45,6 +45,9 @@
 						<Button Classes="MenuIcon" Command="{Binding ChangeToEmployeeManage}"
 								Classes.Choosed="{Binding EmployeeManagePanel}"
 								i:Attached.Icon="fa-solid fa-clipboard-user"/>
+						<Button Classes="MenuIcon" Command="{Binding ChangeToCreateReport}"
+								Classes.Choosed="{Binding CreateReportPanel}"
+								i:Attached.Icon="fa-solid fa-table"/>
 					</StackPanel>
 
 					<Button Command="{Binding }"

@@ -83,7 +83,12 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 
             if (!string.IsNullOrEmpty(FilePath))
             {
-                Utils.ReadAndAddDataFile(dt, FilePath, IsExcel);
+                var readSuccess = UsingExcelPackage.ReadAndAddDataFile(dt, FilePath, IsExcel);
+                if (!readSuccess)
+                {
+                    ResultMessage = "You're opening the excel file!";
+                    return;
+                }
             }
 
             foreach (var dataRow in dt.Select())

@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="800"
+			 Background="#21202E"
+             x:Class="ConvenienceStoreManagement.Main.Page.CreateReportPage">
+	<Border Padding="20">
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Label Foreground="Orchid" FontSize="20" VerticalAlignment="Bottom">
+					Choose Month - Year to Create Report
+				</Label>
+				<Label VerticalAlignment="Bottom" Foreground="Gray">
+					(Report generate data with range of a month start from first date of it)
+				</Label>
+			</StackPanel>
+			<DatePicker FontSize="22" Margin="0 10 0 30" SelectedDate="{Binding	ChoosedMonth}" />
+			<StackPanel Orientation="Horizontal">
+				<Button Content="Generate Report" Margin="0 0 20 0"
+						Command="{Binding GenerateReport}"/>
+				<Border CornerRadius="20" Background="Black" Height="35"
+						Padding="5 0 0  0">
+					<StackPanel Orientation="Horizontal">
+						<TextBox Text="{Binding	ReportPath}" Width="400" Watermark="Link to the Report"
+								 Background="Transparent" BorderThickness="0"
+								 VerticalAlignment="Center" IsReadOnly="True"/>
+						<Button Height="35" Background="Green" VerticalAlignment="Center"
+								CornerRadius="0 20 20 0" Margin="0"
+								Command="{Binding OpenReportFolder}">
+							<Label>
+								Open Report Folder
+							</Label>
+						</Button>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+			
+			<Label Content="Field Explain" Margin="0 10"
+				   Foreground="LightGreen" FontSize="22"/>
+			<Border Padding="10" CornerRadius="10" Background="Black" Width="600"
+					HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1">
+				<StackPanel>
+					<TextBlock>
+						The report is a excel file in the destination link above
+					</TextBlock>
+					<TextBlock>
+						The report contains 3 sheet: { ProductReport, EmployeeReport, CustomerReport }
+					</TextBlock>
+				</StackPanel>
+			</Border>
+
+		</StackPanel>
+	</Border>
+</UserControl>

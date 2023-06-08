@@ -65,9 +65,9 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             var result = await dbManager.QueryInvoice.CreateNewInvoice(
                 Customer != null ? Customer.Id : 0,
                 dbManager.WorkingEmployee.Id,
-                TotalCost,
-                cartList
+                TotalCost
             );
+            result.ToSingle();
 
             if (result["error"] is not null)
             {
@@ -81,6 +81,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                 string date = Utils.GetCurrentDate();
                 string dateFolder = InvoicesFolder + "\\" + date;
                 Invoice = new(data);
+                UpdateEachGood(Invoice.Id);
                 Directory.CreateDirectory(dateFolder);
 
                 AvaloniaPrinter.ToFile(
@@ -95,6 +96,18 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
                 Result = CreateInvoiceResult.Success;
                 ViewWindow.Close();
+            }
+        }
+
+        public async void UpdateEachGood(int invoiceID)
+        {
+            foreach (var item in CartList)
+            {
+                foreach (var good in item.Goods)
+                {
+                    await dbManager.QueryInvoice
+                       .UpdateGoodAfterPurchased(good.Id, invoiceID, good.Item.GetCost());
+                }
             }
         }
     }

@@ -14,11 +14,18 @@ namespace ConvenienceStoreManagement.Model.Control
         public int totalCost;
 
         public void CalculateTotal()
-            => TotalCost = ListCart.Sum(e => e.TotalCost);
+        {
+            var x = 0;
+            foreach (var item in ListCart)
+            {
+                x += item.TotalCost;
+            }
+            TotalCost = x;
+        }
 
         public void AddGood(GoodModel goodModel)
         {
-            int index = ListCart.IndexOf(ListCart.Where(i => i.CompareId(goodModel)).FirstOrDefault());
+            int index = ListCart.IndexOf(ListCart.FirstOrDefault(i => i.CompareId(goodModel)));
             if (index >= 0)
             {
                 ListCart[index].AddGood(goodModel);
@@ -29,6 +36,7 @@ namespace ConvenienceStoreManagement.Model.Control
                 cartItem.AddGood(goodModel);
                 ListCart.Add(cartItem);
             }
+
             CalculateTotal();
         }
 
@@ -39,11 +47,24 @@ namespace ConvenienceStoreManagement.Model.Control
                 if (element.RemoveGoodById(id))
                 {
                     if (element.Goods.Count == 0) ListCart.Remove(element);
-                    CalculateTotal();
                     return true;
                 }
             }
 
+            CalculateTotal();
+            return false;
+        }
+
+        public bool CheckExistedInCart(int id)
+        {
+            foreach (var element in ListCart)
+            {
+                var check = element.Goods.FirstOrDefault(i => i.Id == id);
+                if (check != null)
+                {
+                    return true;
+                }
+            }
             return false;
         }
 

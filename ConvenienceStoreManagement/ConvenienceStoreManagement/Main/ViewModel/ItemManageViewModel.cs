@@ -8,6 +8,7 @@ using ConvenienceStoreManagement.Model;
 using ConvenienceStoreManagement.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 
@@ -36,6 +37,9 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         public ItemManageViewModel()
         {
+            //Create Working Folder
+            Directory.CreateDirectory(ImageFolder);
+
             ChoosedFolder = ImageFolder;
             var filterKeys = new string[] { "ID", "Name" };
             debounceSearchItem = new(FilterShopItem, filterKeys, 1);
@@ -68,7 +72,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 var filterdItems = ListBaseGroupItem
                     .Where(x =>
-                        x.Goods[0].ExpiredDate == DateOnly.Parse(DateTime.Now.ToString())
+                        x.Goods[0].ExpiredDate == DateOnly.FromDateTime(DateTime.Now)
                     ).ToList();
                 GridItems = filterdItems;
             }

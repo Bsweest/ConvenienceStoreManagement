@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using ConvenienceStoreManagement.Components.ViewModel.Base;
 
 namespace ConvenienceStoreManagement.Components.ViewModel
@@ -15,8 +14,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [ObservableProperty]
         private string _password = string.Empty;
 
-        [RelayCommand]
-        public async void Change()
+        public async override void OKBehaviour()
         {
             var isGrant = await dbManager.QueryEmployee
                                 .GrantAdminControl(Check);

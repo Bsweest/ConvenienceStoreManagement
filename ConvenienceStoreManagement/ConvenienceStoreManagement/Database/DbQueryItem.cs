@@ -29,7 +29,8 @@ namespace ConvenienceStoreManagement.Database
         {
             var task = await BaseQueryCall(
                 "SELECT * FROM good " +
-                "WHERE itemid=$1 AND expired_date > current_date " +
+                "WHERE itemid=$1 " +
+                "AND expired_date > current_date AND invoice_id is null " +
                 "ORDER BY expired_date ASC",
                 new object[] { itemID }
             );
@@ -40,7 +41,7 @@ namespace ConvenienceStoreManagement.Database
             (string name, string imagePath = "", int price = 0)
         {
             var task = await BaseQueryCall(
-                "INSERT INTO shopitem (name, image_path, price)" +
+                "INSERT INTO shopitem (name, image_path, price) " +
                 "VALUES ($1, $2, $3) RETURNING *",
                 new object[] { name, imagePath, price }
             );
@@ -52,8 +53,8 @@ namespace ConvenienceStoreManagement.Database
         {
 
             var task = await BaseQueryCall(
-                "UPDATE shopitem SET name=$1, image_path=$2, price=$3" +
-                "WHERE id=$5 RETURNING *",
+                "UPDATE shopitem SET name=$1, image_path=$2, price=$3 " +
+                "WHERE id = $4 RETURNING *",
                 new object[] { name, imagePath, price, uuid }
             );
 

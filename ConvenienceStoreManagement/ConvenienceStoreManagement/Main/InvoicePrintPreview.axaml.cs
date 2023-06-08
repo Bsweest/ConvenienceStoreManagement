@@ -28,12 +28,12 @@ public partial class InvoicePrintPreview : Window
         (ObservableCollection<CartItemViewModel> list, CustomerModel? customer, DbManager dbManager)
     {
         var viewModel = new InvoicePrintViewModel(list, customer);
-        viewModel.SetDatabaseConnection(dbManager);
-
         InvoicePrintPreview invoicePreview = new()
         {
             DataContext = viewModel,
         };
+        viewModel.SetDatabaseConnection(dbManager).SetViewWindow(invoicePreview);
+
         viewModel.InvoicePanel = invoicePreview.InvoicePanel;
 
         var taskCompletion = new TaskCompletionSource<CreateInvoiceResult>();

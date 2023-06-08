@@ -16,6 +16,7 @@ namespace ConvenienceStoreManagement.Database
         public DbQueryInvoice? QueryInvoice { get; private set; }
         public DbQueryEmployee? QueryEmployee { get; private set; }
         public DbQueryContract? QueryContract { get; private set; }
+        public DbQueryReport? QueryReport { get; private set; }
 
         private NotificationViewModel Notification;
 
@@ -29,6 +30,7 @@ namespace ConvenienceStoreManagement.Database
             QueryInvoice = new(DataSource);
             QueryEmployee = new(DataSource);
             QueryContract = new(DataSource);
+            QueryReport = new(DataSource);
         }
 
         public void SetWorkingEmployee(EmployeeModel model) => WorkingEmployee = model;
