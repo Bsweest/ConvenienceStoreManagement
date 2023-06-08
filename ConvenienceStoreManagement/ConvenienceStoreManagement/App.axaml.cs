@@ -13,44 +13,39 @@ namespace ConvenienceStoreManagement
     {
         private readonly DbManager dbManager = new();
 
-        private AuthenticationHandler authWindow;
-        private MainWindow mainWindow;
+        private AuthenticationHandler? authWindow;
+        private MainWindow? mainWindow;
 
         public override void Initialize()
         {
-            InitWindow();
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void InitWindow()
+        public Window FactoryWindow(int x)
         {
-            //Action<int> changeWindow = index => ChangeWindow(index);
-
-            authWindow = new AuthenticationHandler
+            switch (x)
             {
-                DataContext = new AuthViewModel(ChangeWindow)
+                default:
+                    return new AuthenticationHandler
+                    {
+                        DataContext = new AuthViewModel(ChangeWindow)
                                     .SetDatabaseConnection(dbManager),
-            };
-            mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainViewModel(ChangeWindow)
-                                            .SetViewWindow(mainWindow)
-                                            .SetDatabaseConnection(dbManager)
-                                            .FinishBuild();
+                    };
+                case 1:
+                    mainWindow = new MainWindow();
+                    mainWindow.DataContext =
+                        new MainViewModel(ChangeWindow)
+                            .SetViewWindow(mainWindow)
+                            .SetDatabaseConnection(dbManager)
+                            .FinishBuild();
+                    return mainWindow;
+            }
         }
 
         public void ChangeWindow(int index)
         {
-            Window nextWindow = authWindow;
+            Window nextWindow = FactoryWindow(index);
             Window? preWindow;
-            switch (index)
-            {
-                case 0:
-                    nextWindow = authWindow;
-                    break;
-                case 1:
-                    nextWindow = mainWindow;
-                    break;
-            }
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
@@ -63,7 +58,7 @@ namespace ConvenienceStoreManagement
 
         public override void OnFrameworkInitializationCompleted()
         {
-            ChangeWindow(1);
+            ChangeWindow(0);
             base.OnFrameworkInitializationCompleted();
         }
     }

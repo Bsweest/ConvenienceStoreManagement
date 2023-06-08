@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Npgsql;
+using ConvenienceStoreManagement.Model;
+using ConvenienceStoreManagement.Tools;
+using ExCSS;
 using System;
+using System.Collections.Generic;
 
 namespace ConvenienceStoreManagement.Auth
 {
@@ -26,28 +29,25 @@ namespace ConvenienceStoreManagement.Auth
         [RelayCommand]
         public async void Login()
         {
+            ErrorMessage = string.Empty;
             if (dbManager == null) return;
-            await using var connection = await dbManager.DataSource.OpenConnectionAsync();
 
-            await using var cmd = new NpgsqlCommand(
-                "SELECT * FROM employee WHERE username = $1",
-                connection)
-            {
-                Parameters = { new() { Value = Username } }
-            };
 
-            await using var reader = await cmd.ExecuteReaderAsync();
-            if (!reader.HasRows)
+            var result = await dbManager.QueryEmployee.Login(Username);
+            result.ToSingle();
+
+            if (result["error"] is object error)
             {
-                ErrorMessage = "No account found";
-                return;
+                ErrorMessage = error.ToString();
             }
-            while (await reader.ReadAsync())
+
+            if (result["data"] is Dictionary<string, object> data)
             {
-                string auth_pass = reader["password"].ToString();
-                if (auth_pass == Password)
+                var employee = new EmployeeModel(data);
+
+                if (employee.Password == Password)
                 {
-                    dbManager.SetWorkingEmployee(new());
+                    dbManager.SetWorkingEmployee(employee);
                     ChangeWindow(1);
                 }
                 else

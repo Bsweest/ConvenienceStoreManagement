@@ -20,8 +20,8 @@ namespace ConvenienceStoreManagement.Model
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Salary))]
         private ContractModel? contract;
-        public string Username { get; private set; } = string.Empty;
-        public string Password { get; private set; } = string.Empty;
+        public string? Username { get; private set; }
+        public string? Password { get; private set; }
 
         public EmployeeModel() { }
 
