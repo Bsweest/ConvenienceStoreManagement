@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Width="500" Height="250"
+        mc:Ignorable="d" Width="500" Height="300"
         x:Class="ConvenienceStoreManagement.Components.ShowBox.ChangeAuth"
         Title="ChangeAuth">
 	<Border Padding="10">
@@ -25,7 +25,7 @@
 				<Label Content="Password" Grid.Row="2" Grid.Column="0"/>
 
 				<TextBox Grid.Row="0"
-						 Grid.Column="1"
+						 Grid.Column="1" PasswordChar="*"
 						 Text="{Binding Check}"/>
 				<TextBox Grid.Row="1"
 						 Grid.Column="1"

@@ -16,6 +16,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             ItemManage,
             CustomerManage,
             EmployeeManage,
+            CreateReport,
         }
 
         private Dictionary<int, PageViewModelBase> Pages;
@@ -28,12 +29,14 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [NotifyPropertyChangedFor(nameof(ItemPanel))]
         [NotifyPropertyChangedFor(nameof(CustomerManagePanel))]
         [NotifyPropertyChangedFor(nameof(EmployeeManagePanel))]
+        [NotifyPropertyChangedFor(nameof(CreateReportPanel))]
         private int choosedPanel = 0;
 
         public bool ShopPanel => ChoosedPanel == (int)MainPanel.Shop;
         public bool ItemPanel => ChoosedPanel == (int)MainPanel.ItemManage;
         public bool CustomerManagePanel => ChoosedPanel == (int)MainPanel.CustomerManage;
         public bool EmployeeManagePanel => ChoosedPanel == (int)MainPanel.EmployeeManage;
+        public bool CreateReportPanel => ChoosedPanel == (int)MainPanel.CreateReport;
 
         [ObservableProperty]
         NotificationViewModel notify = new();
@@ -76,6 +79,13 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                         .SetViewWindow(ViewWindow)
                         .SetDatabaseConnection(dbManager)
                         .FinishBuild()
+                },
+                {
+                    (int)MainPanel.CreateReport,
+                    new CreateReportViewModel()
+                        .SetViewWindow(ViewWindow)
+                        .SetDatabaseConnection(dbManager)
+                        .FinishBuild()
                 }
             };
             CurrentPage = Pages[0];
@@ -103,5 +113,8 @@ namespace ConvenienceStoreManagement.Main.ViewModel
         [RelayCommand]
         public void ChangeToEmployeeManage()
             => ChoosedPanel = (int)MainPanel.EmployeeManage;
+        [RelayCommand]
+        public void ChangeToCreateReport()
+            => ChoosedPanel = (int)MainPanel.CreateReport;
     }
 }

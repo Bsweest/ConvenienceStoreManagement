@@ -19,6 +19,7 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
     <PackageReference Include="Avalonia.Svg.Skia" Version="0.10.18" />
+    <PackageReference Include="ClosedXML" Version="0.101.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -41,10 +42,7 @@
   <ItemGroup>
     <None Remove="Assets\NotFound.png" />
     <None Remove="Assets\placeholder.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\sql query\" />
+    <None Remove="Assets\sql query\ReportQuery.sql" />
   </ItemGroup>
 
   <ItemGroup>

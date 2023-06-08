@@ -93,7 +93,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                 var errorBox = MessageBoxManager
                     .GetMessageBoxStandardWindow("Good Not Found", "Can not find the Good ID");
                 _ = errorBox.Show();
-                ScannerVM.ProcessResult = $"Fail To Add ID: {goodID}";
+                ScannerVM.ProcessResult = $"Fail To Find ID: {goodID}";
                 return;
             };
 
@@ -101,6 +101,17 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 ShopItemModel itemModel = new(data, true);
                 GoodModel goodModel = new(itemModel, data);
+                if (goodModel.Cost != null)
+                {
+                    ScannerVM.ProcessResult = "Product is already bought!";
+                    return;
+                }
+                if (ListCartCtrl.CheckExistedInCart(goodID))
+                {
+                    ScannerVM.ProcessResult = "Product is already in Cart";
+                    return;
+                }
+
                 ListCartCtrl.AddGood(goodModel);
                 ScannerVM.ProcessResult = $"Success Add {itemModel.Name}, ID: {goodID}";
             }
