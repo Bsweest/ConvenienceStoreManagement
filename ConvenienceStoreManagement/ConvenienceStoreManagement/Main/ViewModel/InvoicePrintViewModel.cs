@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ConvenienceStoreManagement.Components.ViewModel;
 using ConvenienceStoreManagement.Model;
+using ConvenienceStoreManagement.Model.Control;
+using ConvenienceStoreManagement.Model.Product;
 using ConvenienceStoreManagement.Tools;
 using ConvenienceStoreManagement.Tools.Printing;
 using System;
@@ -13,7 +15,7 @@ using System.IO;
 
 namespace ConvenienceStoreManagement.Main.ViewModel
 {
-    public partial class InvoicePrintViewModel : ViewModelBase
+    public partial class InvoicePrintViewModel : ViewModelBase, IProductVisitor
     {
         public static string InvoicesFolder { get; private set; } = @$"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\ConvenienceStoreManagement\Invoices\";
         public CreateInvoiceResult Result { get; private set; } = CreateInvoiceResult.Cancel;
@@ -72,7 +74,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             if (result["error"] is not null)
             {
                 Result = CreateInvoiceResult.Fail;
-                ViewWindow.Close();
+                ViewWindow?.Close();
                 return;
             }
 
@@ -95,7 +97,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                 });
 
                 Result = CreateInvoiceResult.Success;
-                ViewWindow.Close();
+                ViewWindow?.Close();
             }
         }
 
@@ -105,10 +107,27 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 foreach (var good in item.Goods)
                 {
-                    await dbManager.QueryInvoice
-                       .UpdateGoodAfterPurchased(good.Id, invoiceID, good.Item.GetCost());
+                    good.InvoiceID = invoiceID;
+                    good.AcceptVisitor(this);
                 }
             }
+        }
+
+        public async void BoughtSimpleProduct(SimpleProduct product)
+        {
+            await dbManager.QueryInvoice.
+                UpdateGoodAfterPurchased(product.Id, product.InvoiceID, product.Item.GetCost());
+        }
+
+        public async void BoughtNoScanProduct(NoScanProduct product)
+        {
+            await dbManager.QueryInvoice
+                .UpdateNoScanGoodAfterPurchased(product.Id, product.InvoiceID, product.Item.GetCost());
+        }
+        public async void BoughtWeightProduct(WeightProduct product)
+        {
+            await dbManager.QueryInvoice
+                .UpdateWeightProductAfterPurchased(product.Id, product.InvoiceID, product.Item.GetCost());
         }
     }
 }

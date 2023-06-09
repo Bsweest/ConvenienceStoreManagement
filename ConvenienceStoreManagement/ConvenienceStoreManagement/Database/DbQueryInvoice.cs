@@ -21,6 +21,7 @@ namespace ConvenienceStoreManagement.Database
 
             return task;
         }
+
         public async Task<Dictionary<string, object?>> UpdateGoodAfterPurchased
              (int id, int invoice, int cost)
         {
@@ -33,7 +34,16 @@ namespace ConvenienceStoreManagement.Database
 
             return task;
         }
+        public async Task<Dictionary<string, object?>> UpdateNoScanGoodAfterPurchased
+             (int id, int invoice, int cost)
+        {
 
-
+            return await BaseQueryCall("");
+        }
+        public async Task<Dictionary<string, object?>> UpdateWeightProductAfterPurchased
+             (int id, int invoice, int cost)
+        {
+            return await BaseQueryCall("");
+        }
     }
 }

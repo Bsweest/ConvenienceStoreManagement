@@ -104,8 +104,11 @@ namespace ConvenienceStoreManagement.Main.ViewModel
                     {
                         foreach (var good in listGood)
                         {
-                            var newGood = new GoodModel(shopItem, good);
-                            grpItem.AddGood(newGood);
+                            var newGood = GoodModel.FactoryProduct(shopItem, good);
+                            if (newGood != null)
+                            {
+                                grpItem.AddGood(newGood);
+                            }
                         }
                     }
 

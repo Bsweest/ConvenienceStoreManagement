@@ -38,12 +38,12 @@ namespace ConvenienceStoreManagement.Database
         }
 
         public async Task<Dictionary<string, object?>> AddItem
-            (string name, string imagePath = "", int price = 0)
+            (string name, string imagePath = "", int price = 0, int type = 0)
         {
             var task = await BaseQueryCall(
-                "INSERT INTO shopitem (name, image_path, price) " +
-                "VALUES ($1, $2, $3) RETURNING *",
-                new object[] { name, imagePath, price }
+                "INSERT INTO shopitem (name, image_path, price, type) " +
+                "VALUES ($1, $2, $3, $4) RETURNING *",
+                new object[] { name, imagePath, price, type }
             );
             return task;
         }
