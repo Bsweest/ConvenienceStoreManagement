@@ -18,13 +18,14 @@ public partial class AddCustomerBox : Window
 
     public static Task<CustomerModel?> ShowBox(DbManager db, CustomerModel? model = null)
     {
-        AddCustomerBoxViewModel viewModel = new AddCustomerBoxViewModel();
-        AddCustomerBox addBox = new AddCustomerBox
+        var viewModel = new AddCustomerBoxViewModel();
+        viewModel.SetUpdateCustomer(model);
+
+        var addBox = new AddCustomerBox
         {
             DataContext = viewModel
         };
         viewModel.SetViewWindow(addBox).SetDatabaseConnection(db);
-        viewModel.SetUpdateCustomer(model);
 
         var taskCompletion = new TaskCompletionSource<CustomerModel?>();
         addBox.Closed += delegate { taskCompletion.TrySetResult(viewModel.CustomerResult); };

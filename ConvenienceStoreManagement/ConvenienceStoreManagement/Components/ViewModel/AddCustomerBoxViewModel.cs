@@ -33,6 +33,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         {
             if (model == null) return;
             IsAdd = false;
+            UpdateModel = model;
             Title = "Update Customer Id - " + UpdateModel.Id;
             UpdateModel = model;
             CusName = model.FullName;

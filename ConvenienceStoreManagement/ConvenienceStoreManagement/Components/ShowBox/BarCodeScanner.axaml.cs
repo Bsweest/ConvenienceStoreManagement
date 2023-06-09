@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using ConvenienceStoreManagement.Components.ViewModel;
-using ConvenienceStoreManagement.Main;
 
 namespace ConvenienceStoreManagement.Components.ShowBox;
 
@@ -12,18 +11,18 @@ public partial class BarCodeScanner : Window
     }
 
     public static BarCodeScanner CreateBox
-        (BarCodeScannerViewModel viewModel, MainWindow mainWindow)
+        (BarCodeScannerViewModel viewModel)
     {
-        BarCodeScanner numBox = new BarCodeScanner
+        var numBox = new BarCodeScanner
         {
             DataContext = viewModel
         };
         viewModel.SetViewWindow(numBox);
-        numBox.Owner = mainWindow;
 
-        numBox.Closed += delegate
+        numBox.Closing += delegate
         {
-            viewModel.CloseBehaviour();
+            viewModel.StopScanning();
+            viewModel.SetViewWindow(null);
         };
 
         return numBox;

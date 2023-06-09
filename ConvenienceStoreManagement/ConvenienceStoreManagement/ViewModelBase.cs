@@ -9,7 +9,7 @@ namespace ConvenienceStoreManagement
         protected Window? ViewWindow;
         protected DbManager? dbManager;
 
-        public virtual ViewModelBase SetViewWindow(Window viewWindow)
+        public virtual ViewModelBase SetViewWindow(Window? viewWindow)
         {
             ViewWindow = viewWindow;
             return this;
