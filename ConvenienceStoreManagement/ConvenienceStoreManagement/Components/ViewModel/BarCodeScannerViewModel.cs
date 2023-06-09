@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Components.ViewModel.Base;
 using OpenCvSharp;
 using System;
@@ -48,6 +49,11 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [RelayCommand]
         public void ToggleScanning()
         {
+            if (ViewWindow == null)
+            {
+                BarCodeScanner.CreateBox(this);
+            }
+
             if (IsScanning) StartScanning();
             else StopScanning();
         }
@@ -68,6 +74,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
 
         public void StopScanning()
         {
+            IsScanning = false;
             BgWorker.CancelAsync();
             Capturer.Release();
         }
@@ -81,8 +88,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         public override void CloseBehaviour()
         {
             StopScanning();
-            IsScanning = false;
-            ViewWindow.Hide();
+            ViewWindow?.Close();
         }
 
         public void FindScanValue(Mat frameMat)

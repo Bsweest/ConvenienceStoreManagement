@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ConvenienceStoreManagement.Components.ShowBox;
 using ConvenienceStoreManagement.Components.ViewModel;
 using ConvenienceStoreManagement.Database;
 using ConvenienceStoreManagement.Model;
@@ -51,7 +50,6 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             DrawerUserVM = new(SetupPayingCustomer);
             DrawerUserVM.SetDatabaseConnection(dbManager);
             ScannerVM = new(AddToShoppingCart, RemoveFromCartByID);
-            BarCodeScanner.CreateBox(ScannerVM, ViewWindow as MainWindow);
             return this;
         }
 

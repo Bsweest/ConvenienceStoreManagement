@@ -8,7 +8,8 @@
         Title="{Binding Title}">
 	<Border Margin="12">
 		<StackPanel>
-			<Label FontSize="20" Margin="0 0 0 10" Foreground="Orchid" FontWeight="Bold">Add Customer</Label>
+			<Label FontSize="20" Margin="0 0 0 10" Foreground="Orchid" FontWeight="Bold" 
+				   Content="{Binding Title}"/>
 			<Label>Customer Name</Label>
 			<TextBox Margin="0 0 0 20" Text="{Binding CusName}"/>
 			<Label>Phone Num.</Label>
