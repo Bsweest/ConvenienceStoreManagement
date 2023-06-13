@@ -5,6 +5,7 @@ using ConvenienceStoreManagement.Main.ViewModel;
 using ConvenienceStoreManagement.Model;
 using ConvenienceStoreManagement.Tools;
 using MessageBox.Avalonia;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -21,6 +22,17 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(UsageText))]
         private bool isAdd = true;
+
+        [ObservableProperty]
+        private string[] productTypes = new string[]
+        {
+            ProductType.SimpleProduct.ToString(),
+            ProductType.NoScanProduct.ToString(),
+            ProductType.WeightProduct.ToString(),
+        };
+
+        [ObservableProperty]
+        private string selectedType;
 
         public string UsageText =>
             IsAdd ? "Add New Shop Item" : "Update Item";
@@ -86,7 +98,8 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         public async void InsertNewItem()
         {
             string pushImage = string.IsNullOrEmpty(imageAbsPath) ? "" : "storage://" + Name + ".png";
-            var result = await dbManager.QueryItems.AddItem(Name, pushImage, Price);
+            int type = (int)(ProductType)Enum.Parse(typeof(ProductType), SelectedType);
+            var result = await dbManager.QueryItems.AddItem(Name, pushImage, Price, type);
             result.ToSingle();
 
             if (result["error"] is object error)

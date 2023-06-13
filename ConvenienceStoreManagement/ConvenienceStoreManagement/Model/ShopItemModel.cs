@@ -1,5 +1,13 @@
 ﻿using System.Collections.Generic;
 
+public enum ProductType
+{
+    SimpleProduct,
+    NoScanProduct,
+    WeightProduct,
+}
+
+
 namespace ConvenienceStoreManagement.Model
 {
     public class ShopItemModel
@@ -9,6 +17,7 @@ namespace ConvenienceStoreManagement.Model
             UUID = inGoodData ? data["itemid"].ToString() : data["id"].ToString();
             Name = data["name"].ToString();
             Price = (int)data["price"];
+            Type = (int)data["type"];
             if (!string.IsNullOrEmpty(data["image_path"].ToString()))
                 ImagePath = data["image_path"].ToString();
         }
@@ -27,6 +36,7 @@ namespace ConvenienceStoreManagement.Model
         public int Price { get; private set; }
         public string ImagePath { get; private set; } = "avares://Assets/placeholder.png";
         public int Discount { get; private set; } = 0;
+        public int Type = 0;
 
         public int GetCost()
         {

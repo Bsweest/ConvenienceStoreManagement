@@ -40,6 +40,7 @@ create table shopitem (
 	name text not null unique,
 	price integer,
 	image_path text,
+	type int DEFAULT 0,
 	
 	primary key (id)
 );
@@ -105,4 +106,4 @@ as $$
 $$;
 
 insert into customer (id, fullname, phonenum) values (0, 'GUEST', '000000000');
-insert into employee (id, name, phonenum) values (0, 'ADMIN', '000000000');
+insert into employee (id, name, phonenum, username, password) values (0, 'ADMIN', '000000000', 'admin', 'admin');

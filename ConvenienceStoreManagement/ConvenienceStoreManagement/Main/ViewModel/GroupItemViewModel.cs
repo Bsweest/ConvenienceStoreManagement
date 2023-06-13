@@ -28,6 +28,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         public string? NearestExpiredDate =>
             Goods.Count > 0 ? Goods[0].ExpiredDate.ToString() : null;
+
         public bool CompareId(string id) => id == Item.UUID;
 
         public void AddGood(GoodModel goods)
