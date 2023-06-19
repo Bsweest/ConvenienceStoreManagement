@@ -42,6 +42,7 @@
 						<DataGridTextColumn	Width="100" Header="ID" Binding="{Binding Id}"/>
 						<DataGridTextColumn	Width="*" Header="Full Name" Binding="{Binding FullName}" />
 						<DataGridTextColumn	Width="*" Header="Phone Num." Binding="{Binding PhoneNumber}" />
+						<DataGridTextColumn	Width="*" Header="PersonalID" Binding="{Binding PersonId}" />
 						<DataGridTextColumn Width="*" Header="Total Spending" Binding="{Binding TotalSpending}" />
 						<DataGridTextColumn	Width="*" Header="Balance" Binding="{Binding Balance}" />
 					</DataGrid.Columns>

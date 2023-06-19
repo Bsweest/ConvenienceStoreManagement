@@ -42,7 +42,7 @@ namespace ConvenienceStoreManagement.Database
         public async Task<Dictionary<string, object?>> UpdateCustomer(int id, string cusname, string phonenum, string? pid = null)
         {
             var task = await BaseQueryCall(
-                "UPDATE customer SET cusname=$2, phonenum=$3, person_id=$4 " +
+                "UPDATE customer SET fullname=$2, phonenum=$3, person_id=$4 " +
                 "WHERE id=$1 RETURNING *",
                 new object[] { id, cusname, phonenum, pid == null ? DBNull.Value : pid }
             );

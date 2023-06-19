@@ -72,7 +72,10 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             {
                 var filterdItems = ListBaseGroupItem
                     .Where(x =>
-                        x.Goods[0].ExpiredDate == DateOnly.FromDateTime(DateTime.Now)
+                    {
+                        if (x.Goods.Count == 0) return false;
+                        return x.Goods[0].ExpiredDate == DateOnly.FromDateTime(DateTime.Now);
+                    }
                     ).ToList();
                 GridItems = filterdItems;
             }

@@ -23,13 +23,8 @@ namespace ConvenienceStoreManagement.Model
             Item = item;
             Cost = data["cost"] != DBNull.Value ? (int)data["cost"] : null;
 
-            ImportDate = data["cost"] != DBNull.Value
-                ? Utils.GetDateOnlyFromDb(data["mfg_date"])
-                : DateOnly.FromDateTime(DateTime.Now);
-
-            ExpiredDate = data["cost"] != DBNull.Value
-                ? Utils.GetDateOnlyFromDb(data["expired_date"])
-                : DateOnly.FromDateTime(DateTime.Now);
+            ImportDate = Utils.GetDateOnlyFromDb(data["mfg_date"]);
+            ExpiredDate = Utils.GetDateOnlyFromDb(data["expired_date"]);
         }
 
         public static GoodModel? FactoryProduct(ShopItemModel item, Dictionary<string, object> data)

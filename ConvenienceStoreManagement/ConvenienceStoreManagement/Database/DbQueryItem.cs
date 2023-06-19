@@ -55,7 +55,7 @@ namespace ConvenienceStoreManagement.Database
             var task = await BaseQueryCall(
                 "UPDATE shopitem SET name=$1, image_path=$2, price=$3 " +
                 "WHERE id = $4 RETURNING *",
-                new object[] { name, imagePath, price, uuid }
+                new object[] { name, imagePath, price, new Guid(uuid) }
             );
 
             return task;
@@ -76,7 +76,7 @@ namespace ConvenienceStoreManagement.Database
         public async Task<Dictionary<string, object?>> GetGoodWithItem(int goodId)
         {
             var task = await BaseQueryCall(
-                "select G.*, S.name, S.price, S.image_path from good G " +
+                "select G.*, S.name, S.price, S.image_path, S.type from good G " +
                 "JOIN shopitem S on G.itemid = S.id " +
                 "where G.id = $1",
                 new object[] { goodId }
