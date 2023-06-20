@@ -14,7 +14,7 @@ namespace ConvenienceStoreManagement.Components.ViewModel
         {
             var noti = new KeyValuePair<string, bool>(msg, isError);
             NotiMessages.Add(noti);
-            Task.Delay(3000).ContinueWith(_ => NotiMessages.Remove(noti));
+            Task.Delay(5000).ContinueWith(_ => NotiMessages.Remove(noti));
         }
 
     }

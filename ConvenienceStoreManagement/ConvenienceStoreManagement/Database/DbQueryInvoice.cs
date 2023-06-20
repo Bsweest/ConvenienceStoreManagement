@@ -28,12 +28,13 @@ namespace ConvenienceStoreManagement.Database
 
             var task = await BaseQueryCall(
                 "UPDATE good SET invoice_id = $1, cost = $2 " +
-                "WHERE id = $3",
+                "WHERE id = $3 RETURNING *",
                 new object[] { invoice, cost, id }
             );
 
             return task;
         }
+
         public async Task<Dictionary<string, object?>> UpdateNoScanGoodAfterPurchased
              (int id, int invoice, int cost)
         {

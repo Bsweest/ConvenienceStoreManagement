@@ -101,7 +101,7 @@ namespace ConvenienceStoreManagement.Main.ViewModel
             }
         }
 
-        public async void UpdateEachGood(int invoiceID)
+        public void UpdateEachGood(int invoiceID)
         {
             foreach (var item in CartList)
             {
@@ -115,8 +115,17 @@ namespace ConvenienceStoreManagement.Main.ViewModel
 
         public async void BoughtSimpleProduct(SimpleProduct product)
         {
-            await dbManager.QueryInvoice.
+            var task = await dbManager.QueryInvoice.
                 UpdateGoodAfterPurchased(product.Id, product.InvoiceID, product.Item.GetCost());
+            task.ToSingle();
+            if (task["error"] is object error)
+            {
+                dbManager.Notify(error.ToString());
+            }
+            if (task["data"] is Dictionary<string, object> data)
+            {
+                dbManager.Notify($"Success bought Good with Invoice Id: {data["invoice_id"]}");
+            }
         }
 
         public async void BoughtNoScanProduct(NoScanProduct product)
